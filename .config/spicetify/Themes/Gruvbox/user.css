@@ -1,0 +1,15 @@
+/* Song label in table (like 'explicit') */
+.TableCellSong__label {
+    color: var(--modspotify_main_fg);
+    border: 1px solid var(--modspotify_main_fg);
+}
+
+/* Search bar color changes */
+.SearchInput {
+    color: var(--modspotify_main_fg);
+}
+.SearchInput__input {
+    color: var(--modspotify_secondary_fg);
+    background-color: rgba(var(--modspotify_rgb_scrollbar_fg_and_selected_row_bg), 0.7) !important;
+    border-radius: 4px !important;
+}

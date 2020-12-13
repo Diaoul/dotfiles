@@ -1,0 +1,16 @@
+[credential]
+    helper = store
+[core]
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    syntax-theme = gruvbox
+    line-number = true
+    decorations = true
+[merge]
+    tool = vscode
+[mergetool "vscode"]
+    cmd = code --wait $MERGED
+[pull]
+    rebase = true
