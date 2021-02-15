@@ -2,6 +2,8 @@
     helper = store
 [core]
     pager = delta
+[init]
+    defaultBranch = main
 [interactive]
     diffFilter = delta --color-only
 [delta]
