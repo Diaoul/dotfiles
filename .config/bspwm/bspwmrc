@@ -3,7 +3,6 @@
 pgrep -x sxhkd > /dev/null || sxhkd &
 pgrep -x picom > /dev/null || picom --experimental-backends &
 pgrep -x polybar > /dev/null || polybar main &
-pgrep -x xautolock > /dev/null || xautolock -time 60 -locker "systemctl suspend" &
 
 bspc monitor HDMI-0 -d I II III IV V
 bspc monitor DP-1 -d VI VII VIII IX X
