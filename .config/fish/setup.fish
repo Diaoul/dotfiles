@@ -108,6 +108,7 @@ abbr find fd
 abbr -a gco git checkout
 abbr -a gs git status -s
 abbr -a gd git diff
+abbr -a gds git diff --staged
 abbr -a ga git add
 abbr -a gaa git add -A
 abbr -a gau git add -u
@@ -128,6 +129,7 @@ abbr -a kx kubectx
 abbr -a kn kubens
 abbr -a k kubectl
 abbr -a ka kubectl apply
+abbr -a kaf kubectl apply -f
 abbr -a kd kubectl describe
 abbr -a kdel kubectl delete
 abbr -a kg kubectl get
