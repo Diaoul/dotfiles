@@ -56,7 +56,7 @@ br-orange = #fe8019
 ; |_.__/ \__,_|_|  |___/
 
 [bar/main]
-monitor = HDMI-0
+monitor = DP-0
 
 width = 100%
 height = 32
@@ -100,6 +100,49 @@ modules-left = bspwm
 modules-center = center-xwindow
 modules-right = filesystem pulseaudio memory cpu temperature date powermenu
 
+[bar/secondary]
+monitor = HDMI-0
+
+width = 100%
+height = 32
+;width = 2528
+;height = 35
+;offset-x = 16
+;offset-y = 12
+;radius = 6.0
+fixed-center = true
+
+background = ${colors.bg}
+foreground = ${colors.fg}
+
+line-size = 3
+line-color = ${colors.orange}
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = Hack Nerd Font:pixelsize=11:antialias=true;2.5
+font-1 = Noto Color Emoji:style=Regular:scale=11:antialias=false:size=1;2
+
+tray-position = right
+tray-padding = 2
+
+wm-restack = bspwm
+
+scroll-up = #bspwm.next
+scroll-down = #bspwm.prev
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+modules-left = bspwm
+modules-right = date
 
 ;                      _       _
 ;  _ __ ___   ___   __| |_   _| | ___  ___

@@ -2,10 +2,12 @@
 ./.fehbg &
 pgrep -x sxhkd > /dev/null || sxhkd &
 pgrep -x picom > /dev/null || picom --experimental-backends &
-pgrep -x polybar > /dev/null || polybar main &
+pgrep -x polybar > /dev/null || (
+    polybar main & polybar secondary &
+)
 
-bspc monitor HDMI-0 -d I II III IV V
-bspc monitor DP-1 -d VI VII VIII IX X
+bspc monitor DP-0 -d I II III IV V
+bspc monitor HDMI-0 -d VI VII VIII IX X
 
 bspc config border_width        2
 bspc config window_gap          16
