@@ -1,3 +1,5 @@
+---
+# yamllint disable rule:colons
 window:
   padding:
     x: 6
