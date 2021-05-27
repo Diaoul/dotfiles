@@ -137,11 +137,6 @@ abbr -a kgp kubectl get pods
 abbr -a kga kubectl get -A
 abbr -a kex kubectl exec -it
 
-# kubeseal
-set -Ux SEALED_SECRETS_CONTROLLER_NAME sealed-secrets
-set -Ux SEALED_SECRETS_FORMAT yaml
-abbr -a ks kubeseal
-
 # flux
 mkdir -p ~/.config/fish/completions
 flux completion fish > ~/.config/fish/completions/flux.fish
