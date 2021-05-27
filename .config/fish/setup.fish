@@ -79,7 +79,7 @@ alias -s ..... "cd ../../../.."
 alias -s .4 "cd ../../../.."
 
 # vim (or nvim)
-alias -s vim "vim"
+alias -s vim "nvim"
 
 # bat
 abbr -a cat bat
