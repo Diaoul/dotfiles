@@ -166,13 +166,12 @@ vim +'PlugUpdate | PlugInstall --sync' +qa
 function fish_user_key_bindings
     #fish_default_key_bindings
     fish_vi_key_bindings
-    bind -M insert -m default jk backward-char force-repaint
-    bind -M insert -m default kj backward-char force-repaint
+    bind -M insert \b  backward-kill-word
     bind -M insert \cf accept-autosuggestion
-    bind -M insert \ch prevd-or-backward-word
+    bind -M insert \ch backward-kill-word
     bind -M insert \ck history-search-backward
     bind -M insert \cj history-search-forward
-    bind -M insert \cl nextd-or-forward-word
+    bind -M insert \cl forward-word
 end
 funcsave fish_user_key_bindings
 
