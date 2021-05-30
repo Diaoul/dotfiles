@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd ~
+
+# reload bspwm
+.config/bspwm/bspwmrc

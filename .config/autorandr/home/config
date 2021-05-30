@@ -1,0 +1,11 @@
+output eDP1
+mode 1920x1200
+pos 0x0
+output DVI-I-2-2
+mode 2560x1440
+pos 1920x0
+primary
+rate 144
+output DVI-I-1-1
+mode 1920x1200
+pos 4480x0
