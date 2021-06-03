@@ -8,6 +8,9 @@ pgrep -x sxhkd > /dev/null || sxhkd &
 # compositor
 pgrep -x picom > /dev/null || picom --experimental-backends &
 
+# redshift
+pgrep -x redshift > /dev/null || redshift &
+
 # bspc config
 bspc config border_width              2
 bspc config window_gap                16
