@@ -2,8 +2,11 @@ function walle -d 'Your wallpaper manager robot'
     set base ~/wallpapers
     switch $argv[1]
         case 'unsplash'
-            echo -n 'Setting wallpaper from unsplash...'
-            curl -sL https://source.unsplash.com/random/1920x1080 \
+            set resolution (
+                xrandr | grep primary | awk -F '[ +]' '{print $4}'
+            )
+            echo -n "Setting wallpaper from unsplash with resolution $resolution..."
+            curl -sL https://source.unsplash.com/random/$resolution \
                 -o $base/random.jpg
             feh --bg-fill $base/random.jpg
             echo ' Done!'
