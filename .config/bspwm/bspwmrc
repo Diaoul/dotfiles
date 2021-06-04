@@ -11,6 +11,9 @@ pgrep -x picom > /dev/null || picom --experimental-backends &
 # redshift
 pgrep -x redshift > /dev/null || redshift &
 
+# xss-lock
+pgrep -x xss-lock > /dev/null || xss-lock -l -- ./.local/bin/run-xsecurelock.sh &
+
 # bspc config
 bspc config border_width              2
 bspc config window_gap                16
