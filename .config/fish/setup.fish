@@ -61,7 +61,7 @@ set -U fish_pager_color_prefix       --bold --underline
 set -U fish_pager_color_progress     brwhite --background=blue
 
 # editor
-set -Ux EDITOR vim
+set -Ux EDITOR nvim
 set -Ux VISUAL $EDITOR
 
 # greeting
