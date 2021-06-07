@@ -51,7 +51,10 @@ alias grep='rg'
 # dotfiles git bare
 alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
-# thefuck - https://github.com/nvbn/thefuck
+# direnv
+eval "$(direnv hook bash)"
+
+# thefuck
 eval "$(thefuck --alias)"
 
 # starship
