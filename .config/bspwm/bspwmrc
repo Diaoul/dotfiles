@@ -22,6 +22,7 @@ bspc config active_border_color       "#ebdbb2"
 bspc config focused_border_color      "#d65d0e"
 bspc config remove_disabled_monitors   true
 bspc config remove_unplugged_monitors  true
+bspc config external_rules_command     "./.config/bspwm/bspwm-rules"
 
 # polybar
 .config/polybar/launch.sh
