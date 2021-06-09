@@ -112,6 +112,9 @@ call plug#begin('~/.vim/plugged')
   " Language pack
   Plug 'sheerun/vim-polyglot'
 
+  " Markdown preview
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+
   " Linter
   Plug 'dense-analysis/ale'
 
