@@ -145,6 +145,7 @@ flux completion fish > ~/.config/fish/completions/flux.fish
 alias -s myip "dog --short myip.opendns.com @resolver1.opendns.com"
 
 # ripgrep
+set -Ux RIPGREP_CONFIG_PATH ~/.config/ripgrep
 abbr -a grep rg
 
 # fzf
