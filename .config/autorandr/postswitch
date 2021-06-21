@@ -1,6 +1,9 @@
 #!/bin/bash
 
-cd ~
+# send notification
+notify-send -i display "Display" \
+    "Switched to $AUTORANDR_CURRENT_PROFILE profile"
 
 # reload bspwm
-.config/bspwm/bspwmrc
+cd ~
+.config/bspwm/bspwmrc &
