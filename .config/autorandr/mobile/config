@@ -1,7 +1,0 @@
-output eDP1
-mode 1920x1200
-primary
-output DP1-2
-off
-output DP1-1
-off
