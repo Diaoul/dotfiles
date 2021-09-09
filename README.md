@@ -36,7 +36,12 @@ There are other nice looking fonts [out](https://terminal.sexy/)
 
 ### GTK Theme
 I use [Oomox](https://github.com/themix-project/oomox) to create my own
-theme variant.
+theme and icons variants.
+To use it, just generate the theme using the Oomox GUI.
+
+The mouse cursor is from `xcursor-breeze` from the AUR.
+
+To preview and apply all those, I run `lxappearance`.
 
 ### Firefox
 I published my own theme made with [Firefox Color](https://color.firefox.com/)
