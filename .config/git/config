@@ -8,15 +8,19 @@
     helper = store
 [core]
     editor = nvim
-    pager = delta
 [init]
     defaultBranch = main
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
 [interactive]
     diffFilter = delta --color-only
 [delta]
-    syntax-theme = gruvbox
-    line-number = true
-    decorations = true
+    syntax-theme = gruvbox-dark
+    line-numbers = true
+    navigate = true
 [merge]
     tool = vscode
 [mergetool "vscode"]
