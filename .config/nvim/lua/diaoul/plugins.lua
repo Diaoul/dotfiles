@@ -17,7 +17,7 @@ require('packer').startup(function()
   use 'tpope/vim-fugitive'
   use {'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'} }
   -- Comments
-  use 'tpope/vim-commentary'         
+  use 'tpope/vim-commentary'
   -- Autocomplete
   use 'neovim/nvim-lspconfig'
   use 'hrsh7th/nvim-compe'

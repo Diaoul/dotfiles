@@ -131,7 +131,7 @@ function M.config()
               library = vim.api.nvim_get_runtime_file('', true),
               preloadFileSize = 500,
          },
-  	  teltelemetry = {
+        telemetry = {
             enable = false,
          },
       },

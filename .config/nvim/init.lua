@@ -222,12 +222,12 @@ opt.termguicolors = true
 -- Terminal {{{1
 cmd [[command! Term :botright vsplit term://$SHELL]]
 cmd [[
-	autocmd TermOpen * setlocal listchars= nonumber norelativenumber nocursorline
-	autocmd TermOpen * startinsert
-	autocmd BufEnter,BufWinEnter,WinEnter term://* startinsert
-	autocmd BufLeave term://* stopinsert
-	autocmd TermClose term://* call nvim_input('<CR>')
-	autocmd TermClose * call feedkeys("i")
+  autocmd TermOpen * setlocal listchars= nonumber norelativenumber nocursorline
+  autocmd TermOpen * startinsert
+  autocmd BufEnter,BufWinEnter,WinEnter term://* startinsert
+  autocmd BufLeave term://* stopinsert
+  autocmd TermClose term://* call nvim_input('<CR>')
+  autocmd TermClose * call feedkeys("i")
 ]]
 
 -- Mappings {{{1
@@ -304,4 +304,3 @@ map('v', 'p', '"_dP', { noremap = true }) -- keep paste available in visual mode
 
 -- paste {{{2
 opt.pastetoggle = '<F3>'
-

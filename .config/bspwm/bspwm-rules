@@ -6,19 +6,19 @@ instance=$3
 consequences=$4
 
 case $instance.$class in
-	(*.Pavucontrol)
-		echo "state=floating"
-		;;
-	(*.discord)
-		echo "desktop=^1"
-		;;
-	(*.Spotify)
-		echo "desktop=^2"
-		;;
-	(.)
-		case $(ps -p "$(xdo pid "$wid")" -o comm= 2>/dev/null) in
-			(spotify)
-				echo "desktop=^2"
-				;;
-		esac;;
+    (*.Pavucontrol)
+        echo "state=floating"
+        ;;
+    (*.discord)
+        echo "desktop=^1"
+        ;;
+    (*.Spotify)
+        echo "desktop=^2"
+        ;;
+    (.)
+        case $(ps -p "$(xdo pid "$wid")" -o comm= 2>/dev/null) in
+            (spotify)
+                echo "desktop=^2"
+                ;;
+        esac;;
 esac;
