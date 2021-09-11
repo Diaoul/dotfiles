@@ -58,6 +58,7 @@ Amazing tools I use all the time!
 * [ripgrep](https://github.com/BurntSushi/ripgrep) to kill old `grep`
 * [fzf](https://github.com/junegunn/fzf) the fuzzy finder
 * [starship](https://starship.rs/) ok this is not a tool but a cool prompt!
+* [direnv](https://direnv.net/) for per-project environment
 
 ### Terminal emulators
 Switching back and forth between [Kitty](https://sw.kovidgoyal.net/kitty/) and
