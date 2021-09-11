@@ -11,6 +11,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
-      - name: Copy pre-commit configuration
-        run: cp .github/workflows-config/.pre-commit-config.yaml ./
       - uses: pre-commit/action@v2.0.0
