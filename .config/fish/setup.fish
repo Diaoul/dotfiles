@@ -158,11 +158,6 @@ set -Ux FZF_DEFAULT_OPTS \
 # fisher
 curl -sfL https://git.io/fisher | source && fisher update
 
-# vim
-curl -sfLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-vim +'PlugUpdate | PlugInstall --sync' +qa
-
 # vi mode
 function fish_user_key_bindings
     if ! set -q NVIM_LISTEN_ADDRESS
