@@ -123,11 +123,14 @@ super + {Left,Down,Up,Right}
 #
 # media
 #
+XF86AudioPlay
+    playerctl play-pause
+
 XF86AudioMute
-    amixer -q set Master toggle
+    pamixer --toggle-mute
 
 XF86AudioRaiseVolume
-    amixer -q set Master 5%+ unmute
+    pamixer --increase 5
 
 XF86AudioLowerVolume
-    amixer -q set Master 5%- unmute
+    pamixer --decrease 5
