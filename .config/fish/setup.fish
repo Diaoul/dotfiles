@@ -165,8 +165,9 @@ vim +'PlugUpdate | PlugInstall --sync' +qa
 
 # vi mode
 function fish_user_key_bindings
-    #fish_default_key_bindings
-    fish_vi_key_bindings
+    if ! set -q NVIM_LISTEN_ADDRESS
+        fish_vi_key_bindings
+    end
     bind -M insert \b  backward-kill-word
     bind -M insert \cf accept-autosuggestion
     bind -M insert \ch backward-kill-word
