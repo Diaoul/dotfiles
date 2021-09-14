@@ -56,7 +56,7 @@ br-orange = #fe8019
 ; |_.__/ \__,_|_|  |___/
 
 [bar/main]
-monitor = DP-0
+monitor = ${env:MONITOR}
 
 width = 100%
 height = 32
@@ -90,18 +90,14 @@ tray-padding = 2
 
 wm-restack = bspwm
 
-scroll-up = #bspwm.next
-scroll-down = #bspwm.prev
-
 cursor-click = pointer
-cursor-scroll = ns-resize
 
 modules-left = bspwm
 modules-center = center-xwindow
-modules-right = filesystem pulseaudio memory cpu temperature date powermenu
+modules-right = yubikey systemd checkupdates backlight temperature battery pulseaudio pulseaudio-sink buds wlan timedate powermenu
 
 [bar/secondary]
-monitor = HDMI-0
+monitor = ${env:MONITOR}
 
 width = 100%
 height = 32
@@ -142,7 +138,7 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 modules-left = bspwm
-modules-right = date
+modules-right = eth date
 
 ;                      _       _
 ;  _ __ ___   ___   __| |_   _| | ___  ___
@@ -156,16 +152,16 @@ label = %title:0:80:...%
 
 [module/bspwm]
 type = internal/bspwm
-label-focused = %index%
+label-focused = %name%
 label-focused-background = ${colors.bg0-h}
 label-focused-underline= ${colors.orange}
 label-focused-padding = 2
-label-occupied = %index%
+label-occupied = %name%
 label-occupied-padding = 2
-label-urgent = %index%!
+label-urgent = %name%!
 label-urgent-background = ${colors.red}
 label-urgent-padding = 2
-label-empty = %index%
+label-empty = %name%
 label-empty-foreground = ${colors.fg4}
 label-empty-padding = 2
 ; label-separator = |
@@ -182,6 +178,16 @@ format-umounted-prefix = " "
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.fg4}
 
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+format = <ramp> <label>
+format-underline = ${colors.orange}
+ramp-0 = " "
+ramp-1 = " "
+ramp-2 = " "
+ramp-foreground = ${colors.fg4}
+
 [module/cpu]
 type = internal/cpu
 interval = 2
@@ -197,55 +203,60 @@ format-prefix = "  "
 format-prefix-foreground = ${colors.fg4}
 format-underline = ${colors.orange}
 label = %percentage_used:2%%
-;label = %gb_used%/%gb_total%
 
 [module/wlan]
 type = internal/network
-interface = wlp3s0
-interval = 3.0
-format-connected = <ramp-signal> <label-connected>
+interface = wlan0
+format-connected = <label-connected>
+format-connected-prefix = "  "
+format-connected-prefix-foreground = ${colors.fg4}
 format-connected-underline = ${colors.orange}
 label-connected = %essid%
-format-disconnected = 
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.fg4}
-ramp-signal-0 = ▁▁▁▁
-ramp-signal-1 = ▂▁▁▁
-ramp-signal-2 = ▂▄▁▁
-ramp-signal-3 = ▂▄▆▁
-ramp-signal-4 = ▂▄▆█
-ramp-signal-foreground = ${colors.fg4}
+format-disconnected = <label-disconnected>
+format-disconnected-prefix = "  "
+format-disconnected-prefix-foreground = ${colors.fg4}
+format-disconnected-underline = ${self.format-connected-underline}
+label-disconnected = not connected
 
 [module/eth]
 type = internal/network
-interface = enp3s0
+interface = enp4s0u2u4
 interval = 3.0
-format-connected-underline = ${colors.orange}
+format-connected = <label-connected>
 format-connected-prefix = "  "
 format-connected-prefix-foreground = ${colors.fg4}
+format-connected-underline = ${colors.orange}
 label-connected = %local_ip%
-format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.fg4}
+
+[module/timedate]
+type = internal/date
+time = "%H:%M"
+date-alt = "%Y-%m-%d"
+format-prefix = " "
+format-prefix-foreground = ${colors.fg4}
+format-underline = ${colors.orange}
+label = "%date%%time%"
+
+[module/time]
+type = internal/date
+time = "%H:%M"
+format-prefix = " "
+format-prefix-foreground = ${colors.fg4}
+format-underline = ${colors.orange}
+label = "%{A1:gsimplecal:}%time%%{A}"
 
 [module/date]
 type = internal/date
-interval = 1
-date = " %Y-%m-%d"
-date-alt = " %Y-%m-%d"
-time = %H:%M
-time-alt = %H:%M:%S
-format-prefix = " "
+date = "%Y-%m-%d"
+time = "%H:%M"
+format-prefix = "  "
 format-prefix-foreground = ${colors.fg4}
 format-underline = ${colors.orange}
-label = %date% %time%
+label = "%{A1:gsimplecal:}%date% %time%%{A}"
 
 [module/pulseaudio]
 type = internal/pulseaudio
+use-ui-max = false
 format-volume = <ramp-volume> <label-volume>
 format-volume-underline = ${colors.orange}
 format-muted-underline = ${colors.orange}
@@ -300,37 +311,61 @@ bar-volume-empty = ─
 bar-volume-empty-font = 3
 bar-volume-empty-foreground = ${colors.fg4}
 
+[module/pulseaudio-sink]
+type = custom/script
+tail = true
+format-underline = ${colors.orange}
+label-foreground = ${colors.fg}
+exec = pulseaudio-control --format "\$ICON_SINK \$SINK_NICKNAME" --sink-nicknames-from "device.description" --sink-nickname "bluez_output.70_CE_8C_DA_10_81.a2dp-sink: %{F#a89984}%{F-} Galaxy Buds+" --sink-nickname "bluez_output.14_3F_A6_10_80_39.a2dp-sink: %{F#a89984}%{F-} WH-1000XM4" --sink-nickname "alsa_output.usb-Logitech_G935_Gaming_Headset-00.analog-stereo: %{F#a89984}%{F-} Logitech G935" --sink-nickname "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi___ucm0001.hw_sofhdadsp__sink: %{F#a89984}蓼 %{F-}Speaker" --sink-nickname "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi___ucm0003.hw_sofhdadsp__sink: %{F#a89984}蓼 %{F-}Speaker" --sink-nickname "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp__sink: %{F#a89984}蓼 %{F-}Speaker" --sink-nickname "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi___ucm0003.hw_sofhdadsp_3__sink: %{F#a89984}蓼 %{F-}Output 1" --sink-nickname "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi___ucm0001.hw_sofhdadsp_3__sink: %{F#a89984}蓼 %{F-}Output 1" --sink-nickname "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp_3__sink: %{F#a89984}蓼 %{F-}Output 1" --sink-nickname "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi___ucm0003.hw_sofhdadsp_4__sink: %{F#a89984}蓼 %{F-}Output 2" --sink-nickname "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi___ucm0001.hw_sofhdadsp_4__sink: %{F#a89984}蓼 %{F-}Output 2" --sink-nickname "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp_4__sink: %{F#a89984}蓼 %{F-}Output 2" --sink-nickname "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi___ucm0003.hw_sofhdadsp_5__sink: %{F#a89984}蓼 %{F-}Output 3" --sink-nickname "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi___ucm0001.hw_sofhdadsp_5__sink: %{F#a89984}蓼 %{F-}Output 3" --sink-nickname "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp_5__sink: %{F#a89984}蓼 %{F-}Output 3" listen
+click-left = pulseaudio-control next-sink
+click-middle = pavucontrol &
+click-right = pulseaudio-control next-sink
+
+[module/buds]
+type = custom/script
+;tail = true
+format-underline = ${colors.orange}
+exec = ~/.config/polybar/scripts/buds.sh
+;exec-if = "[[ "$(pactl list short sinks | rg RUNNING | awk '{print $2}')" == "bluez_sink.70_CE_8C_DA_10_81.a2dp_sink" ]]"
+click-middle = earbuds toggle anc
+click-right = earbuds toggle touchpadlock
+
 [module/battery]
 type = internal/battery
-battery = BAT1
-adapter = ACAD
-full-at = 98
+battery = BAT0
+adapter = AC
 format-charging = <animation-charging> <label-charging>
 format-charging-underline = ${colors.orange}
-format-discharging = <animation-discharging> <label-discharging>
+format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 format-full-prefix = " "
 format-full-prefix-foreground = ${colors.fg4}
 format-full-underline = ${self.format-charging-underline}
-ramp-capacity-0 = 1
-ramp-capacity-1 = 2
-ramp-capacity-2 = 3
+ramp-capacity-0 = " "
+ramp-capacity-1 = " "
+ramp-capacity-2 = " "
+ramp-capacity-3 = " "
+ramp-capacity-4 = " "
+ramp-capacity-5 = " "
+ramp-capacity-6 = " "
+ramp-capacity-7 = " "
+ramp-capacity-8 = " "
+ramp-capacity-9 = " "
+ramp-capacity-10 = " "
 ramp-capacity-foreground = ${colors.fg4}
 animation-charging-0 = " "
-animation-charging-1 = " "
-animation-charging-2 = " "
+animation-charging-1 = " "
+animation-charging-2 = " "
+animation-charging-3 = " "
+animation-charging-4 = " "
 animation-charging-foreground = ${colors.fg4}
 animation-charging-framerate = 750
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-foreground = ${colors.fg4}
-animation-discharging-framerate = 750
 
 [module/temperature]
 type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
+thermal-zone = 6
+base-temparature = 35
+warn-temperature = 70
 format = <ramp> <label>
 format-underline = ${colors.orange}
 format-warn = <ramp> <label-warn>
@@ -343,20 +378,40 @@ ramp-1 = 
 ramp-2 = 
 ramp-foreground = ${colors.fg4}
 
+[module/yubikey]
+type = custom/script
+exec = nc -U $XDG_RUNTIME_DIR/yubikey-touch-detector.socket | while read -n5 message; do [[ $message = *1 ]] && echo "YubiKey" || echo ""; done
+tail = true
+label = %{F#a89984}%{F-} %output%
+format-foreground = ${colors.fg}
+format-underline = ${colors.red}
+
+[module/systemd]
+type = custom/script
+exec = system=$(systemctl --failed | rg '^(\d+) loaded units listed\.$' --replace '$1'); user=$(systemctl --user --failed | rg '^(\d+) loaded units listed\.$' --replace '$1'); echo $(($system + $user))
+exec-if = [ $(systemctl --failed | rg '^(\d+) loaded units listed\.$' --replace '$1') -gt 0 ]
+label = %{F#a89984}力%{F-} %output% failed unit
+format-foreground = ${colors.fg}
+format-underline = ${colors.red}
+
+[module/checkupdates]
+type = custom/script
+; checkupdates doesn't account for AUR updates
+;exec = checkupdates | wc -l
+;exec-if = [ $(checkupdates | wc -l) -gt 0 ]
+; paru may need to sync to check for updates
+exec = paru -Qu | rg -v ignored | wc -l
+exec-if = [ $(paru -Qu | rg -v ignored | wc -l) -gt 0 ]
+interval = 90
+label = %{F#a89984}%{F-}  %output%
+format-foreground = ${colors.fg}
+format-underline = ${colors.orange}
+
 [module/powermenu]
 type = custom/text
 content = "⏻ "
 content-foreground = ${colors.fg4}
-
 click-left = rofi-power
-
-[settings]
-screenchange-reload = true
-;compositing-background = xor
-;compositing-background = screen
-;compositing-foreground = source
-;compositing-border = over
-;pseudo-transparency = false
 
 [global/wm]
 margin-top = 5
