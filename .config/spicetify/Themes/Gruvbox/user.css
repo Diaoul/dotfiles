@@ -1,15 +1,27 @@
-/* Song label in table (like 'explicit') */
-.TableCellSong__label {
-    color: var(--modspotify_main_fg);
-    border: 1px solid var(--modspotify_main_fg);
+/* Remove Upgrade Button, User Name */
+.main-topBar-UpgradeButton,
+.main-userWidget-displayName {
+  display: none
 }
 
-/* Search bar color changes */
-.SearchInput {
-    color: var(--modspotify_main_fg);
+/* Search bar color */
+input {
+    border-radius: 0 !important;
+    padding: 6px 10px 6px 48px;
+    background-color: var(--spice-card) !important;
+    color: var(--spice-text) !important;
 }
-.SearchInput__input {
-    color: var(--modspotify_secondary_fg);
-    background-color: rgba(var(--modspotify_rgb_scrollbar_fg_and_selected_row_bg), 0.7) !important;
-    border-radius: 4px !important;
+
+.main-topBar-topbarContent svg {
+  color: var(--spice-subtext) !important;
+}
+
+/* Remove Friend Activity */
+.Root__top-container > aside {
+    display: none;
+}
+
+/* Explicit icon color */
+.main-type-ballad > span {
+    background-color: var(--spice-subtext);
 }
