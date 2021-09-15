@@ -1,0 +1,8 @@
+[[buds_settings]]
+address = '70:CE:8C:DA:10:81'
+default = true
+auto_pause_music = true
+auto_resume_music = true
+low_battery_notification = true
+smart_touchpad = true
+smart_sink = true
