@@ -64,3 +64,39 @@ repositories:
   password: ""
   url: https://charts.rook.io/release
   username: ""
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: vmware-tanzu
+  pass_credentials_all: false
+  password: ""
+  url: https://vmware-tanzu.github.io/helm-charts
+  username: ""
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: runix
+  pass_credentials_all: false
+  password: ""
+  url: https://helm.runix.net
+  username: ""
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: hajimari
+  pass_credentials_all: false
+  password: ""
+  url: https://hajimari.io
+  username: ""
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: emqx
+  pass_credentials_all: false
+  password: ""
+  url: https://repos.emqx.io/charts
+  username: ""
