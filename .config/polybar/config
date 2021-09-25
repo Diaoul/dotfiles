@@ -226,7 +226,7 @@ format-connected = <label-connected>
 format-connected-prefix = "  "
 format-connected-prefix-foreground = ${colors.fg4}
 format-connected-underline = ${colors.orange}
-label-connected = %local_ip%
+label-connected = Connected
 
 [module/timedate]
 type = internal/date
