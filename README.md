@@ -28,6 +28,7 @@ point to feed my brain with more blue light!
 
 ### Fonts
 * [Hack](https://sourcefoundry.org/hack/)
+* [Cascadia Code](https://github.com/microsoft/cascadia-code)
 * [Fira Code](https://github.com/tonsky/FiraCode) with stylistic sets
   zero ss01
 
@@ -70,11 +71,11 @@ for both!
 From the [arch wiki](https://wiki.archlinux.org/index.php/Font_configuration).
 
 ```fish
-ln -s /etc/fonts/conf.avail/09-autohint-if-no-hinting.conf /etc/fonts/conf.d/
-ln -s /etc/fonts/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
-ln -s /etc/fonts/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
+ln -s /usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf /etc/fonts/conf.d/
+ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
+ln -s /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
 # if you don't plan to use bitmap fonts
-ln -s /etc/fonts/conf.avail/70-no-bitmaps.com /etc/fonts/conf.d/
+ln -s /usr/share/fontconfig/conf.avail/70-no-bitmaps.com /etc/fonts/conf.d/
 ```
 
 ## :handshake: Thanks
