@@ -1,5 +1,3 @@
-
-
 .theme-dark {
     --bg0-h: #1d2021;
     --bg0: #282828;
@@ -135,9 +133,13 @@ ul[class*="resultsGroup"] > [class*="option"] > span[class*="filter"] {
 ul[class*="resultsGroup"] > [class*="option"] > span[class*="answer"] {
     color: var(--fg4);
 }
+ul[class*="resultsGroup"] > [class*="option"] > span[class*="nonText"] {
+    color: var(--fg4);
+}
 ul[class*="resultsGroup"] > [class*="option"] > svg[class*="plusIcon"] {
     color: var(--fg1);
 }
+
 /* Code block syntax highlighting by highlight.js */
 /* Gruvbox Red */
 .hljs-deletion,
