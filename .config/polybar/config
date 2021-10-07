@@ -94,7 +94,7 @@ cursor-click = pointer
 
 modules-left = bspwm
 modules-center = center-xwindow
-modules-right = yubikey systemd checkupdates backlight temperature battery pulseaudio pulseaudio-sink buds wlan timedate powermenu
+modules-right = yubikey systemd backlight temperature pulseaudio battery pulseaudio-sink wlan datetime
 
 [bar/secondary]
 monitor = ${env:MONITOR}
@@ -138,7 +138,7 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 modules-left = bspwm
-modules-right = eth date
+modules-right = eth datetime
 
 ;                      _       _
 ;  _ __ ___   ___   __| |_   _| | ___  ___
@@ -228,27 +228,11 @@ format-connected-prefix-foreground = ${colors.fg4}
 format-connected-underline = ${colors.orange}
 label-connected = Connected
 
-[module/timedate]
+[module/datetime]
 type = internal/date
 time = "%H:%M"
-date-alt = "%Y-%m-%d"
-format-prefix = " "
-format-prefix-foreground = ${colors.fg4}
-format-underline = ${colors.orange}
-label = "%date%%time%"
-
-[module/time]
-type = internal/date
-time = "%H:%M"
-format-prefix = " "
-format-prefix-foreground = ${colors.fg4}
-format-underline = ${colors.orange}
-label = "%{A1:gsimplecal:}%time%%{A}"
-
-[module/date]
-type = internal/date
 date = "%Y-%m-%d"
-time = "%H:%M"
+date-alt = "%Y-%m-%d"
 format-prefix = "  "
 format-prefix-foreground = ${colors.fg4}
 format-underline = ${colors.orange}
