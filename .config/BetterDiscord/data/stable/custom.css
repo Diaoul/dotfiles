@@ -1,0 +1,233 @@
+
+
+.theme-dark {
+    --bg0-h: #1d2021;
+    --bg0: #282828;
+    --bg0-s: #32302f;
+    --bg1: #3c3836;
+    --bg2: #504945;
+    --bg3: #665c54;
+    --bg4: #7c6f64;
+    --fg0: #fbf1c7;
+    --fg1: #ebdbb2;
+    --fg2: #d5c4a1;
+    --fg3: #bdae93;
+    --fg4: #a89984;
+    --gray: #928374;
+    --orange: #fe8019;
+    --red: #fb4934;
+    --green: #b8bb26;
+    --yellow: #fabd2f;
+    --blue: #83a598;
+    --purple: #d3869b;
+    --aqua: #8ec07c;
+    --br-red: #cc241d;
+    --br-green: #98971a;
+    --br-yellow: #d79921;
+    --br-blue: #458588;
+    --br-purple: #b16286;
+    --br-aqua: #689d6a;
+    --br-orange: #d65d0e;
+
+    --background-primary: #282828;
+    --background-secondary: #3c3836;
+    --background-tertiary: #1d2021;
+    --background-modifier-active: #665c54;
+    --background-modifier-selected: #504945;
+    --background-modifier-hover: #504945;
+    --background-accent: #d65d0e;
+    --text-normal: #ebdbb2;
+    --text-spotify: #fbf1c7;
+    --text-muted: #bdae93;
+    --text-link: #458588;
+    --background-floating: #3c3836;
+    --header-primary: #ebdbb2;
+    --header-secondary: #bdae93;
+    --header-spotify: #b8bb26;
+    --interactive-normal: #ebdbb2;
+    --interactive-hover: #bdae93;
+    --interactive-active: #fbf1c7;
+    --channels-default: #a89984;
+    --control-brand-foreground: #d65d0e;
+}
+
+/* Scroll bars */
+::-webkit-scrollbar,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece {
+    background: transparent !important;
+    width: 5px !important;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--background-accent) !important;
+    border-radius: 0px !important;
+}
+
+/* "New Messages" bar */
+div[class*="newMessagesBar"] {
+    background-color: var(--background-accent);
+}
+
+/* Mentions (channel, user) */
+span[class*="mention"][class*="interactive"] {
+    color: var(--br-orange);
+    background-color: var(--bg1);
+}
+
+/* Mentions (role) */
+span[class*="mention"] {
+    color: var(--br-orange);
+    background-color: var(--bg1);
+}
+
+/* Message input box */
+div[class^="scrollableContainer"] {
+    background-color: var(--background-secondary);
+}
+
+/* Message input box emoji button */
+button[class*="emojiButton"] div[class*="contents"] div[class*="sprite"] {
+    filter: none !important;
+}
+
+/* User status bar */
+section[class^="panels"] > div[class^="container"] {
+    background-color: var(--background-primary);
+}
+
+/* Discord server buttons (add, explore) */
+* > svg {
+    color: var(--interactive-hover);
+}
+
+/* Right click submenu */
+div[class*="labelContainer"][class*="focused"] {
+    background-color: var(--background-accent);
+}
+div[class*="labelContainer"]:active {
+    background-color: var(--orange) !important;
+}
+
+/* Right click submenu invite people special entry */
+div[class*="labelContainer"]:not([class*="focused"])#channel-context-invite-people {
+    color: var(--background-accent);
+}
+
+/* Search */
+ul[class*="resultsGroup"] {
+    background-color: var(--background-secondary);
+}
+ul[class*="resultsGroup"] > div[class*="header"] {
+    color: var(--fg1) !important;
+}
+ul[class*="resultsGroup"] > [class*="option"][class*="selected"] {
+    background-color: var(--bg0-s);
+}
+ul[class*="resultsGroup"] > [class*="option"]:hover {
+    background-color: var(--background-primary);
+}
+ul[class*="resultsGroup"] > [class*="option"]:after {
+    background: transparent !important;
+}
+ul[class*="resultsGroup"] > [class*="option"] > span[class*="filter"] {
+    color: var(--fg1);
+}
+ul[class*="resultsGroup"] > [class*="option"] > span[class*="answer"] {
+    color: var(--fg4);
+}
+ul[class*="resultsGroup"] > [class*="option"] > svg[class*="plusIcon"] {
+    color: var(--fg1);
+}
+/* Code block syntax highlighting by highlight.js */
+/* Gruvbox Red */
+.hljs-deletion,
+.hljs-formula,
+.hljs-keyword,
+.hljs-link,
+.hljs-selector-tag {
+  color: var(--red);
+}
+
+/* Gruvbox Blue */
+.hljs-built_in,
+.hljs-emphasis,
+.hljs-name,
+.hljs-quote,
+.hljs-strong,
+.hljs-title,
+.hljs-variable {
+  color: var(--blue);
+}
+
+/* Gruvbox Yellow */
+.hljs-attr,
+.hljs-params,
+.hljs-template-tag,
+.hljs-type {
+  color: var(--yellow);
+}
+
+/* Gruvbox Bright Purple */
+.hljs-builtin-name,
+.hljs-doctag,
+.hljs-literal,
+.hljs-number {
+  color: var(--br-purple);
+}
+
+/* Gruvbox Orange */
+.hljs-code,
+.hljs-meta,
+.hljs-regexp,
+.hljs-selector-id,
+.hljs-template-variable {
+  color: var(--br-orange);
+}
+
+/* Gruvbox Green */
+.hljs-addition,
+.hljs-meta-string,
+.hljs-section,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-string,
+.hljs-symbol {
+  color: var(--green);
+}
+
+/* Gruvbox Aqua */
+.hljs-attribute,
+.hljs-bullet,
+.hljs-class,
+.hljs-function,
+.hljs-function .hljs-keyword,
+.hljs-meta-keyword,
+.hljs-selector-pseudo,
+.hljs-tag {
+  color: var(--aqua);
+}
+
+/* Gruvbox Gray */
+.hljs-comment {
+  color: var(--gray);
+}
+
+/* Gruvbox Purple */
+.hljs-link_label,
+.hljs-literal,
+.hljs-number {
+  color: var(--purple);
+}
+
+/* Italic */
+.hljs-comment,
+.hljs-emphasis {
+  font-style: italic;
+}
+
+/* Bold */
+.hljs-section,
+.hljs-strong,
+.hljs-tag {
+  font-weight: bold;
+}
