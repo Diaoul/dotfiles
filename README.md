@@ -48,6 +48,17 @@ To preview and apply all those, I run `lxappearance`.
 I published my own theme made with [Firefox Color](https://color.firefox.com/)
 which is available [here](https://addons.mozilla.org/addon/yagdmit/).
 
+### Brave
+I rely on the GTK+ theme as the few available theme options don't allow to
+create anything better.
+
+### Discord
+I use [BetterDiscord](https://betterdiscord.app/) with custom css.
+
+### Spotify
+Customized thanks to [Spicetify](https://github.com/khanhas/spicetify-cli).
+
+
 ## :hammer_and_wrench: Utilities
 Amazing tools I use all the time!
 
