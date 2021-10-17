@@ -21,9 +21,7 @@ packer.startup(function()
   }
   use {
     'numToStr/Comment.nvim',
-    config = function ()
-      require('Comment').setup()
-    end,
+    config = require('diaoul.comment').config,
   }
   use {
     'neovim/nvim-lspconfig',
