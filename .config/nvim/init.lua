@@ -1,22 +1,9 @@
 -- vim: fdm=marker:ts=2:sw=2
-local opt = vim.opt
-local g = vim.g
-local cmd = vim.cmd
-local fn = vim.fn
-local execute = vim.api.nvim_command
-
+local cmd, fn, g, opt = vim.cmd, vim.fn, vim.g, vim.opt
 
 ------------
 -- Packer --
 ------------
--- Install {{{1
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-  execute 'packadd packer.nvim'
-end
-
 -- Plugins {{{1
 local packer = require('packer')
 local use = packer.use
@@ -234,7 +221,7 @@ cmd [[
 
 -- Mappings {{{1
 local map = vim.api.nvim_set_keymap
-vim.g.mapleader = ' '
+g.mapleader = ' '
 
 -- wrapped lines navigation {{{2
 map('n', 'j', "v:count ? 'j' : 'gj'", { noremap = true, expr = true })
