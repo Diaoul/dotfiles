@@ -33,8 +33,10 @@ packer.startup(function()
     config = require('diaoul.surround').config,
   }
   use {
-    'b3nj5m1n/kommentary',
-    config = require('diaoul.kommentary').config,
+    'numToStr/Comment.nvim',
+    config = function ()
+      require('Comment').setup()
+    end,
   }
   use {
     'neovim/nvim-lspconfig',
