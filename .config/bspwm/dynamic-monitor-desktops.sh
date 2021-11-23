@@ -144,7 +144,7 @@ elif [[ "$monitor_count" == 5 ]]; then
         bspc monitor $monitor_5 -o 9 10
         bspc monitor $monitor_5 -d 9 10
     fi
-else
+else  # more than 5 monitors...
     # no rearranging for rich people
     i=0
     for monitor in $(bspc query -M); do
