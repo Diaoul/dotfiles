@@ -17,7 +17,7 @@
 ;==========================================================
 
 [colors]
-; gruvbox
+; gruvbox dark
 bg0-h = #1d2021
 bg0 = #282828
 bg0-s = #32302f
@@ -153,7 +153,7 @@ label = %title:0:80:...%
 [module/bspwm]
 type = internal/bspwm
 label-focused = %name%
-label-focused-background = ${colors.bg0-h}
+label-focused-background = ${colors.bg1}
 label-focused-underline= ${colors.orange}
 label-focused-padding = 2
 label-occupied = %name%
@@ -164,7 +164,11 @@ label-urgent-padding = 2
 label-empty = %name%
 label-empty-foreground = ${colors.fg4}
 label-empty-padding = 2
-; label-separator = |
+label-dimmed-foreground = ${colors.fg3}
+label-dimmed-focused-foreground = ${colors.fg3}
+label-dimmed-focused-background = ${colors.bg0-s}
+label-dimmed-focused-underline = ${colors.fg1}
+label-dimmed-empty-foreground = ${colors.bg4}
 
 [module/filesystem]
 type = internal/fs
