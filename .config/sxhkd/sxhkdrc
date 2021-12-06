@@ -94,6 +94,12 @@ super + shift + {d,v}
 # in the given the direction
 super + ctrl + {h,j,k,l}
     bspc node -p {west,south,north,east}
+# in the given the direction (colemak)
+super + ctrl + {m,n,e,i}
+    bspc node -p {west,south,north,east}
+# in the given the direction (navigation)
+super + ctrl + {Left,Up,Down,Right}
+    bspc node -p {west,south,north,east}
 # the ratio
 super + ctrl + {1-9}
     bspc node -o 0.{1-9}
