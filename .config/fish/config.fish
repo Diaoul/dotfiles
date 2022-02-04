@@ -2,6 +2,7 @@
 
 # GPG
 set -gx GPG_TTY (tty)
+set -gx SSH_AUTH_SOCK $HOME/.gnupg/S.gpg-agent.ssh
 
 # direnv
 direnv hook fish | source

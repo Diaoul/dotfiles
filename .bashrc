@@ -11,6 +11,9 @@ export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 # if not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# gpg
+export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+
 # vi mode
 set -o vi
 
