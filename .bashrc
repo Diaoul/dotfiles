@@ -7,6 +7,9 @@ export HISTFILESIZE='20000'
 
 # export PATH
 export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
+if [ "$(uname)" == "Darwin" ]; then
+  export PATH=/opt/homebrew/bin:$PATH
+fi
 
 # if not running interactively, don't do anything else
 [[ $- != *i* ]] && return
@@ -59,7 +62,20 @@ alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 # pyenv
 if command -v pyenv &> /dev/null
 then
-  eval "$(pyenv init -)"
+  eval "$(pyenv init --path)"
+fi
+
+# nvm
+if [ -d "$HOME/.nvm" ]
+then
+    export NVM_DIR="$HOME/.nvm"
+    source "$NVM_DIR/nvm.sh"
+    source "$NVM_DIR/bash_completion"
+fi
+
+# lazygit
+if [ "$(uname)" == "Darwin" ]; then
+  export LG_CONFIG_FILE="$HOME/.config/lazygit/config.yml"
 fi
 
 # direnv
@@ -70,3 +86,4 @@ eval "$(thefuck --alias)"
 
 # starship
 eval "$(starship init bash)"
+
