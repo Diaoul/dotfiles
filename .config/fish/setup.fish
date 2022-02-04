@@ -139,7 +139,9 @@ abbr -a kex kubectl exec -it
 
 # flux
 mkdir -p ~/.config/fish/completions
-flux completion fish > ~/.config/fish/completions/flux.fish
+if type -q flux
+  flux completion fish > ~/.config/fish/completions/flux.fish
+end
 
 # internet ip address
 alias -s myip "dog --short myip.opendns.com @resolver1.opendns.com"
