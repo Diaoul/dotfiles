@@ -12,6 +12,10 @@ set -U fish_user_paths \
   $HOME/.local/bin \
   $HOME/.cargo/bin \
   $HOME/.krew/bin
+if test (uname) = Darwin
+  set -U fish_user_paths \
+    /opt/homebrew/bin
+end
 
 # man
 set -Ux MANROFFOPT "-c"
@@ -53,3 +57,8 @@ alias -s dotfiles "git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 
 # fisher
 curl -sL https://git.io/fisher | source && fisher update
+
+# lazygit
+if test (uname) = "Darwin"
+  set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml"
+end

@@ -7,6 +7,9 @@ export HISTFILESIZE='20000'
 
 # export PATH
 export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
+if [ "$(uname)" == "Darwin" ]; then
+  export PATH=/opt/homebrew/bin:$PATH
+fi
 
 # if not running interactively, don't do anything else
 [[ $- != *i* ]] && return
@@ -72,3 +75,4 @@ eval "$(thefuck --alias)"
 
 # starship
 eval "$(starship init bash)"
+
