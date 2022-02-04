@@ -24,7 +24,7 @@ set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
 
 # pyenv
 if type -q pyenv
-  pyenv init - | source
+  pyenv init --path | source
 end
 
 # direnv
