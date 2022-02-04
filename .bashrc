@@ -54,6 +54,12 @@ alias grep='rg'
 # dotfiles git bare
 alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
+# pyenv
+if command -v pyenv &> /dev/null
+then
+  eval "$(pyenv init -)"
+fi
+
 # direnv
 eval "$(direnv hook bash)"
 
