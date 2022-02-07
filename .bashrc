@@ -42,11 +42,11 @@ alias .....='cd ../../../..'
 alias .4='cd ../../../..'
 
 # ls
-alias ls='exa -al --group-directories-first' # verbose by default
-alias la='exa -a --group-directories-first'  # all files and dirs
-alias ll='exa -l --group-directories-first'  # long format
-alias lt='exa -aT --group-directories-first' # tree listing
-alias l.='exa -a | egrep "^\."'
+alias l='exa -al --group-directories-first'
+alias ls='exa --group-directories-first'
+alias la='exa -a --group-directories-first'
+alias ll='exa -l --group-directories-first'
+alias lt='exa -aT --group-directories-first'
 
 # ripgrep
 alias grep='rg'
