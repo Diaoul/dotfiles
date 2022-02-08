@@ -1,4 +1,13 @@
 #!/usr/bin/fish
+# cursor
+# disabled to fix https://github.com/fish-shell/fish-shell/issues/3481
+function fish_vi_cursor; end
+
+# key bindings
+if ! set -q NVIM_LISTEN_ADDRESS
+    fish_vi_key_bindings
+end
+bind -M insert \b backward-kill-word
 
 # GPG
 set -gx GPG_TTY (tty)

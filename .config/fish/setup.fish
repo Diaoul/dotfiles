@@ -78,16 +78,14 @@ alias -s .3 "cd ../../.."
 alias -s ..... "cd ../../../.."
 alias -s .4 "cd ../../../.."
 
-# vim (or nvim)
-alias -s vim "nvim"
+# nvim
+abbr -a v nvim
 
 # bat
 abbr -a cat bat
 set -Ux MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
 # docker
-curl -sfLo ~/.config/fish/completions/docker.fish --create-dirs \
-    https://raw.githubusercontent.com/docker/cli/master/contrib/completion/fish/docker.fish
 abbr -a d docker
 
 # dog
@@ -102,7 +100,7 @@ abbr -a ll exa -l
 abbr -a lt exa -laT
 
 # fd
-abbr find fd
+abbr -a find fd
 
 # git
 abbr -a gco git checkout
@@ -137,12 +135,6 @@ abbr -a kgp kubectl get pods
 abbr -a kga kubectl get -A
 abbr -a kex kubectl exec -it
 
-# flux
-mkdir -p ~/.config/fish/completions
-if type -q flux
-  flux completion fish > ~/.config/fish/completions/flux.fish
-end
-
 # internet ip address
 alias -s myip "dog --short myip.opendns.com @resolver1.opendns.com"
 
@@ -158,25 +150,7 @@ set -Ux FZF_DEFAULT_OPTS \
     "--color pointer:#$theme_brblue,marker:#$theme_brorange,header:#$theme_bg3"
 
 # fisher
-curl -sfL https://git.io/fisher | source && fisher update
-
-# vi mode
-function fish_user_key_bindings
-    if ! set -q NVIM_LISTEN_ADDRESS
-        fish_vi_key_bindings
-    end
-    bind -M insert \b  backward-kill-word
-    bind -M insert \cf accept-autosuggestion
-    bind -M insert \ch backward-kill-word
-    bind -M insert \ck history-search-backward
-    bind -M insert \cj history-search-forward
-    bind -M insert \cl forward-word
-end
-funcsave fish_user_key_bindings
-
-# thefuck
-thefuck --alias | source
-funcsave fuck
+curl -sL https://git.io/fisher | source && fisher update
 
 # dotfiles
 alias -s dotfiles "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
