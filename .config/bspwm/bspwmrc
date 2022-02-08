@@ -24,8 +24,8 @@ bspc config remove_disabled_monitors   true
 bspc config remove_unplugged_monitors  true
 bspc config external_rules_command     "./.config/bspwm/bspwm-rules"
 
-# polybar
-.config/polybar/launch.sh
-
 # desktops
 .config/bspwm/dynamic-monitor-desktops.sh
+
+# polybar
+.config/polybar/launch.sh
