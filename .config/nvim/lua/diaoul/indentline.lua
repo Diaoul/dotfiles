@@ -15,6 +15,7 @@ function M.config()
         'terminal',
         'nofile',
     }
+    vim.g.indent_blankline_use_treesitter = true
 end
 
 return M

@@ -5,77 +5,157 @@ local cmd, fn, g, opt = vim.cmd, vim.fn, vim.g, vim.opt
 -- Packer --
 ------------
 -- Plugins {{{1
+cmd [[packadd packer.nvim]]
 local packer = require('packer')
 local use = packer.use
 
 packer.startup(function()
-  use 'wbthomason/packer.nvim'
+  use {'wbthomason/packer.nvim', opt = true}
   use {
     'lewis6991/gitsigns.nvim',
-    requires = 'nvim-lua/plenary.nvim',
-    config = require('diaoul.gitsigns').config,
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require('diaoul.gitsigns').config()
+    end,
   }
   use {
     'blackCauldron7/surround.nvim',
-    config = require('diaoul.surround').config,
+    config = function()
+      require('diaoul.surround').config()
+    end,
   }
   use {
     'numToStr/Comment.nvim',
-    config = require('diaoul.comment').config,
+    config = function()
+      require('diaoul.comment').config()
+    end,
   }
+  -- use {
+  --   'nvim-treesitter/nvim-treesitter',
+  --   requires = {
+  --     {
+  --       'nvim-treesitter/nvim-treesitter-refactor',
+  --       after = 'nvim-treesitter',
+  --     },
+  --     {
+  --       'nvim-treesitter/nvim-treesitter-textobjects',
+  --       after = 'nvim-treesitter',
+  --     },
+  --     {
+  --       'nvim-treesitter/playground',
+  --       cmd = 'TSPlaygroundToggle',
+  --     },
+  --   },
+  --   run = ':TSUpdate',
+  --   config = function()
+  --     require('diaoul.treesitter').config()
+  --   end,
+  -- }
+  -- use {
+  --   'lewis6991/spellsitter.nvim',
+  --   config = function()
+  --     require('spellsitter').setup()
+  --   end,
+  -- }
   use {
     'neovim/nvim-lspconfig',
-    config = require('diaoul.lsp').config,
+    setup = function()
+        require('diaoul.lsp').setup()
+    end,
+    config = function()
+      require('diaoul.lsp').config()
+    end,
   }
   use {
     'L3MON4D3/LuaSnip',
-    requires = 'rafamadriz/friendly-snippets',
-    config = require('diaoul.luasnip').config,
+    requires = { 'rafamadriz/friendly-snippets' },
+    config = function()
+      require('diaoul.luasnip').config()
+    end,
   }
   use {
-    'hrsh7th/nvim-compe',
-    config = require('diaoul.compe').config,
-    after = 'LuaSnip',
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-nvim-lua',
+      'hrsh7th/cmp-nvim-lsp',
+      'saadparwaiz1/cmp_luasnip',
+      'onsails/lspkind-nvim',
+      -- { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+      -- { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+      -- { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
+      -- { 'hrsh7th/cmp-nvim-lsp' },
+      -- { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp' },
+      -- { 'onsails/lspkind-nvim', after = 'nvim-cmp' },
+      -- { 'f3fora/cmp-spell', after = 'nvim-cmp' },
+    },
+    config = function()
+      require('diaoul.cmp').config()
+    end,
   }
   -- use {
-  --   'nvim-telescope/telescope.nvim',
-  --   requires = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim'},
-  --   config = require('diaoul.telescope')
+  --   'windwp/nvim-autopairs',
+  --   after = { 'nvim-cmp', 'nvim-treesitter' },
+  --   config = function()
+  --     require('diaoul.autopairs').config()
+  --   end,
+  -- }
+  -- use {
+  --   'abecodes/tabout.nvim',
+  --   module = 'tabout',
+  --   config = function()
+  --     require('diaoul.tabout').config()
+  --   end,
+  --   wants = { 'nvim-treesitter' },
+  --   after = { 'nvim-cmp' },
   -- }
   use {
-    'npxbr/gruvbox.nvim',
-    requires = 'rktjmp/lush.nvim',
+    'nvim-telescope/telescope.nvim',
+    module = 'telescope',
+    requires = { 'nvim-lua/plenary.nvim' },
+    setup = function()
+      require('diaoul.telescope').setup()
+    end,
+    config = function()
+      require('diaoul.telescope').config()
+    end,
+  }
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'make',
+    after = { 'telescope.nvim' },
+    config = function()
+      require('telescope').load_extension 'fzf'
+    end,
+  }
+  use {
+    'ellisonleao/gruvbox.nvim',
     config = function()
       vim.opt.background = 'dark'
       vim.cmd [[colorscheme gruvbox]]
     end,
   }
   use {
-    'glepnir/galaxyline.nvim',
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = require('diaoul.galaxyline').config,
+    'feline-nvim/feline.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons' },
+    config = function()
+      require('diaoul.feline').config()
+    end,
   }
-
-  -- Buffer line
-  -- use {
-  --   'akinsho/nvim-bufferline.lua',
-  --   requires = 'kyazdani42/nvim-web-devicons',
-  --   config = function() require('diaoul.bufferline') end
-  -- }
   use {
     'lukas-reineke/indent-blankline.nvim',
-    config = require('diaoul.indentline').config,
-  }
-  use {
-    'iamcco/markdown-preview.nvim',
-    config = "vim.call('mkdp#util#install')"
+    config = function()
+      require('diaoul.indentline').config()
+    end,
   }
 end)
 -- 1}}}
 
 -- TODO
 -- - https://github.com/folke/which-key.nvim
--- - vim surround or something to change ' to " etc.
+-- - https://github.com/RRethy/nvim-treesitter-textsubjects
+-- - LSP Status
 -- - nvim config structure
 -- - inspiration /r/neovim et nvchad
 --
@@ -85,17 +165,21 @@ end)
 -------------------
 -- Utils {{{1
 opt.clipboard = 'unnamedplus'
-opt.completeopt = { 'menuone', 'noselect' }
+opt.complete:prepend { 'kspell' }
+opt.completeopt = { 'menu', 'menuone', 'noselect' }
 opt.shortmess:append 'c'
 
 -- restore cursor position
-cmd [[autocmd BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") && @% !~? 'commit' | exe "normal! g`\"" | endif]]
+-- cmd [[autocmd BufReadPost * if line("'\"") >= 1 && line("'\"") <= line("$") && @% !~? 'commit' | exe "normal! g`\"" | endif]]
 
 -- commit specific configuration
 cmd [[autocmd FileType gitcommit setlocal nonumber norelativenumber spell textwidth=72 colorcolumn=+1]]
 
 -- highlight yanked text briefly
 cmd [[autocmd TextYankPost * silent! lua vim.highlight.on_yank()]]
+
+-- resize splits when Vim is resized
+cmd [[autocmd VimResized * wincmd =]]
 
 -- Indentation {{{1
 opt.expandtab = true
@@ -110,7 +194,7 @@ opt.joinspaces = false
 opt.number = true
 opt.relativenumber = true
 opt.signcolumn = 'yes:1'
-opt.colorcolumn = "80"
+opt.colorcolumn = '80'
 opt.cursorline = true
 cmd [[
   augroup cursorline_focus
@@ -141,8 +225,8 @@ opt.title = true
 opt.titlestring = '%t (%{expand("%:~:.:h")}) -  Neovim'
 
 -- Folds {{{1
-opt.foldmethod = 'marker'
-opt.foldcolumn = 'auto:2'
+opt.foldmethod = 'syntax'
+-- opt.foldexpr = 'nvim_treesitter#foldexpr()'
 opt.foldlevelstart = 10
 
 -- Backup {{{1
@@ -155,7 +239,14 @@ opt.confirm = true
 -- Search {{{1
 opt.ignorecase = true
 opt.smartcase = true
-opt.scrolloff = 4
+opt.scrolloff = 6
+-- cmd [[
+--   augroup auto-nohlsearch
+--     autocmd!
+--     autocmd CmdlineEnter /,\? :set hlsearch
+--     autocmd CmdlineLeave /,\? :set nohlsearch
+--   augroup END
+-- ]]
 -- TODO
 -- opt.grepprg = [[rg --vimgrep --no-heading --smart-case $*]]
 -- opt.grepformat:prepend { '%f:%l:%c:%m' }
@@ -204,6 +295,9 @@ opt.updatetime = 250
 opt.mouse = 'a'
 
 -- Colorscheme {{{1
+g.gruvbox_sign_column = 'bg0'
+g.gruvbox_cursor_line = 'dark0_soft'
+g.gruvbox_color_column = 'dark0_soft'
 opt.termguicolors = true
 
 -- Terminal {{{1
@@ -274,8 +368,8 @@ map('c', '<C-e>', '<End>', { noremap = false })
 
 -- visual mode indenting preserves selection {{{2
 -- note: can also use .
--- map('v', '<', '<gv', { noremap = true })
--- map('v', '>', '>gv', { noremap = true })
+map('v', '<', '<gv', { noremap = true })
+map('v', '>', '>gv', { noremap = true })
 
 -- neovim configuration {{{2
 map('n', ',e', ':e $MYVIMRC<CR>', { noremap = true })
