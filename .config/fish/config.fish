@@ -11,7 +11,9 @@ bind -M insert \b backward-kill-word
 
 # GPG
 set -gx GPG_TTY (tty)
-set -gx SSH_AUTH_SOCK $HOME/.gnupg/S.gpg-agent.ssh
+if ! set -q SSH_AUTH_SOCK
+    set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
+end
 
 # pyenv
 if type -q pyenv

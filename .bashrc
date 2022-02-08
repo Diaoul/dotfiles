@@ -12,7 +12,11 @@ export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 [[ $- != *i* ]] && return
 
 # gpg
-export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
+export GPG_TTY="$(tty)"
+if [ -z "$SSH_AUTH_SOCK" ]
+then
+    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+fi
 
 # vi mode
 set -o vi
