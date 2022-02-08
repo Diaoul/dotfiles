@@ -16,7 +16,7 @@ super + alt + q
 #
 # terminal emulator
 super + Return
-    alacritty
+    kitty
 # program launcher
 super + space
     rofi -combi-modi drun,ssh -show combi
@@ -34,17 +34,14 @@ super + {r,t,f}
 # focus
 #
 # node in the given direction
-super + {h,j,k,l}
-    bspc node -f {west,south,north,east}
-# node in the given direction (colemak)
 super + {m,n,e,i}
     bspc node -f {west,south,north,east}
 # node in the given direction (navigation)
 super + {Left,Down,Up,Right}
     bspc node -f {west,south,north,east}
-# next/previous node in the current desktop
+# previous/next node in the current desktop
 super + {d,v}
-    bspc node -f {next,prev}.local.!hidden.window
+    bspc node -f {prev,next}.local.!hidden.window
 # parent/brother node
 super + {p,b}
     bspc node -f @{parent,brother}
@@ -59,20 +56,17 @@ super + Tab
 # given desktop
 super + {1-9,0}
     bspc desktop -f '^{1-9,10}'
-# next/previous desktop in the current monitor
+# previous/next desktop
 super + {z,x}
-    bspc desktop -f {prev,next}.local
-# next/previous monitor
-super + {comma,period}
-    bspc monitor -f {prev,next}
+    bspc desktop -f {prev,next}
+# previous/next monitor
+super + {period,slash}
+    bspc monitor -f {west,east}
 
 #
 # move: shift
 #
 # node in the given direction
-super + shift + {h,j,k,l}
-    bspc node -s {west,south,north,east} --follow
-# node in the given direction (colemak)
 super + shift + {m,n,e,i}
     bspc node -s {west,south,north,east} --follow
 # node in the given direction (navigation)
@@ -92,9 +86,6 @@ super + shift + {d,v}
 # preselect: ctrl
 #
 # in the given the direction
-super + ctrl + {h,j,k,l}
-    bspc node -p {west,south,north,east}
-# in the given the direction (colemak)
 super + ctrl + {m,n,e,i}
     bspc node -p {west,south,north,east}
 # in the given the direction (navigation)
@@ -109,26 +100,17 @@ super + ctrl + Escape
 # cancel within desktop
 super + ctrl + shift + Escape
     bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-# send node to preselection
-super + ctrl + o
-    bspc node -n last.!automatic
 
 #
 # resize: alt
 #
 # expand a node by moving one of its side outward
-super + alt + {h,j,k,l}
-    bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
-# expand a node by moving one of its side outward (colemak)
 super + alt + {m,n,e,i}
     bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 # expand a node by moving one of its side outward (navigation)
 super + alt + {Left,Up,Down,Right}
     bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 # contract a node by moving one of its side inward
-super + alt + shift + {h,j,k,l}
-    bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
-# contract a node by moving one of its side inward (colemak)
 super + alt + shift + {m,n,e,i}
     bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 # contract a node by moving one of its side inward (navigation)
