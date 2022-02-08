@@ -5,5 +5,4 @@ notify-send -i display "Display" \
     "Switched to $AUTORANDR_CURRENT_PROFILE profile"
 
 # reload bspwm
-cd ~
-.config/bspwm/bspwmrc &
+bspc wm -r
