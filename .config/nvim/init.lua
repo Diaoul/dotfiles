@@ -19,7 +19,7 @@ packer.startup(function()
     end,
   }
   use {
-    'blackCauldron7/surround.nvim',
+    'ur4ltz/surround.nvim',
     config = function()
       require('diaoul.surround').config()
     end,
@@ -110,6 +110,16 @@ packer.startup(function()
   --   wants = { 'nvim-treesitter' },
   --   after = { 'nvim-cmp' },
   -- }
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = { 'kyazdani42/nvim-web-devicons' },
+    setup = function()
+      require('diaoul.nvim_tree').setup()
+    end,
+    config = function()
+      require('diaoul.nvim_tree').config()
+    end,
+  }
   use {
     'nvim-telescope/telescope.nvim',
     module = 'telescope',

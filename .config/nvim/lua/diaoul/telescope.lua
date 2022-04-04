@@ -9,13 +9,13 @@ end
 
 function M.setup()
     -- mappings
-    local function nvim_set_keymap(...) vim.api.nvim_set_keymap(...) end
+    local function map(...) vim.api.nvim_set_keymap(...) end
     local opts = { noremap = true, silent = true }
 
-    nvim_set_keymap('n', '<leader>ff', '<cmd>lua require("diaoul.telescope").project_files()<cr>', opts)
-    nvim_set_keymap('n', '<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<cr>', opts)
-    nvim_set_keymap('n', '<leader>fg', '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
-    nvim_set_keymap('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
+    map('n', '<leader>ff', '<cmd>lua require("diaoul.telescope").project_files()<cr>', opts)
+    map('n', '<leader>fb', '<cmd>lua require("telescope.builtin").buffers()<cr>', opts)
+    map('n', '<leader>fg', '<cmd>lua require("telescope.builtin").live_grep()<cr>', opts)
+    map('n', '<leader>fh', '<cmd>lua require("telescope.builtin").help_tags()<cr>', opts)
 end
 
 function M.config()
