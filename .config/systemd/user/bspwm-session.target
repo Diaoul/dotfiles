@@ -1,0 +1,5 @@
+# Required for libinput-gestures as service
+# see https://github.com/bulletmark/libinput-gestures/issues/305#issuecomment-1028698381
+[Unit]
+Description=bspwm session
+BindsTo=graphical-session.target

@@ -29,3 +29,6 @@ bspc config external_rules_command     "./.config/bspwm/bspwm-rules"
 
 # polybar
 .config/polybar/launch.sh
+
+# session
+systemctl --user start bspwm-session.target
