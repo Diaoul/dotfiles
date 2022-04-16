@@ -13,10 +13,8 @@ export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 
 # gpg
 export GPG_TTY="$(tty)"
-if [ -z "$SSH_AUTH_SOCK" ]
-then
-    export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-fi
+gpg-connect-agent updatestartuptty /bye >/dev/null
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 
 # vi mode
 set -o vi
