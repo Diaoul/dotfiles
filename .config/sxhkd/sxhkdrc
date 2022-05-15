@@ -2,10 +2,10 @@
 # maintainance
 #
 # reload sxhkd configuration
-super + Escape
+super + alt + s
     pkill -USR1 -x sxhkd; notify-send "sxhkd" "configuration reloaded"
 # restart bspwm
-super + alt + r
+super + alt + b
     bspc wm -r; notify-send "bspwm" "restarted"
 # quit bspwm
 super + alt + q
