@@ -2,6 +2,10 @@
 # cursor
 # disabled to fix https://github.com/fish-shell/fish-shell/issues/3481
 function fish_vi_cursor; end
+# set fish_cursor_default block blink
+# set fish_cursor_insert line blink
+# set fish_cursor_replace_one underscore blink
+# set fish_cursor_visual block
 
 # key bindings
 if ! set -q NVIM_LISTEN_ADDRESS
