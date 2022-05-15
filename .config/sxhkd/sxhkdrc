@@ -20,6 +20,9 @@ super + Return
 # program launcher
 super + space
     rofi -combi-modi drun,ssh -show combi
+# emoji selector
+super + semicolon
+    rofimoji
 # close/kill
 super + {_,shift + }w
     bspc node -{c,k}
