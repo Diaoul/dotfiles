@@ -11,6 +11,13 @@ local use = packer.use
 
 packer.startup(function()
   use {'wbthomason/packer.nvim', opt = true}
+
+  use {
+    'kyazdani42/nvim-web-devicons',
+    config = function()
+      require('diaoul.nvim_web_devicons').config()
+    end,
+  }
   use {
     'lewis6991/gitsigns.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
@@ -112,7 +119,7 @@ packer.startup(function()
   -- }
   use {
     'kyazdani42/nvim-tree.lua',
-    requires = { 'kyazdani42/nvim-web-devicons' },
+    after = { 'nvim-web-devicons' },
     setup = function()
       require('diaoul.nvim_tree').setup()
     end,
@@ -147,10 +154,16 @@ packer.startup(function()
     end,
   }
   use {
-    'feline-nvim/feline.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' },
+    'j-hui/fidget.nvim',
+    config = function ()
+      require('diaoul.fidget').config()
+    end
+  }
+  use {
+    'nvim-lualine/lualine.nvim',
+    after = { 'nvim-web-devicons' },
     config = function()
-      require('diaoul.feline').config()
+      require('diaoul.lualine').config()
     end,
   }
   use {

@@ -20,6 +20,7 @@ end
 
 function M.config()
     local actions = require 'telescope.actions'
+    local colors = require 'gruvbox.colors'
 
     require('telescope').setup {
         defaults = {
@@ -29,10 +30,13 @@ function M.config()
                     ['<Esc>'] = actions.close,
                     ['<C-j>'] = actions.move_selection_next,
                     ['<C-k>'] = actions.move_selection_previous,
+                    ['<C-p>'] = require('telescope.actions.layout').toggle_preview,
                 },
             },
+            color_devicons = false,
         },
     }
+    vim.api.nvim_set_hl(0, 'TelescopeResultsFileIcon', {fg = colors.light3})
 end
 
 return M
