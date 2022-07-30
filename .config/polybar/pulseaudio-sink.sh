@@ -11,4 +11,3 @@ pulseaudio-control \
     --node-nickname "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp_4__sink: %{F#a89984}蓼 %{F-}Output 2" \
     --node-nickname "alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp_5__sink: %{F#a89984}蓼 %{F-}Output 3" \
     $1
-
