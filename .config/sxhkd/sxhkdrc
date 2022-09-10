@@ -19,7 +19,7 @@ super + Return
     kitty
 # program launcher
 super + space
-    rofi -combi-modi drun,ssh -show combi
+    rofi -show drun
 # emoji selector
 super + semicolon
     rofimoji
