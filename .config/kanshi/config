@@ -1,0 +1,19 @@
+profile mobile {
+	output eDP-1 position 0,0
+}
+
+profile docked {
+	output eDP-1 position 0,120
+	output 'Unknown VG27A KCLMQS095159' mode 2560x1440@144Hz position 1920,0
+	output 'Ancor Communications Inc PA248 D1LMQS035408' position 4480,120
+    exec swaymsg workspace 1, move workspace to output eDP-1
+    exec swaymsg workspace 2, move workspace to output eDP-1
+    exec swaymsg workspace 3, move workspace to output eDP-1
+    exec swaymsg workspace 4, move workspace to output '"Unknown VG27A KCLMQS095159"'
+    exec swaymsg workspace 5, move workspace to output '"Unknown VG27A KCLMQS095159"'
+    exec swaymsg workspace 6, move workspace to output '"Unknown VG27A KCLMQS095159"'
+    exec swaymsg workspace 7, move workspace to output '"Unknown VG27A KCLMQS095159"'
+    exec swaymsg workspace 8, move workspace to output '"Ancor Communications Inc PA248 D1LMQS035408"'
+    exec swaymsg workspace 9, move workspace to output '"Ancor Communications Inc PA248 D1LMQS035408"'
+    exec swaymsg workspace 10, move workspace to output '"Ancor Communications Inc PA248 D1LMQS035408"'
+}
