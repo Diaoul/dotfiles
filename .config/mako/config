@@ -1,0 +1,23 @@
+# general
+default-timeout=5000
+layer=overlay
+
+# style
+padding=10
+
+# colors
+background-color=#282828
+text-color=#d5c4a1
+border-color=#ebdbb2
+progress-color=over #d5c4a1
+
+# urgency overrides
+[urgency=low]
+border-color=#665c54
+
+[urgency=normal]
+
+[urgency=high]
+border-color=#cc241d
+text-color=#ebdbb2
+default-timeout=0
