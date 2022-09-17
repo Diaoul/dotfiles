@@ -8,6 +8,9 @@ pgrep -x sxhkd > /dev/null || SXHKD_SHELL=sh sxhkd &
 # compositor
 pgrep -x picom > /dev/null || picom --experimental-backends &
 
+# notifications
+pgrep -x dunst > /dev/null || dunst &
+
 # screen locker
 pgrep -x xss-lock > /dev/null || xss-lock -l -- ./.local/bin/run-xsecurelock.sh &
 
