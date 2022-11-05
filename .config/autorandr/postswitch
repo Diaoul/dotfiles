@@ -2,7 +2,7 @@
 
 # send notification
 notify-send -i display "Display" \
-    "Switched to $AUTORANDR_CURRENT_PROFILE profile"
+    "Switched to $AUTORANDR_CURRENT_PROFILE profile" &
 
 # reload bspwm
 bspc wm -r
