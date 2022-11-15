@@ -5,7 +5,7 @@ include "/home/antoine/.gtkrc-2.0.mine"
 gtk-theme-name="oomox-gruvbox-dark-medium"
 gtk-icon-theme-name="oomox-gruvbox-dark-medium"
 gtk-font-name="Noto Sans 11"
-gtk-cursor-theme-name="Breeze"
+gtk-cursor-theme-name="Simp1e-Gruvbox-Dark"
 gtk-cursor-theme-size=0
 gtk-toolbar-style=GTK_TOOLBAR_BOTH
 gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
