@@ -31,3 +31,5 @@
     cmd = code --wait $MERGED
 [pull]
     rebase = true
+[push]
+    default = current
