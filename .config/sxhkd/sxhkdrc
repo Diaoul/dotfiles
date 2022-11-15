@@ -17,6 +17,14 @@ super + alt + q
 # terminal emulator
 super + Return
     kitty
+super + shift + Return
+    kitty --class kitty-float
+super + ctrl + Return
+    kitty --class kitty-float
+super + alt + Return
+    kitty --class kitty-full --override font_size=20 --override window_padding_width=20
+super + minus
+    bspwm-toggle-visibility.sh kitty-scratchpad "kitty --class kitty-scratchpad"
 # program launcher
 super + space
     rofi -show drun

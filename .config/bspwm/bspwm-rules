@@ -9,6 +9,15 @@ case $instance.$class in
     (*.Pavucontrol)
         echo "state=floating"
         ;;
+    (*.kitty-float)
+        echo "state=floating"
+        ;;
+    (*.kitty-full)
+        echo "state=fullscreen"
+        ;;
+    (*.scratchpad)
+        echo "sticky=on state=floating hidden=on"
+        ;;
     (*.discord)
         echo "desktop=^1"
         ;;
