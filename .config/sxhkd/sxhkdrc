@@ -57,7 +57,7 @@ super + {d,v}
 super + {p,b}
     bspc node -f @{parent,brother}
 # older/newer node in the focus history
-super + {u,y}
+super + {l,u}
     bspc wm -h off; \
     bspc node {older,newer} -f; \
     bspc wm -h on
@@ -68,10 +68,10 @@ super + Tab
 super + {1-9,0}
     bspc desktop -f '^{1-9,10}'
 # previous/next desktop
-super + {z,x}
-    bspc desktop -f {prev,next}
+super + {j,y}
+    bspc desktop -f {prev,next}.local
 # previous/next monitor
-super + {period,slash}
+super + {k,period}
     bspc monitor -f {west,east}
 
 #
