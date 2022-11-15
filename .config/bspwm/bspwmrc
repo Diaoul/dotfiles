@@ -3,7 +3,7 @@
 ./.fehbg &
 
 # hotkey daemon
-pgrep -x sxhkd > /dev/null || SXHKD_SHELL=sh sxhkd &
+pgrep -x sxhkd > /dev/null || BASH_ENV=~/.bashrc SXHKD_SHELL=bash sxhkd &
 
 # compositor
 pgrep -x picom > /dev/null || picom --experimental-backends &
