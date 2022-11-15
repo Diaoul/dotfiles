@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # exports
 export EDITOR='nvim'
 export HISTCONTROL='ignoreboth';
@@ -6,9 +6,9 @@ export HISTSIZE='10000'
 export HISTFILESIZE='20000'
 
 # export PATH
-export PATH=$HOME/.bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 
-# if not running interactively, don't do anything
+# if not running interactively, don't do anything else
 [[ $- != *i* ]] && return
 
 # gpg
