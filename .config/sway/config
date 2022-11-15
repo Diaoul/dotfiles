@@ -56,7 +56,7 @@ input type:touchpad {
 }
 
 ### theme
-# gaps 
+# gaps
 gaps inner 16
 # border
 titlebar_border_thickness 2
@@ -67,7 +67,7 @@ client.focused           $orange    $bg1       $fg        $br_orange $orange
 client.focused_inactive  $fg3       $bg1       $fg        $fg3       $fg3
 client.focused_tab_title $bg        $bg1       $fg        $bg        $bg
 client.unfocused         $bg        $bg1       $fg3       $bg        $bg
-client.urgent            $red       $bg1       $fg        $red       $red 
+client.urgent            $red       $bg1       $fg        $red       $red
 
 ### key bindings
 ## maintainance
@@ -170,10 +170,10 @@ bindsym XF86AudioLowerVolume exec pamixer --decrease 5
 bindsym XF86AudioMute exec pamixer --toggle-mute
 
 ## brightness
-bindsym Ctrl+XF86MonBrightnessUp exec light -A 1 
+bindsym Ctrl+XF86MonBrightnessUp exec light -A 1
 bindsym XF86MonBrightnessUp exec light -A 5
 bindsym Shift+XF86MonBrightnessUp exec light -A 10
-bindsym Ctrl+XF86MonBrightnessDown exec light -U 1 
+bindsym Ctrl+XF86MonBrightnessDown exec light -U 1
 bindsym XF86MonBrightnessDown exec light -U 5
 bindsym Shift+XF86MonBrightnessDown exec light -U 10
 
