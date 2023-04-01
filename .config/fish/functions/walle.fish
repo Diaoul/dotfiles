@@ -19,8 +19,8 @@ function walle -d 'Your wallpaper manager robot'
             feh --bg-fill $base/$uuid.jpg
             echo "Wallpaper saved to $uuid.jpg"
         case 'random'
-            set file (exa $base | shuf -n 1)
-            feh --bg-fill $base/$file
+            set file (fd -a -t f | shuf -n 1)
+            feh --bg-fill $file
             echo "Wallpaper set to $file"
         case '*'
             echo "Unknown command '$argv[1]'"
