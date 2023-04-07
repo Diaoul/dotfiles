@@ -1,0 +1,30 @@
+theme = "gruvbox"
+playback_format = "{track} • {artists} [{album}]\n{metadata}"
+notify_format = { summary = "{track} • {artists}", body = "{album}" }
+# the default `copy_command` is based on the OS
+# copy_command = { command = "pbcopy", args = [] } # macos
+# copy_command = { command = "xclip", args = ["-sel", "c"] } # linux
+# copy_command = { command = "clip", args = [] } # windows
+app_refresh_duration_in_ms = 32
+playback_refresh_duration_in_ms = 0
+cover_image_refresh_duration_in_ms = 2000
+page_size_in_rows = 20
+track_table_item_max_len = 32
+enable_media_control = true
+enable_streaming = true
+enable_cover_image_cache = true
+default_device = "Mars"
+play_icon = ""
+pause_icon = ""
+liked_icon = "♥"
+playback_window_position = "Bottom"
+cover_img_length = 9
+cover_img_width = 5
+playback_window_width = 6
+
+[device]
+name = "Mars"
+device_type = "speaker"
+volume = 100
+bitrate = 160
+audio_cache = false
