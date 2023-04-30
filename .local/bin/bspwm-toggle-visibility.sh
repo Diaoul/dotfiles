@@ -30,7 +30,8 @@ while [ -n "${1}" ]; do
 done
 
 if [ -z "${id}" ]; then
-    ${executable} &
+    ${executable} & \
+    disown
 else
     while read -r instance; do
         bspc node "${instance}" --flag hidden --to-monitor focused --focus
