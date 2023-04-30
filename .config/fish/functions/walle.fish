@@ -2,26 +2,38 @@ function walle -d 'Your wallpaper manager robot'
     set base ~/wallpapers
     switch $argv[1]
         case 'unsplash'
-            set resolution (
-                xrandr | grep primary | awk -F '[ +]' '{print $4}'
-            )
-            echo -n "Setting wallpaper from unsplash with resolution $resolution..."
-            curl -sL https://source.unsplash.com/random/$resolution \
-                -o $base/current.jpg
-            feh --bg-fill $base/current.jpg
+            # HD
+            # set width "1920"
+            # set height "1080"
+            # 4k
+            set width "3840"
+            set height "2160"
+            echo -n Setting wallpaper from unsplash with resolution {$width}x{$height}...
+            curl -sL "https://unsplash.it/$width/$height/?random" \
+                -o $base/unsplash.jpg
+            ln -sf $base/unsplash.jpg $base/current
+            if test $XDG_SESSION_TYPE = "wayland"
+                swww img -t grow $base/current
+            else if test $XDG_SESSION_TYPE = "x11"
+                feh --bg-fill $base/current
+            end
             echo ' Done!'
         case 'save'
             set uuid (
                 string split - -m 1 (bat /proc/sys/kernel/random/uuid) \
                 | head -n 1
             )
-            mv $base/current.jpg $base/$uuid.jpg
-            feh --bg-fill $base/$uuid.jpg
-            echo "Wallpaper saved to $uuid.jpg"
+            cp $base/unsplash.jpg $base/$uuid.jpg
+            echo Wallpaper saved to $uuid.jpg
         case 'random'
-            set file (fd -a -t f | shuf -n 1)
-            feh --bg-fill $file
-            echo "Wallpaper set to $file"
+            set file (fd . -a -t f $base | shuf -n 1)
+            ln -sf $file $base/current
+            if test $XDG_SESSION_TYPE = "wayland"
+                swww img -t grow $base/current
+            else if test $XDG_SESSION_TYPE = "x11"
+                feh --bg-fill $base/current
+            end
+            echo Wallpaper set to $file
         case '*'
             echo "Unknown command '$argv[1]'"
             echo '  Possible values: (unsplash|save|random)'
