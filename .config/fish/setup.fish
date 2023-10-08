@@ -70,7 +70,8 @@ set -U fish_greeting ""
 # PATH
 set -U fish_user_paths \
   $HOME/.local/bin \
-  $HOME/.cargo/bin
+  $HOME/.cargo/bin \
+  $HOME/.krew/bin
 
 # navigation
 alias -s .. "cd .."
