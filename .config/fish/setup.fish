@@ -145,6 +145,10 @@ alias -s myip "dog --short myip.opendns.com @resolver1.opendns.com"
 set -Ux RIPGREP_CONFIG_PATH ~/.config/ripgrep
 abbr -a grep rg
 
+# swww
+set -Ux SWWW_TRANSITION_TYPE grow
+set -Ux SWWW_TRANSITION_POS 0.75,0.7
+
 # fzf
 set -Ux FZF_DEFAULT_OPTS \
     "--color fg:#$theme_brwhite,bg:#$theme_black,hl:#$theme_bryellow" \

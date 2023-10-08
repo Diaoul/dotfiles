@@ -14,7 +14,7 @@ switch $argv[1]
             -o $base/unsplash.jpg
         ln -sf $base/unsplash.jpg $base/current
         if test $XDG_SESSION_TYPE = "wayland"
-            swww img -t grow $base/current
+            swww img $base/current
         else if test $XDG_SESSION_TYPE = "x11"
             feh --bg-fill $base/current
         end
@@ -30,7 +30,7 @@ switch $argv[1]
         set file (fd . -a -t f $base | shuf -n 1)
         ln -sf $file $base/current
         if test $XDG_SESSION_TYPE = "wayland"
-            swww img -t grow $base/current
+            swww img $base/current
         else if test $XDG_SESSION_TYPE = "x11"
             feh --bg-fill $base/current
         end
