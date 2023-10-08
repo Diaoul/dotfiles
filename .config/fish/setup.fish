@@ -146,7 +146,7 @@ set -Ux RIPGREP_CONFIG_PATH ~/.config/ripgrep
 abbr -a grep rg
 
 # swww
-set -Ux SWWW_TRANSITION_TYPE grow
+set -Ux SWWW_TRANSITION grow
 set -Ux SWWW_TRANSITION_POS 0.75,0.7
 
 # fzf
