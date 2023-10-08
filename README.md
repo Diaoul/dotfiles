@@ -95,7 +95,7 @@ Keeping an eye on [foot](https://codeberg.org/dnkl/foot) on Wayland.
 
 Amazing tools I use all the time!
 
-- [exa](https://the.exa.website/) as a replacement for `ls`
+- [eza](https://github.com/eza-community/eza) as a replacement for `ls`
 - [bat](https://github.com/sharkdp/bat) instead of `cat` (with wings)
 - [dog](https://dns.lookup.dog/) for coloured (and usable) `dig`
 - [delta](https://github.com/dandavison/delta): `diff` with style
