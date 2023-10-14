@@ -86,6 +86,7 @@ abbr -a v nvim
 
 # bat
 abbr -a cat bat
+set -Ux MANROFFOPT "-c"
 set -Ux MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
 # docker
