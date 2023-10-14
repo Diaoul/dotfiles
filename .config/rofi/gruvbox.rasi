@@ -1,0 +1,142 @@
+// see man 5 rofi-theme
+* {
+    bg0h-color: #1d2021;
+    bg-color: #282828;
+    bg1-color: #3c3836;
+    bg2-color: #504945;
+    bg3-color: #665c54;
+    bg4-color: #7c6f64;
+    fg0-color: #fbf1c7;
+    fg-color: #ebdbb2;
+    fg1-color: #ebdbb2;
+    fg2-color: #d5c4a1;
+    fg3-color: #bdae93;
+    fg4-color: #a89984;
+    grey: #928374;
+    red: #cc241d;
+    green: #98971a;
+    yellow: #d79921;
+    blue: #458588;
+    purple: #b16286;
+    aqua: #689d6a;
+    orange: #d65d0e;
+    br-red: #fb4934;
+    br-green: #b8bb26;
+    br-yellow: #fabd2f;
+    br-blue: #83a598;
+    br-purple: #d3869b;
+    br-aqua: #8ec07c;
+    br-orange: #fe8019;
+    bold-orange: bold #fabd2f;
+    bold-orange: bold #fe8019;
+    bold-orange: bold #d65d0e;
+    //border: 1px;
+    //border-color: @red;
+}
+
+window {
+    width: 550;
+    height: 624;  // exactly fits 14 lines
+    border: 2px;
+    border-color: @fg2-color;
+    background-color: @bg-color;
+}
+
+mainbox {
+    background-color: inherit;
+}
+
+inputbar {
+    children: [prompt,entry];
+    background-color: inherit;
+    margin: 15px 15px 0px 15px;
+}
+
+prompt {
+    background-color: @br-blue;
+    text-color: @bg-color;
+    padding: 5px 15px;
+}
+
+entry {
+    margin: 0px 0px 0px 15px;
+    padding: 5px 10px;
+    text-color: @fg-color;
+    background-color: @bg1-color;
+    placeholder: "<i>type here...</i>";
+    placeholder-markup: true;
+    placeholder-color: @fg4-color;
+    cursor-width: 8px;  // does not seem to be working
+}
+
+message {
+    margin: 15px 15px 0px 15px;
+    background-color: inherit;
+}
+
+textbox {
+    border: 2px;
+    border-color: @fg3-color;
+    text-color: @fg-color;
+    background-color: @bg1-color;
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+}
+
+listview {
+    margin: 15px 5px;
+    columns: 1;
+    // use height on window instead to avoid changing the height when a message shows up
+    //lines: 14;
+    cycle: false;
+    background-color: inherit;
+}
+
+scrollbar {
+    background-color: inherit;
+    handle-color: @br-blue;
+}
+
+element {
+    padding: 5px 20px;
+    background-color: inherit;
+    text-color: @fg-color;
+}
+
+element selected {
+    color: @fg0-color;
+    background-color: @bg1-color;
+    // alternatively, use a darker background and invert the text color
+    //background-color: @bg4-color;
+    //text-color: @bg-color;
+}
+
+element-icon {
+    background-color: inherit;
+    size: 25px;
+}
+
+element-text {
+    padding: 4px 0px;
+    vertical-align: 0.5;
+    background-color: inherit;
+    text-color: inherit;
+    highlight: @bold-orange;
+}
+
+mode-switcher {
+    spacing: 0;
+}
+
+button {
+    padding: 10px;
+    background-color: @bg1-color;
+    text-color: @fg3-color;
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+}
+
+button selected {
+    background-color: @bg-color;
+    text-color: @br-blue;
+}

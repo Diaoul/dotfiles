@@ -1,6 +1,18 @@
+// Base configuration
 configuration {
-    modes: "window,drun";
-    combi-modes: "window,drun";
+    // does not work on wayland yet
+    // see https://github.com/lbonn/rofi/issues/77
+    hover-select: true;
+    me-select-entry: "";
+    me-accept-entry: "MousePrimary";
+    scroll-method: 1;
+    terminal: "foot";
+    drun-display-format: "{icon} {name}";
+    display-drun: "󰀘 Apps";
+    display-run: " Run";
+    display-window: "󰕰 Window";
+    display-ssh: "󰆍 SSH";
+    display-emoji: " Emoji";
 }
 
-@theme "/usr/share/rofi/themes/gruvbox-dark.rasi"
+@theme "~/.config/rofi/gruvbox.rasi"

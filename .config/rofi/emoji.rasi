@@ -1,0 +1,18 @@
+configuration{
+    modi: "emoji";
+}
+
+@theme "~/.config/rofi/gruvbox.rasi"
+
+// Yellow for emojis
+prompt {
+    background-color: @br-yellow;
+}
+
+scrollbar {
+    handle-color: @br-yellow;
+}
+
+button selected {
+    text-color: @br-yellow;
+}
