@@ -73,6 +73,28 @@ set -U fish_user_paths \
   $HOME/.cargo/bin \
   $HOME/.krew/bin
 
+# man
+set -Ux MANROFFOPT "-c"
+set -Ux MANPAGER "sh -c 'col -bx | bat -l man -p'"
+
+# ripgrep
+set -Ux RIPGREP_CONFIG_PATH ~/.config/ripgrep
+
+# swww
+set -Ux SWWW_TRANSITION grow
+set -Ux SWWW_TRANSITION_POS 0.75,0.7
+
+# fzf
+set -Ux FZF_DEFAULT_OPTS \
+    "--color fg:#$theme_fg1,bg:#$theme_bg0,hl:#$theme_bryellow" \
+    "--color fg+:#$theme_fg0,bg+:#$theme_bg1,hl+:#$theme_brorange" \
+    "--color info:#$theme_brblue,prompt:#$theme_fg3,spinner:#$theme_bryellow" \
+    "--color pointer:#$theme_brblue,marker:#$theme_brred,header:#$theme_magenta" \
+    "--cycle --layout=reverse --border --height=90% --preview-window=wrap --marker=\"*\""
+
+# ls_colors
+set -Ux LS_COLORS (vivid -m 8-bit generate gruvbox-dark)
+
 # navigation
 alias -s .. "cd .."
 alias -s ... "cd ../.."
@@ -81,84 +103,12 @@ alias -s .3 "cd ../../.."
 alias -s ..... "cd ../../../.."
 alias -s .4 "cd ../../../.."
 
-# nvim
-abbr -a v nvim
-
-# bat
-abbr -a cat bat
-set -Ux MANROFFOPT "-c"
-set -Ux MANPAGER "sh -c 'col -bx | bat -l man -p'"
-
-# docker
-abbr -a d docker
-
-# dog
-abbr -a dig dog
-
-# exa
-alias -s exa "exa --group-directories-first"
-abbr -a l exa -la
-abbr -a ls exa
-abbr -a la exa -a
-abbr -a ll exa -l
-abbr -a lt exa -laT
-
-# fd
-abbr -a find fd
-
-# git
-abbr -a gco git checkout
-abbr -a gs git status -s
-abbr -a gd git diff
-abbr -a gds git diff --staged
-abbr -a ga git add
-abbr -a gaa git add -A
-abbr -a gau git add -u
-abbr -a gb git branch -v
-abbr -a gc git commit
-abbr -a gca git commit -a
-abbr -a gcm git commit -m
-abbr -a gcam git commit -am
-abbr -a gl git pull
-abbr -a gp git push
-abbr -a gpa git push --all
-abbr -a glg git log --graph --oneline
-abbr -a glga glg --all
-abbr -a glgn glg '(git describe --tags --abbrev=0 @^)..@'
-
-# kubernetes
-abbr -a kx kubectx
-abbr -a kn kubens
-abbr -a k kubectl
-abbr -a ka kubectl apply
-abbr -a kaf kubectl apply -f
-abbr -a kd kubectl describe
-abbr -a kdel kubectl delete
-abbr -a kg kubectl get
-abbr -a kgp kubectl get pods
-abbr -a kga kubectl get -A
-abbr -a kex kubectl exec -it
-
 # internet ip address
 alias -s myip "dog --short myip.opendns.com @resolver1.opendns.com"
 
-# ripgrep
-set -Ux RIPGREP_CONFIG_PATH ~/.config/ripgrep
-abbr -a grep rg
-
-# swww
-set -Ux SWWW_TRANSITION grow
-set -Ux SWWW_TRANSITION_POS 0.75,0.7
-
-# fzf
-set -Ux FZF_DEFAULT_OPTS \
-    "--color fg:#$theme_brwhite,bg:#$theme_black,hl:#$theme_bryellow" \
-    "--color fg+:#$theme_brwhite,bg+:#$theme_bg1,hl+:#$theme_bryellow" \
-    "--color info:#$theme_brblue,prompt:#$theme_fg3,spinner:#$theme_bryellow" \
-    "--color pointer:#$theme_brblue,marker:#$theme_brorange,header:#$theme_bg3"
+# dotfiles
+alias -s dotfiles "git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 
 # fisher
 curl -sL https://git.io/fisher | source && fisher update
 
-# dotfiles
-alias -s dotfiles "git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"

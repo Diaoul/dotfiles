@@ -31,3 +31,62 @@ thefuck --alias | source
 
 # starship
 starship init fish | source
+
+# eza
+alias eza "eza --group-directories-first"
+abbr -a l eza -la
+abbr -a ls eza
+abbr -a la eza -a
+abbr -a ll eza -l
+abbr -a lt eza -laT
+
+# ripgrep
+abbr -a grep rg
+
+# fd
+abbr -a find fd
+
+# dog
+abbr -a dig dog
+
+# cat
+abbr -a cat bat
+
+# nvim
+abbr -a v nvim
+
+# git
+abbr -a gco git checkout
+abbr -a gs git status -s
+abbr -a gd git diff
+abbr -a gds git diff --staged
+abbr -a ga git add
+abbr -a gaa git add -A
+abbr -a gau git add -u
+abbr -a gb git branch -v
+abbr -a gc git commit
+abbr -a gca git commit -a
+abbr -a gcm git commit -m
+abbr -a gcam git commit -am
+abbr -a gl git pull
+abbr -a gp git push
+abbr -a gpa git push --all
+abbr -a glg git log --graph --oneline
+abbr -a glga glg --all
+abbr -a glgn glg '(git describe --tags --abbrev=0 @^)..@'
+
+# kubernetes
+abbr -a kx kubectx
+abbr -a kn kubens
+abbr -a k kubectl
+abbr -a ka kubectl apply
+abbr -a kaf kubectl apply -f
+abbr -a kd kubectl describe
+abbr -a kdel kubectl delete
+abbr -a kg kubectl get
+abbr -a kgp kubectl get pods
+abbr -a kga kubectl get -A
+abbr -a kex kubectl exec -it
+
+# docker
+abbr -a d docker
