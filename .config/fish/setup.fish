@@ -85,12 +85,13 @@ set -Ux SWWW_TRANSITION grow
 set -Ux SWWW_TRANSITION_POS 0.75,0.7
 
 # fzf
+# see https://minsw.github.io/fzf-color-picker/
 set -Ux FZF_DEFAULT_OPTS \
     "--color fg:#$theme_fg1,bg:#$theme_bg0,hl:#$theme_bryellow" \
     "--color fg+:#$theme_fg0,bg+:#$theme_bg1,hl+:#$theme_brorange" \
     "--color info:#$theme_brblue,prompt:#$theme_fg3,spinner:#$theme_bryellow" \
-    "--color pointer:#$theme_brblue,marker:#$theme_brred,header:#$theme_magenta" \
-    "--cycle --layout=reverse --border --height=90% --preview-window=wrap --marker=\"*\""
+    "--color pointer:#$theme_brblue,marker:#$theme_red,header:#$theme_magenta" \
+    "--cycle --border --height=90% --preview-window=wrap --marker=\">\""
 
 # ls_colors
 set -Ux LS_COLORS (vivid -m 8-bit generate gruvbox-dark)
