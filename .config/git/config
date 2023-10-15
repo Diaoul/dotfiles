@@ -4,32 +4,98 @@
     signingkey = 86170CE5CB464ADDC6BE8E597450F180356132B6
 [commit]
     gpgSign = true
+[tag]
+    gpgSign = true
 [credential]
-    helper = store
+    helper = cache
 [core]
     editor = nvim
+    pager = delta
 [init]
     defaultBranch = main
-[diff]
-    colorMoved = default
-[diff "sopsdiffer"]
-    textconv = sops -d
-[pager]
-    diff = delta
-    log = delta
-    reflog = delta
-    show = delta
-[interactive]
-    diffFilter = delta --color-only
-[delta]
-    syntax-theme = gruvbox-dark
-    line-numbers = true
-    navigate = true
-[merge]
-    tool = vscode
-[mergetool "vscode"]
-    cmd = code --wait $MERGED
 [pull]
     rebase = true
 [push]
     default = current
+[diff]
+    colorMoved = default
+[diff "sopsdiffer"]
+    textconv = sops -d
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    features = gruvbox
+    navigate = true
+    line-numbers = true
+[delta "gruvbox"]
+    # colors
+    black = "#282829"
+    brblack = "#928374"
+    red = "#cc241d"
+    brred = "#fb4934"
+    green = "#98971a"
+    brgreen = "#b8bb26"
+    yellow = "#d79921"
+    bryellow = "#fabd2f"
+    blue = "#458588"
+    brblue = "#83a598"
+    purple = "#b16286"
+    brpurple = "#d3869b"
+    aqua = "#689d6a"
+    braqua = "#8ec07c"
+    white = "#a89984"
+    brwhite = "#ebdbb2"
+    orange = "#d65d0e"
+    brorange = "#fe8019"
+    bg0-h = "#1d2021"
+    bg0 = "#282828"
+    bg1 = "#3c3836"
+    bg2 = "#504945"
+    bg3 = "#665c54"
+    bg4 = "#7c6f64"
+    gray = "#928374"
+    bg0-s = "#32302f"
+    fg4 = "#a89984"
+    fg3 = "#bdae93"
+    fg2 = "#d5c4a1"
+    fg1 = "#ebdbb2"
+    fg0 = "#fbf1c7"
+    # blended colors to bg0
+    bggreen = "#424328"  # brgreen
+    bggreenhl = "#696b27"  # brgreen
+    bgred = "#4e2e2a"  # brred
+    bgredhl = "#88372d"  # brred
+    bgaqua = "#44513f"  # braqua
+    bgpurple = "#574247"  # brpurple
+    dark = true
+    syntax-theme = gruvbox-dark
+    map-styles = bold purple => syntax gruvbox.bgpurple, bold cyan => syntax gruvbox.bgaqua
+    file-style = gruvbox.blue bold
+    file-added-label = [+]
+    file-copied-label = [==]
+    file-modified-label = [*]
+    file-removed-label = [-]
+    file-renamed-label = [->]
+    file-decoration-style = gruvbox.blue ul
+    hunk-header-style = omit
+    line-numbers-left-style = "#928374"
+    line-numbers-right-style = gruvbox.fg1
+    line-numbers-minus-style = gruvbox.red
+    line-numbers-plus-style = gruvbox.green
+    line-numbers-zero-style = "#504945"
+    line-numbers-left-format = " {nm:>3} ⋮"
+    line-numbers-right-format = " {np:>3} │"
+    minus-style = syntax gruvbox.bgred
+    minus-emph-style = syntax gruvbox.bgredhl
+    minus-non-emph-style = syntax gruvbox.bgred
+    plus-style = syntax gruvbox.bggreen
+    plus-emph-style = syntax gruvbox.bggreenhl
+    plus-non-emph-style = syntax gruvbox.bggreen
+    commit-decoration-style = gruvbox.yellow box
+    commit-style = gruvbox.yellow bold
+    blame-format = "{author:<8.7} ({commit:<8}) {timestamp:>13} "
+    blame-palette = gruvbox.bg0-h gruvbox.bg0 gruvbox.bg0-s gruvbox.bg1 gruvbox.bg2 gruvbox.bg3 gruvbox.bg4
+    merge-conflict-ours-diff-header-style = gruvbox.yellow bold
+    merge-conflict-theirs-diff-header-style = gruvbox.yellow bold
+    merge-conflict-ours-diff-header-decoration-style = gruvbox.yellow box
+    merge-conflict-theirs-diff-header-decoration-style = gruvbox.yellow box
