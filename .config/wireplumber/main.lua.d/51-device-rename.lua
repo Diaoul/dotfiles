@@ -4,8 +4,8 @@ local rules = {
 			{
 				{
 					"node.name",
-					"equals",
-					"alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp__sink",
+					"matches",
+					"alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic*HiFi__hw_sofhdadsp__sink",
 				},
 			},
 		},
@@ -18,8 +18,8 @@ local rules = {
 			{
 				{
 					"node.name",
-					"equals",
-					"alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp_3__sink",
+					"matches",
+					"alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic*HiFi__hw_sofhdadsp_3__sink",
 				},
 			},
 		},
@@ -32,8 +32,8 @@ local rules = {
 			{
 				{
 					"node.name",
-					"equals",
-					"alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp_4__sink",
+					"matches",
+					"alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic*HiFi__hw_sofhdadsp_4__sink",
 				},
 			},
 		},
@@ -46,8 +46,8 @@ local rules = {
 			{
 				{
 					"node.name",
-					"equals",
-					"alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__hw_sofhdadsp_5__sink",
+					"matches",
+					"alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic*HiFi__hw_sofhdadsp_5__sink",
 				},
 			},
 		},
