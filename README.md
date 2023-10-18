@@ -2,7 +2,7 @@
 
 _... my personal and constantly evolving collection_
 
-![pre-commit](https://github.com/Diaoul/dotfiles/workflows/pre-commit/badge.svg)
+![pre-commit](https://img.shields.io/github/actions/workflow/status/Diaoul/dotfiles/pre-commit.yml?label=pre-commit&style=for-the-badge)
 
 ## :package: Installation
 
