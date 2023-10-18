@@ -48,7 +48,7 @@ To preview and apply all those, I run `lxappearance`.
 
 ### Cursors
 
-- [Simp1e](https://gitlab.com/zoli111/simp1e/) (Gruvbox variant)
+- [Simp1e](https://gitlab.com/cursors/simp1e/) (Gruvbox variant)
 - [Capitaine](https://github.com/keeferrourke/capitaine-cursors) or its fork with Gruvbox support
 - [Bibata](https://github.com/ful1e5/Bibata_Cursor)
 
