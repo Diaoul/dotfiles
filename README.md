@@ -18,6 +18,8 @@ dotfiles sparse-checkout init
 dotfiles sparse-checkout set "/*"
 dotfiles sparse-checkout add "!/.github/"
 dotfiles checkout
+
+GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME pre-commit install
 ```
 
 _I use Arch, btw._
