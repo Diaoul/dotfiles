@@ -112,4 +112,3 @@ alias -s dotfiles "git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 
 # fisher
 curl -sL https://git.io/fisher | source && fisher update
-

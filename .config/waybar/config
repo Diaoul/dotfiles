@@ -2,9 +2,9 @@
 {
     "layer": "top",
     "height": 40,
-	"include": [
-		"~/.config/waybar/default-modules",
-	],
+    "include": [
+        "~/.config/waybar/default-modules",
+    ],
     // flying bar
     // "margin-top": 20,
     // "margin-left": 20,
@@ -30,4 +30,3 @@
     ],
     "modules-center": [],
 }
-

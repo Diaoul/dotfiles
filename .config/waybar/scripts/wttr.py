@@ -165,4 +165,3 @@ try:
     print(json.dumps({"text": text, "tooltip": tooltip}))
 except:
     print(json.dumps({"text": "...", "tooltip": "..."}))
-

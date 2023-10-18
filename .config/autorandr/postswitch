@@ -8,4 +8,3 @@ bspc wm -r
 # send notification
 notify-send -i display "Display" \
     "Switched to $AUTORANDR_CURRENT_PROFILE profile" &
-

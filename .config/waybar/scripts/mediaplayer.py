@@ -105,7 +105,7 @@ class PlayerManager:
         current_player = self.get_first_playing_player()
         if current_player is not None:
             self.on_metadata_changed(current_player, current_player.props.metadata)
-        else:    
+        else:
             self.clear_output()
 
     def on_metadata_changed(self, player, metadata, _=None):

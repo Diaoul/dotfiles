@@ -31,4 +31,3 @@ current_playing = { fg = { Rgb = { r = 254, g = 128, b = 25}}, modifiers = ["Bol
 page_desc = { fg = "Magenta", modifiers = ["Bold", "Italic"] }
 table_header = { fg = "Blue" }
 selection = { modifiers = ["Bold", "Reversed"] }
-
