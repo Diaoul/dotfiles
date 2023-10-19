@@ -66,6 +66,7 @@
     "custom/systemd": {
         "exec": "~/.config/waybar/scripts/systemd.sh",
         "return-type": "json",
+        "interval": 60,
     },
     "pulseaudio": {
         "format": "{icon} {volume:2}%",
