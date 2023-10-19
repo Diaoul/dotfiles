@@ -16,6 +16,7 @@
     "modules-right": [
         "custom/yubikey",
         "custom/systemd",
+        "backlight",
         "pulseaudio",
         "battery",
         "cpu",

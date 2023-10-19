@@ -177,9 +177,7 @@
     "backlight": {
         "format": "{icon}{percent}%",
         "format-icons": [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-        "max-lenght": 25,
-        "min-length": 6,
-        "on-scroll-up":"brightnessctl set 30+",
-        "on-scroll-down":"brightnessctl set 30-",
+        "on-scroll-up":"brightnessctl -d intel_backlight -c backlight set +5% > /dev/null",
+        "on-scroll-down":"brightnessctl -d intel_backlight -c backlight set 5%- > /dev/null",
     },
 }
