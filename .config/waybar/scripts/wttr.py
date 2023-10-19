@@ -163,5 +163,7 @@ def main(location: str):
 try:
     text, tooltip = main(sys.argv[1])
     print(json.dumps({"text": text, "tooltip": tooltip}))
-except:
-    print(json.dumps({"text": "...", "tooltip": "..."}))
+except Exception as e:
+    import traceback
+    tb = traceback.format_exc()
+    print(json.dumps({"text": "...", "tooltip": f"{e}\n{tb}"}))
