@@ -52,13 +52,7 @@ theme (and icons) variants.
 To preview and apply all those, I run `lxappearance`.
 
 But since there is a bug with [GTK3 on Wayland](https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland),
-I also run this:
-```
-gsettings set org.gnome.desktop.interface gtk-theme 'oomox-gruvbox-dark-medium'
-gsettings set org.gnome.desktop.interface icon-theme 'Gruvbox-Plus-Dark'
-gsettings set org.gnome.desktop.interface cursor-theme 'Simp1e-Gruvbox-Dark'
-gsettings set org.gnome.desktop.interface font-name 'Noto Sans'
-```
+I also run [this](.local/bin/import-gsettings.sh).
 
 ### Firefox
 I published my own theme made with [Firefox Color](https://color.firefox.com/)
