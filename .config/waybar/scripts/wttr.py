@@ -139,7 +139,7 @@ def main(location: str):
         # only today and tomorrow
         if i > 1:
             break
-        tooltip += f"<span size=\"xx-large\">{index_to_text(i):^18}</span>\n"
+        tooltip += f"<span size=\"xx-large\">{index_to_text(i)}</span>\n"
 
         minimum_temperature = day['mintempC']
         maximum_temperature = day['maxtempC']

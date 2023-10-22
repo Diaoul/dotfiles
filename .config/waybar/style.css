@@ -151,6 +151,7 @@ tooltip label {
 #backlight,
 #pulseaudio,
 #battery,
+#bluetooth,
 #cpu,
 #memory,
 #temperature,
@@ -204,7 +205,7 @@ tooltip label {
     color: @brmagenta;
 }
 #memory {
-    color: @brgreen;
+    color: @brcyan;
 }
 #temperature {
     color: @brorange;
@@ -219,12 +220,24 @@ tooltip label {
     animation-direction: alternate;
 }
 
-#custom-network, #custom-vpn {
+#bluetooth,
+#custom-network,
+#custom-vpn {
     color: @brblue;
-    /* adjust because the icon is off-centered */
-    padding-right: 15px;
 }
-
+/* adjust because the icon is off-centered */
+#bluetooth:not(.connected) {
+    padding-right: 10px;
+}
+#custom-network {
+    padding-right: 16px;
+}
+#custom-vpn {
+    padding-right: 12px;
+}
+#bluetooth:not(.connected),
+#custom-network.disconnected,
+#custom-vpn.nonetwork,
 #custom-vpn.disconnected {
     color: @fg4;
 }
