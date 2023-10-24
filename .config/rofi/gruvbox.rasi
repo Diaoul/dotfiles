@@ -35,8 +35,7 @@
 }
 
 window {
-    width: 550;
-    height: 624;  // exactly fits 14 lines
+    width: 550px;
     border: 2px;
     border-color: @fg2-color;
     background-color: @bg-color;
@@ -76,6 +75,7 @@ message {
 
 textbox {
     border: 2px;
+    padding: 5px;
     border-color: @fg3-color;
     text-color: @fg-color;
     background-color: @bg1-color;
@@ -85,9 +85,10 @@ textbox {
 
 listview {
     margin: 15px 5px;
+    border: 1px;
+    border-color: red;
     columns: 1;
-    // use height on window instead to avoid changing the height when a message shows up
-    //lines: 14;
+    lines: 14;
     cycle: false;
     background-color: inherit;
 }

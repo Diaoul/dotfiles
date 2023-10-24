@@ -4,6 +4,11 @@ configuration{
 
 @theme "~/.config/rofi/gruvbox.rasi"
 
+// Wider for more text and room for frequent emojis on a single line
+window {
+    width: 600px;
+}
+
 // Yellow for emojis
 prompt {
     background-color: @br-yellow;

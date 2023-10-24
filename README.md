@@ -93,6 +93,9 @@ Running [Thunar](https://docs.xfce.org/xfce/thunar/start) with a few plugins:
 - raw-thumbnailer
 - tumbler-stl-thumbnailer
 
+### Launcher
+[rofi](https://github.com/lbonn/rofi) (forked for Wayland support) and [rofimoji](https://github.com/fdw/rofimoji) for emoji selector.
+
 ### Terminal emulators
 [foot](https://codeberg.org/dnkl/foot) is my go-to on Wayland but I also have
 configs for [Kitty](https://sw.kovidgoyal.net/kitty/) and
