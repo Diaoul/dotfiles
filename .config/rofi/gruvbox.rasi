@@ -30,8 +30,6 @@
     bold-orange: bold #fabd2f;
     bold-orange: bold #fe8019;
     bold-orange: bold #d65d0e;
-    //border: 1px;
-    //border-color: @red;
 }
 
 window {
@@ -85,8 +83,6 @@ textbox {
 
 listview {
     margin: 15px 5px;
-    border: 1px;
-    border-color: red;
     columns: 1;
     lines: 14;
     cycle: false;
