@@ -28,6 +28,7 @@ return {
         },
         pkgbuild_language_server = {},
         ruff_lsp = {},
+        html = {},
         rust_analyzer = {},
         taplo = {},
         tsserver = {},
