@@ -6,7 +6,7 @@ window:
     y: 6
 
 font:
-  size: 10
+  size: 13
 
 colors:
   primary:
