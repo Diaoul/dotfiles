@@ -121,6 +121,9 @@ return {
   -- Surround actions
   {
     "echasnovski/mini.surround",
+    opts = {
+      silent = true,
+    },
   },
 
   -- Comments
