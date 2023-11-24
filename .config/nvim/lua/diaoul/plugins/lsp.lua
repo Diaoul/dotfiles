@@ -27,6 +27,7 @@ return {
           telemetry = { enable = false },
         },
         pkgbuild_language_server = {},
+        pyright = {},
         ruff_lsp = {},
         html = {},
         rust_analyzer = {},
@@ -60,6 +61,13 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
+          local client = vim.lsp.get_client_by_id(ev.data.client_id)
+          if client and client.name == "ruff_lsp" then
+            -- disable hover in favor of Pyright
+            client.server_capabilities.hoverProvider = false
+          end
+
+          -- mappings
           local map = function(modes, keys, func, desc)
             vim.keymap.set(modes, keys, func, { buffer = ev.buf, desc = desc })
           end
