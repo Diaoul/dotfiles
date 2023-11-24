@@ -1,0 +1,4 @@
+# yaml-language-server: $schema=https://json.schemastore.org/lazygit.json
+git:
+  # does not play well with ssh repos and yubikey
+  autoFetch: false
