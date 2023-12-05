@@ -70,6 +70,7 @@ tooltip {
     border: 1px solid @bg2;
     border-radius: 4px;
 }
+
 tooltip label {
     color: @fg1;
 }
@@ -83,6 +84,7 @@ tooltip label {
     /* border: 1px solid @bg2; */
     border-radius: 4px;
 }
+
 #workspaces button {
     padding: 0px 8px;
     margin: 2px;
@@ -93,9 +95,11 @@ tooltip label {
     /* Use box-shadow instead of border so the text isn't offset */
     box-shadow: inset 0 -2px transparent;
 }
+
 #workspaces button.empty {
     color: @gray;
 }
+
 #workspaces button:hover {
     background: none;
     color: @fg1;
@@ -103,19 +107,20 @@ tooltip label {
     /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
     text-shadow: inherit;
 }
+
 #workspaces button.visible {
     box-shadow: inset 0 -2px @fg1;
 }
+
 #workspaces button.active {
     color: @orange;
-    /* border-bottom: 2px solid @orange; */
     box-shadow: inset 0 -2px @orange;
-    /* color: @orange; */
-    /* text-shadow: 0 0 5px rgba(0, 0, 0, 0.818); */
 }
+
 #workspaces button.special {
     background-color: @magenta;
 }
+
 #workspaces button.urgent {
     color: @red;
     animation-name: blink1;
@@ -124,6 +129,7 @@ tooltip label {
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
+
 #workspaces button.urgent:hover {
     box-shadow: inset 0 -2px @red;
 }
@@ -133,17 +139,11 @@ tooltip label {
     margin-left: 10px;
     color: @fg1;
 }
+
 #custom-media.paused, #custom-media.stopped {
     font-style: italic;
     color: @fg4;
 }
-/* #mpris { */
-/*     margin-left: 10px; */
-/*     color: @fg1; */
-/* } */
-/* #mpris.paused, #mpris.stopped { */
-/*     color: @fg3; */
-/* } */
 
 /* right modules */
 #custom-yubikey,
@@ -170,12 +170,12 @@ tooltip label {
     border-radius: 4px;
 }
 #custom-systemd {
-    color: @fg1;
-    background-color: @red;
+    color: @bg1;
+    background-color: @brred;
 }
 #custom-yubikey {
-    color: @fg1;
-    background-color: @red;
+    color: @bg1;
+    background-color: @brred;
     /* adjust because the icon is off-centered */
     padding-right: 15px;
 }
@@ -189,12 +189,12 @@ tooltip label {
     color: @bryellow;
 }
 #battery.warning:not(.charging) {
-    background-color: @yellow;
-    color: @fg1;
+    background-color: @bryellow;
+    color: @bg1;
 }
 #battery.critical:not(.charging) {
-    background-color: @red;
-    color: @fg1;
+    background-color: @brred;
+    color: @bg1;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: ease-in;
@@ -211,8 +211,8 @@ tooltip label {
     color: @brorange;
 }
 #temperature.critical {
-    background-color: @red;
-    color: @fg1;
+    background-color: @brred;
+    color: @bg1;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: ease-in;
@@ -225,16 +225,20 @@ tooltip label {
 #custom-vpn {
     color: @brblue;
 }
+
 /* adjust because the icon is off-centered */
 #bluetooth:not(.connected) {
     padding-right: 10px;
 }
+
 #custom-network {
     padding-right: 16px;
 }
+
 #custom-vpn {
     padding-right: 12px;
 }
+
 #bluetooth:not(.connected),
 #custom-network.disconnected,
 #custom-vpn.nonetwork,
@@ -246,14 +250,15 @@ tooltip label {
     color: @brblue;
 }
 
+/* adjust because the icon is off-centered */
 #network.ethernet {
-    /* adjust because the icon is off-centered */
     padding-right: 14px;
 }
 
 #tray {
     color: @fg1;
 }
+
 #tray menu {
     /* same as tooltips */
     color: @fg2;
@@ -261,67 +266,9 @@ tooltip label {
     border: 1px solid @bg2;
     border-radius: 4px;
 }
+
 /* not implemented yet, see https://github.com/Alexays/Waybar/issues/2569 */
 /* #tray menu-item:hover { */
-/*     color: @fg1; */
-/*     background-color: @red; */
-/* } */
-
-/* .modules-right { */
-/*     font-size: 10px; */
-/*     margin-right: 0.5rem; */
-/* } */
-/* .modules-left { */
-/*     margin-left: 0.5rem; */
-/* } */
-
-/* #memory { */
-/*     color: #a9b665; */
-/*     padding: 0 0.3em; */
-/* } */
-
-/* #pulseaudio { */
-/*     margin: 0; */
-/*     padding: 0 0.5em 0 0.4em; */
-/*     color: #d8a657; */
-/* } */
-
-/* #backlight { */
-/*     margin: 0; */
-/*     padding: 0 0.5em 0 0.4em; */
-/*     color: #d8a657; */
-/* } */
-/* #cpu { */
-/*     margin: 0; */
-/*     padding: 0 0.1em 0 0.1em; */
-/*     color: #a9b665; */
-/* } */
-/* #network { */
-/*     margin: 0; */
-/*     padding: 0 0.4em 0 0.5em; */
-/*     color: #d8a657; */
-/* } */
-/* #custom-cycle_wall { */
-/*     margin: 0; */
-/*     padding: 0 0.5em; */
-/*     color: #d3869b; */
-/* } */
-
-/* #language { */
-/*     margin: 0; */
-/*     padding: 0 0.1em; */
-/*     color: #d3869b; */
-/* } */
-/* #tray { */
-/*     margin: 0; */
-/*     padding: 0 0.2em; */
-/*     color: #d3869b; */
-/* } */
-/* #battery { */
-/*     margin: 0; */
-/*     padding: 0 0.5em 0 0.4em; */
-/*     color: #a9b665; */
-/* } */
-/* .modules-right { */
-/*     border: 1px solid red; */
+/*     color: @bg1; */
+/*     background-color: @brred; */
 /* } */
