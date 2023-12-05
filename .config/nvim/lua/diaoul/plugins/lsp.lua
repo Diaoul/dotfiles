@@ -16,15 +16,17 @@ return {
         dockerls = {},
         jsonls = {},
         lua_ls = {
-          Lua = {
-            runtime = {
-              version = "LuaJIT",
+          settings = {
+            Lua = {
+              runtime = {
+                version = "LuaJIT",
+              },
+              workspace = {
+                checkThirdParty = false,
+              },
             },
-            workspace = {
-              checkThirdParty = false,
-            },
+            telemetry = { enable = false },
           },
-          telemetry = { enable = false },
         },
         pkgbuild_language_server = {},
         pyright = {},
@@ -116,11 +118,20 @@ return {
 
       mason_lspconfig.setup_handlers({
         function(server_name)
-          require("lspconfig")[server_name].setup({
-            capabilities = capabilities,
-            settings = opts.servers[server_name],
-            filetypes = (opts.servers[server_name] or {}).filetypes,
-          })
+          -- only setup lsps defined above
+          if not opts.servers[server_name] then
+            vim.notify(
+              ("Server %s installed but not configured"):format(server_name),
+              vim.log.levels.WARN,
+              { title = "LSP" }
+            )
+            return
+          end
+          local server_opts = { capabilities = capabilities }
+          for k, v in pairs(opts.servers[server_name]) do
+            server_opts[k] = v
+          end
+          require("lspconfig")[server_name].setup(server_opts)
         end,
       })
 
