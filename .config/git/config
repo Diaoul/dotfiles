@@ -17,6 +17,10 @@
     rebase = true
 [push]
     default = current
+[log]
+    date = short
+[format]
+  pretty = format:%C(yellow)%h %C(blue)%ad %C(red)%d %C(reset)%s %C(green)[%an]%Creset
 [diff]
     colorMoved = default
 [diff "sopsdiffer"]
