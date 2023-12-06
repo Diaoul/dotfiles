@@ -34,7 +34,7 @@
 window {
   background-color: @bg0;
   font-family: monospace;
-  border: 2px solid @fg3;
+  border: 2px solid @fg2;
   border-radius: 4px;
 }
 
