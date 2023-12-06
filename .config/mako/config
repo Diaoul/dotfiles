@@ -4,6 +4,7 @@ layer=overlay
 
 # style
 padding=10
+border-radius=4
 
 # colors
 background-color=#282828
