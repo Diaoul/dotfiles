@@ -11,6 +11,11 @@
     "interval": 3600
   },
   // modules configuration
+  "custom/powermenu": {
+    "format": " ",
+    "tooltip": false,
+    "on-click": "nwg-bar > /dev/null 2>&1"
+  },
   "hyprland/workspaces": {
     "format": "{id}",
     // for icons version

@@ -161,6 +161,7 @@ tooltip label {
 #custom-weather,
 #clock,
 #custom-wallpaper,
+#custom-powermenu,
 #tray,
 #mpd {
     background-color: @bg1;
@@ -178,6 +179,14 @@ tooltip label {
     background-color: @brred;
     /* adjust because the icon is off-centered */
     padding-right: 15px;
+}
+/* adjust because the icon is off-centered */
+#custom-wallpaper {
+  padding-right: 7px;
+}
+/* adjust because the icon is off-centered */
+#custom-powermenu {
+  padding-right: 5px;
 }
 #pulseaudio {
     color: @fg1;

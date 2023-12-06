@@ -23,7 +23,8 @@
       "custom/weather",
       "clock",
       "custom/wallpaper",
-      "tray"
+      "tray",
+      "custom/powermenu"
     ],
     "modules-center": []
   },
@@ -53,7 +54,8 @@
       "custom/weather",
       "clock",
       "custom/wallpaper",
-      "tray"
+      "tray",
+      "custom/powermenu"
     ],
     "modules-center": []
   }
