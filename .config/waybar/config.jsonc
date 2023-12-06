@@ -4,10 +4,6 @@
     "output": "!eDP-1",
     "height": 40,
     "include": ["~/.config/waybar/default-modules.jsonc"],
-    // flying bar
-    // "margin-top": 20,
-    // "margin-left": 20,
-    // "margin-right": 20,
     "modules-left": ["hyprland/workspaces", "custom/media"],
     "modules-right": [
       "custom/yubikey",
@@ -16,7 +12,6 @@
       "battery",
       "cpu",
       "memory",
-      "temperature",
       "bluetooth",
       "custom/network",
       "custom/vpn",
@@ -34,10 +29,6 @@
     "output": "eDP-1",
     "height": 40,
     "include": ["~/.config/waybar/default-modules.jsonc"],
-    // flying bar
-    // "margin-top": 20,
-    // "margin-left": 20,
-    // "margin-right": 20,
     "modules-left": ["hyprland/workspaces", "custom/media"],
     "modules-right": [
       "custom/yubikey",
@@ -47,7 +38,6 @@
       "battery",
       "cpu",
       "memory",
-      "temperature",
       "bluetooth",
       "custom/network",
       "custom/vpn",

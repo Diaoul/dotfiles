@@ -1,21 +1,4 @@
 {
-  // custom modules
-  "custom/wallpaper": {
-    "format": " ",
-    "tooltip": false,
-    "on-click": "walle random > /dev/null"
-  },
-  "custom/weather": {
-    "exec": "~/.config/waybar/scripts/wttr.py Poissy",
-    "return-type": "json",
-    "interval": 3600
-  },
-  // modules configuration
-  "custom/powermenu": {
-    "format": " ",
-    "tooltip": false,
-    "on-click": "nwg-bar > /dev/null 2>&1"
-  },
   "hyprland/workspaces": {
     "format": "{id}",
     // for icons version
@@ -71,6 +54,12 @@
     "exec": "~/.config/waybar/scripts/systemd.sh",
     "return-type": "json",
     "interval": 60
+  },
+  "backlight": {
+    "format": "{icon}{percent}%",
+    "format-icons": [" ", " ", " ", " ", " ", " ", " ", " ", " "],
+    "on-scroll-up": "brightnessctl -d intel_backlight -c backlight set +5% > /dev/null",
+    "on-scroll-down": "brightnessctl -d intel_backlight -c backlight set 5%- > /dev/null"
   },
   "pulseaudio": {
     "format": "{icon} {volume:2}%",
@@ -161,6 +150,11 @@
     "return-type": "json",
     "interval": 5
   },
+  "custom/weather": {
+    "exec": "~/.config/waybar/scripts/wttr.py Poissy",
+    "return-type": "json",
+    "interval": 3600
+  },
   "clock": {
     "format": "󰥔 {:%H:%M}",
     "format-alt": "󰃭 {:%Y-%m-%d  󰥔 %H:%M}",
@@ -182,6 +176,11 @@
       "on-scroll-down": "shift_down"
     }
   },
+  "custom/wallpaper": {
+    "format": " ",
+    "tooltip": false,
+    "on-click": "walle random > /dev/null"
+  },
   "tray": {
     "icon-size": 20,
     "spacing": 6,
@@ -189,10 +188,9 @@
     "max-length": 6,
     "min-length": 6
   },
-  "backlight": {
-    "format": "{icon}{percent}%",
-    "format-icons": [" ", " ", " ", " ", " ", " ", " ", " ", " "],
-    "on-scroll-up": "brightnessctl -d intel_backlight -c backlight set +5% > /dev/null",
-    "on-scroll-down": "brightnessctl -d intel_backlight -c backlight set 5%- > /dev/null"
+  "custom/powermenu": {
+    "format": " ",
+    "tooltip": false,
+    "on-click": "nwg-bar > /dev/null 2>&1"
   }
 }

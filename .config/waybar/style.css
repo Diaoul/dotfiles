@@ -33,116 +33,117 @@
 
 /* general */
 * {
-    font-family: Monospace;
-    font-size: 16px;
+  font-family: Monospace;
+  font-size: 16px;
 }
 
 @keyframes blink {
-    to {
-        color: @bg0;
-        background-color: @bg0;
-    }
+  to {
+    color: @bg0;
+    background-color: @bg0;
+  }
 }
 
 @keyframes blink1 {
-    to {
-        color: @bg1;
-        background-color: @bg1;
-    }
+  to {
+    color: @bg1;
+    background-color: @bg1;
+  }
 }
 
 window#waybar {
-    background: transparent;
-    color: @fg1;
-    transition-property: background-color;
-    transition-duration: 0.2s;
+  background: transparent;
+  color: @fg1;
+  transition-property: background-color;
+  transition-duration: 0.2s;
 }
 
 window > box {
-    background-color: @bg0;
-    /* for a transparent background */
-    background: rgba(40, 40, 40, 0.93);
+  background-color: @bg0;
+  /* for a transparent background */
+  background: rgba(40, 40, 40, 0.93);
 }
 
 /* tooltips */
 tooltip {
-    background: @bg1;
-    border: 1px solid @bg2;
-    border-radius: 4px;
+  background: @bg1;
+  border: 1px solid @bg2;
+  border-radius: 4px;
 }
 
 tooltip label {
-    color: @fg1;
+  color: @fg1;
 }
 
 /* workspaces */
 #workspaces {
-    background-color: @bg1;
-    /* Inside box */
-    margin: 6px;
-    padding: 0 2px;
-    /* border: 1px solid @bg2; */
-    border-radius: 4px;
+  background-color: @bg1;
+  /* Inside box */
+  margin: 6px;
+  padding: 0 2px;
+  /* border: 1px solid @bg2; */
+  border-radius: 4px;
 }
 
 #workspaces button {
-    padding: 0px 8px;
-    margin: 2px;
-    border: none;
-    border-radius: 0;
-    color: @fg1;
-    transition: all 0.2s ease-in-out;
-    /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -2px transparent;
+  padding: 0px 8px;
+  margin: 2px;
+  border: none;
+  border-radius: 0;
+  color: @fg1;
+  transition: all 0.2s ease-in-out;
+  /* Use box-shadow instead of border so the text isn't offset */
+  box-shadow: inset 0 -2px transparent;
 }
 
 #workspaces button.empty {
-    color: @gray;
+  color: @gray;
 }
 
 #workspaces button:hover {
-    background: none;
-    color: @fg1;
-    box-shadow: inset 0 -2px @fg1;
-    /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-    text-shadow: inherit;
+  background: none;
+  color: @fg1;
+  box-shadow: inset 0 -2px @fg1;
+  /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+  text-shadow: inherit;
 }
 
 #workspaces button.visible {
-    box-shadow: inset 0 -2px @fg1;
+  box-shadow: inset 0 -2px @fg1;
 }
 
 #workspaces button.active {
-    color: @orange;
-    box-shadow: inset 0 -2px @orange;
+  color: @orange;
+  box-shadow: inset 0 -2px @orange;
 }
 
 #workspaces button.special {
-    background-color: @magenta;
+  background-color: @magenta;
 }
 
 #workspaces button.urgent {
-    color: @red;
-    animation-name: blink1;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  color: @red;
+  animation-name: blink1;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 #workspaces button.urgent:hover {
-    box-shadow: inset 0 -2px @red;
+  box-shadow: inset 0 -2px @red;
 }
 
 /* media */
 #custom-media {
-    margin-left: 10px;
-    color: @fg1;
+  margin-left: 10px;
+  color: @fg1;
 }
 
-#custom-media.paused, #custom-media.stopped {
-    font-style: italic;
-    color: @fg4;
+#custom-media.paused,
+#custom-media.stopped {
+  font-style: italic;
+  color: @fg4;
 }
 
 /* right modules */
@@ -161,119 +162,121 @@ tooltip label {
 #custom-weather,
 #clock,
 #custom-wallpaper,
-#custom-powermenu,
 #tray,
+#custom-powermenu,
 #mpd {
-    background-color: @bg1;
-    margin: 6px 6px 6px 0;
-    padding: 0 10px;
-    /* border: 1px solid @bg2; */
-    border-radius: 4px;
+  background-color: @bg1;
+  margin: 6px 6px 6px 0;
+  padding: 0 10px;
+  /* border: 1px solid @bg2; */
+  border-radius: 4px;
 }
 #custom-systemd {
-    color: @bg1;
-    background-color: @brred;
+  color: @bg1;
+  background-color: @brred;
 }
 #custom-yubikey {
-    color: @bg1;
-    background-color: @brred;
-    /* adjust because the icon is off-centered */
-    padding-right: 15px;
-}
-/* adjust because the icon is off-centered */
-#custom-wallpaper {
-  padding-right: 7px;
-}
-/* adjust because the icon is off-centered */
-#custom-powermenu {
-  padding-right: 5px;
+  color: @bg1;
+  background-color: @brred;
+  /* adjust because the icon is off-centered */
+  padding-right: 15px;
 }
 #pulseaudio {
-    color: @fg1;
+  color: @fg1;
 }
 #pulseaudio.muted {
-    color: @fg4;
+  color: @fg4;
 }
 #battery {
-    color: @bryellow;
+  color: @bryellow;
 }
 #battery.warning:not(.charging) {
-    background-color: @bryellow;
-    color: @bg1;
+  background-color: @bryellow;
+  color: @bg1;
 }
 #battery.critical:not(.charging) {
-    background-color: @brred;
-    color: @bg1;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: ease-in;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  background-color: @brred;
+  color: @bg1;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 #cpu {
-    color: @brmagenta;
+  color: @brgreen;
 }
 #memory {
-    color: @brcyan;
+  color: @brorange;
 }
 #temperature {
-    color: @brorange;
+  color: @brmagenta;
 }
 #temperature.critical {
-    background-color: @brred;
-    color: @bg1;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: ease-in;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  background-color: @brred;
+  color: @bg1;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 #bluetooth,
 #custom-network,
 #custom-vpn {
-    color: @brblue;
+  color: @brblue;
 }
 
 /* adjust because the icon is off-centered */
 #bluetooth:not(.connected) {
-    padding-right: 10px;
+  padding-right: 10px;
 }
 
 #custom-network {
-    padding-right: 16px;
+  padding-right: 16px;
 }
 
 #custom-vpn {
-    padding-right: 12px;
+  padding-right: 12px;
 }
 
 #bluetooth:not(.connected),
 #custom-network.disconnected,
 #custom-vpn.nonetwork,
 #custom-vpn.disconnected {
-    color: @fg4;
+  color: @fg4;
 }
 
 #network {
-    color: @brblue;
+  color: @brblue;
 }
 
 /* adjust because the icon is off-centered */
 #network.ethernet {
-    padding-right: 14px;
+  padding-right: 14px;
+}
+
+/* adjust because the icon is off-centered */
+#custom-wallpaper {
+  padding-right: 7px;
 }
 
 #tray {
-    color: @fg1;
+  color: @fg1;
 }
 
 #tray menu {
-    /* same as tooltips */
-    color: @fg2;
-    background-color: @bg1;
-    border: 1px solid @bg2;
-    border-radius: 4px;
+  /* same as tooltips */
+  color: @fg2;
+  background-color: @bg1;
+  border: 1px solid @bg2;
+  border-radius: 4px;
+}
+
+/* adjust because the icon is off-centered */
+#custom-powermenu {
+  padding-right: 5px;
 }
 
 /* not implemented yet, see https://github.com/Alexays/Waybar/issues/2569 */
