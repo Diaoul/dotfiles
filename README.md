@@ -4,6 +4,11 @@ _... my personal and constantly evolving collection_
 
 ![pre-commit](https://img.shields.io/github/actions/workflow/status/Diaoul/dotfiles/pre-commit.yml?label=pre-commit&style=for-the-badge)
 
+## :camera_flash: Screenshots
+_More in [screenshots](/screenshots)!_
+
+![Screenshot](/screenshots/screenshot2.png)
+
 ## :package: Installation
 With the [git bare](https://www.atlassian.com/git/tutorials/dotfiles) method
 and [git sparse-checkout](https://git-scm.com/docs/git-sparse-checkout) to
