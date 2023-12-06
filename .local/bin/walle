@@ -35,7 +35,14 @@ switch $argv[1]
             feh --bg-fill $base/current
         end
         echo Wallpaper set to $file
+    case 'apply'
+        if test $XDG_SESSION_TYPE = "wayland"
+            swww img $base/current
+        else if test $XDG_SESSION_TYPE = "x11"
+            feh --bg-fill $base/current
+        end
+        echo Applied current wallpaper
     case '*'
         echo "Unknown command '$argv[1]'"
-        echo '  Possible values: (unsplash|save|random)'
+        echo '  Possible values: (unsplash|save|random|apply)'
 end
