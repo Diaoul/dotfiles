@@ -1,20 +1,14 @@
-// vim: set ft=jsonc:
 [
   {
     "layer": "top",
     "output": "!eDP-1",
     "height": 40,
-    "include": [
-      "~/.config/waybar/default-modules",
-    ],
+    "include": ["~/.config/waybar/default-modules.jsonc"],
     // flying bar
     // "margin-top": 20,
     // "margin-left": 20,
     // "margin-right": 20,
-    "modules-left": [
-      "hyprland/workspaces",
-      "custom/media",
-    ],
+    "modules-left": ["hyprland/workspaces", "custom/media"],
     "modules-right": [
       "custom/yubikey",
       "custom/systemd",
@@ -29,25 +23,21 @@
       "custom/weather",
       "clock",
       "custom/wallpaper",
-      "tray",
+      "tray"
     ],
-    "modules-center": [],
+    "modules-center": []
   },
+  // same as above with added backlight control
   {
     "layer": "top",
     "output": "eDP-1",
     "height": 40,
-    "include": [
-      "~/.config/waybar/default-modules",
-    ],
+    "include": ["~/.config/waybar/default-modules.jsonc"],
     // flying bar
     // "margin-top": 20,
     // "margin-left": 20,
     // "margin-right": 20,
-    "modules-left": [
-      "hyprland/workspaces",
-      "custom/media",
-    ],
+    "modules-left": ["hyprland/workspaces", "custom/media"],
     "modules-right": [
       "custom/yubikey",
       "custom/systemd",
@@ -63,8 +53,8 @@
       "custom/weather",
       "clock",
       "custom/wallpaper",
-      "tray",
+      "tray"
     ],
-    "modules-center": [],
+    "modules-center": []
   }
 ]

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -uo pipefail
 
-CONFIG_FILES="$HOME/.config/waybar/config $HOME/.config/waybar/style.css $HOME/.config/waybar/default-modules"
+CONFIG_FILES="$HOME/.config/waybar/config.jsonc $HOME/.config/waybar/style.css $HOME/.config/waybar/default-modules.jsonc"
 
 # kill waybar on exit
 trap "killall waybar" EXIT
