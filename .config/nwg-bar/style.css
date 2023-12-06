@@ -1,0 +1,79 @@
+/* gruvbox */
+@define-color black #282828;
+@define-color brblack #928374;
+@define-color red #cc241d;
+@define-color brred #fb4934;
+@define-color green #98971a;
+@define-color brgreen #b8bb26;
+@define-color yellow #d79921;
+@define-color bryellow #fabd2f;
+@define-color blue #458588;
+@define-color brblue #83a598;
+@define-color magenta #b16286;
+@define-color brmagenta #d3869b;
+@define-color cyan #689d6a;
+@define-color brcyan #8ec07c;
+@define-color white #a89984;
+@define-color brwhite #ebdbb2;
+@define-color orange #d65d0e;
+@define-color brorange #fe8019;
+@define-color bg0_h #1d2021;
+@define-color bg0 #282828;
+@define-color bg1 #3c3836;
+@define-color bg2 #504945;
+@define-color bg3 #665c54;
+@define-color bg4 #7c6f64;
+@define-color gray #928374;
+@define-color bg0_s #32302f;
+@define-color fg4 #a89984;
+@define-color fg3 #bdae93;
+@define-color fg2 #d5c4a1;
+@define-color fg1 #ebdbb2;
+@define-color fg0 #fbf1c7;
+
+window {
+  background-color: @bg0;
+  font-family: monospace;
+  border: 2px solid @fg3;
+  border-radius: 4px;
+}
+
+/* Outer bar container, takes all the window width/height */
+#outer-box {
+  margin: 0px;
+}
+
+/* Inner bar container, surrounds buttons */
+#inner-box {
+  background-color: @bg0;
+  padding: 5px;
+  margin: 5px;
+}
+
+image {
+  color: red;
+}
+
+button {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 5px;
+  color: @fg3;
+  /* Use box-shadow instead of border so the text isn't offset */
+  box-shadow: inset 0 -2px transparent;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  color: @fg1;
+  box-shadow: inset 0 -2px @fg1;
+}
+
+button:focus {
+  outline: none;
+  color: @fg1;
+  box-shadow: inset 0 -2px @orange;
+}
