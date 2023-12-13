@@ -1,4 +1,14 @@
 return {
+  -- Copilot
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    build = ":Copilot auth",
+    opts = {
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+    },
+  },
   -- Snippets
   {
     "L3MON4D3/LuaSnip",
@@ -35,6 +45,7 @@ return {
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
       "onsails/lspkind-nvim",
+      { "zbirenbaum/copilot-cmp", dependencies = "copilot.lua", opts = {} },
     },
     opts = function()
       -- for luasnip (see below)
@@ -92,6 +103,7 @@ return {
           end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
+          { name = "copilot" },
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "path" },
@@ -99,7 +111,9 @@ return {
           { name = "buffer" },
         }),
         formatting = {
-          format = lspkind.cmp_format({}),
+          format = lspkind.cmp_format({
+            symbol_map = { Copilot = "" },
+          }),
         },
         experimental = {
           ghost_text = {
