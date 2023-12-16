@@ -28,7 +28,6 @@ return {
             telemetry = { enable = false },
           },
         },
-        pkgbuild_language_server = {},
         pyright = {},
         ruff_lsp = {},
         html = {},
