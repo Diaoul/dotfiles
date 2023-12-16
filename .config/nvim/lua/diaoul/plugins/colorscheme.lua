@@ -3,8 +3,6 @@ return {
   -- disabled because poor support for all the UI stuff I use
   -- {
   --   "ellisonleao/gruvbox.nvim",
-  --   enabled = false,
-  --   priority = 1000,
   --   opts = {
   --     italic = {
   --       strings = false,
@@ -60,4 +58,31 @@ return {
       vim.cmd.colorscheme("catppuccin")
     end,
   },
+
+  -- rosé pine
+  -- {
+  --   "rose-pine/neovim",
+  --   name = "rose-pine",
+  --   init = function()
+  --     vim.cmd.colorscheme("rose-pine")
+  --   end,
+  -- },
+
+  -- kanagawa
+  -- {
+  --   "rebelot/kanagawa.nvim",
+  --   init = function()
+  --     vim.cmd.colorscheme("kanagawa")
+  --   end,
+  -- },
+
+  -- my own gruvbox.nvim
+  -- {
+  --   "Diaoul/gruvbox.nvim",
+  --   dir = "~/projects/gruvbox.nvim",
+  --   dev = true,
+  --   init = function()
+  --     vim.cmd.colorscheme("rose-pine")
+  --   end,
+  -- },
 }
