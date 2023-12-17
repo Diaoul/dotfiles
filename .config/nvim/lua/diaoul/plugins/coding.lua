@@ -3,10 +3,22 @@ return {
   {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
+    event = "InsertEnter", -- not needed if using cmp
     build = ":Copilot auth",
     opts = {
-      suggestion = { enabled = false },
       panel = { enabled = false },
+      suggestion = {
+        enabled = true, -- set to false if using cmp
+        auto_trigger = true,
+        keymap = {
+          accept = false,
+          accept_word = false,
+          accept_line = false,
+          next = "<M-]>",
+          prev = "<M-[>",
+          dismiss = "<M-e>",
+        },
+      },
     },
   },
   -- Snippets
@@ -19,23 +31,39 @@ return {
         require("luasnip.loaders.from_vscode").lazy_load()
       end,
     },
-    -- stylua: ignore
+    -- TODO: use ext_opts to customize the colors when in snippet
     keys = {
       {
-        "<tab>",
+        "<C-e>",
         function()
-          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+          if require("luasnip").expand_or_locally_jumpable() then
+            require("luasnip").expand_or_jump()
+          end
         end,
-        expr = true,
-        silent = true,
-        mode = "i",
+        mode = { "i", "s" },
       },
-      { "<tab>",   function() require("luasnip").jump(1) end,  mode = "s" },
-      { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+      {
+        "<C-n>",
+        function()
+          if require("luasnip").jumpable(-1) then
+            require("luasnip").jump(-1)
+          end
+        end,
+        mode = { "i", "s" },
+      },
     },
   },
 
   -- Auto completion
+  -- Expected behavior:
+  --   <Tab> complete ghost text
+  --   <C-Space> to trigger completion menu manually
+  --   <Up> and <Down> navigate the completion menu
+  --   <CR> confirm the selected item
+  --
+  -- Currently, support for ghost text in cmp is limited to one line only
+  -- so I rely on copilot for that instead.
+  -- Addionally, indentation is messed up with cmp-copilot.
   {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
@@ -45,67 +73,75 @@ return {
       "hrsh7th/cmp-path",
       "saadparwaiz1/cmp_luasnip",
       "onsails/lspkind-nvim",
-      { "zbirenbaum/copilot-cmp", dependencies = "copilot.lua", opts = {} },
+      -- disabled in favor of copilot
+      -- { "zbirenbaum/copilot-cmp", dependencies = "copilot.lua", opts = {} },
     },
+    ---@return cmp.ConfigSchema
     opts = function()
-      -- for luasnip (see below)
-      local has_words_before = function()
-        unpack = unpack or table.unpack
-        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-      end
-
       local cmp = require("cmp")
       local lspkind = require("lspkind")
       local luasnip = require("luasnip")
 
       -- highlight for ghost text
-      -- TODO: change this to non-italic
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
 
       -- configuration
       return {
-        completion = {
-          completeopt = "menu,menuone,noinsert",
-        },
+        -- automatically select the first item in the menu, disabled for copilot
+        -- completion = {
+        --   completeopt = "menu,menuone,noinsert",
+        -- },
         snippet = {
           expand = function(args)
             luasnip.lsp_expand(args.body)
           end,
         },
-        mapping = cmp.mapping.preset.insert({
-          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-f>"] = cmp.mapping.scroll_docs(4),
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          -- integration with luasnip
-          -- see https://github.com/hrsh7th/nvim-cmp/wiki/Example-mappings#luasnip
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        mapping = {
+          ["<C-Space>"] = { i = cmp.mapping.complete() },
+          ["<Down>"] = { i = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }) },
+          ["<Up>"] = { i = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }) },
+          ["<C-b>"] = { i = cmp.mapping.scroll_docs(-4) },
+          ["<C-f>"] = { i = cmp.mapping.scroll_docs(4) },
+          ["<C-q>"] = { i = cmp.mapping.abort() },
+          ["<CR>"] = { i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }) },
           ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            elseif has_words_before() then
-              cmp.complete()
+            if require("copilot.suggestion").is_visible() then
+              require("copilot.suggestion").accept()
+            elseif cmp.visible() and cmp.get_active_entry() then
+              cmp.complete({ behavior = cmp.ConfirmBehavior.Replace, select = true })
+            -- disabled to use default luasnip mappings
+            -- elseif luasnip.expand_or_jumpable() then
+            --   luasnip.expand_or_jump()
             else
               fallback()
             end
           end, { "i", "s" }),
-
-          ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-              luasnip.jump(-1)
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-        }),
+          -- disabled to use default luasnip mappings
+          -- ["<S-Tab>"] = cmp.mapping(function(fallback)
+          --   if cmp.visible() then
+          --     cmp.select_prev_item()
+          --   elseif luasnip.jumpable(-1) then
+          --     luasnip.jump(-1)
+          --   else
+          --     fallback()
+          --   end
+          -- end, { "i", "s" }),
+        },
         sources = cmp.config.sources({
           { name = "copilot" },
           { name = "nvim_lsp" },
-          { name = "luasnip" },
+          {
+            name = "luasnip",
+            entry_filter = function()
+              local context = require("cmp.config.context")
+              return not context.in_treesitter_capture("string") and not context.in_syntax_group("String")
+            end,
+          },
+          { name = "buffer" },
           { name = "path" },
         }, {
           { name = "buffer" },
@@ -116,10 +152,10 @@ return {
           }),
         },
         experimental = {
-          ghost_text = {
-            hl_group = "CmpGhostText",
-          },
-          -- TODO: maybe add some other sources for git and cmdline?
+          -- disabled as it conflicts with copilot
+          -- ghost_text = {
+          --   hl_group = "CmpGhostText",
+          -- },
         },
       }
     end,
