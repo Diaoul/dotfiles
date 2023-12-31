@@ -1,0 +1,5 @@
+program_options:
+  tray: auto
+  file_manager: thunar
+notifications:
+  device_added: false # duplicates with mounted as automount is enabled
