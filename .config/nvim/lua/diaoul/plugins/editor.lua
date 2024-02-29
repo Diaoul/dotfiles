@@ -215,6 +215,7 @@ return {
   -- instances.
   {
     "RRethy/vim-illuminate",
+    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
     opts = {
       delay = 200,
     },
