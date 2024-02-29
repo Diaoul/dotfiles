@@ -6,7 +6,6 @@ return {
       { "folke/neodev.nvim", opts = {} },
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
-      -- TODO: fidget?
     },
     opts = {
       -- server configuration
