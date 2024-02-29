@@ -85,36 +85,38 @@ return {
       -- mappings
       -- shortcuts
       -- stylua: ignore start
-      vim.keymap.set('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Search in current buffer' })
-      vim.keymap.set('n', '<leader>:', require('telescope.builtin').command_history, { desc = 'Command History search in current buffer' })
+      vim.keymap.set('n', '<leader>/', require('telescope.builtin').live_grep, { desc = 'Grep' })
+      vim.keymap.set('n', '<leader>:', require('telescope.builtin').command_history, { desc = 'Command History' })
+      vim.keymap.set('n', '<leader><space>', require('telescope.builtin').find_files, { desc = 'Find Files' })
       -- find
       -- stylua: ignore start
       vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = 'Find Files' })
       vim.keymap.set('n', '<leader>fc', function() require('telescope.builtin').find_files({ cwd = "~/.config/nvim/" }) end, { desc = 'Find config files' })
-      vim.keymap.set('n', '<leader>fR', require('telescope.builtin').oldfiles, { desc = 'Find recently opened files' })
-      vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = 'Find buffers' })
+      vim.keymap.set('n', '<leader>fr', require('telescope.builtin').oldfiles, { desc = 'Find Recent' })
+      vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = 'Find Buffers' })
       vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = 'Find Git Files' })
       -- git
       -- stylua: ignore start
-      vim.keymap.set('n', '<leader>gc', require('telescope.builtin').git_commits, { desc = 'Git commits' })
-      vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = 'Git statuses' })
+      vim.keymap.set('n', '<leader>gc', require('telescope.builtin').git_commits, { desc = 'Git Commits' })
+      vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = 'Git Statuses' })
       -- search
       -- stylua: ignore start
-      vim.keymap.set('n', '<leader>s"', require('telescope.builtin').registers, { desc = 'Search registers' })
-      vim.keymap.set('n', '<leader>sb', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Search in current buffer' })
-      vim.keymap.set('n', '<leader>sc', require('telescope.builtin').command_history, { desc = 'Command History search in current buffer' })
-      vim.keymap.set('n', '<leader>sC', require('telescope.builtin').commands, { desc = 'Search commands' })
-      vim.keymap.set('n', '<leader>sa', require('telescope.builtin').autocommands, { desc = 'Search autocommands' })
-      vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = 'Search help' })
-      vim.keymap.set({ 'n', 'v' }, '<leader>sw', require('telescope.builtin').grep_string, { desc = 'Search word' })
-      vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = 'Search by grep' })
-      vim.keymap.set('n', '<leader>sd', function() require('telescope.builtin').diagnostics({ bufnr = 0 }) end, { desc = 'Search document diagnostics' })
-      vim.keymap.set('n', '<leader>sD', require('telescope.builtin').diagnostics, { desc = 'Search workspace diagnostics' })
-      vim.keymap.set('n', "<leader>ss", require("telescope.builtin").lsp_document_symbols, { desc = "Goto symbol" })
-      vim.keymap.set('n', "<leader>so", require("telescope.builtin").vim_options, { desc = "Search options" })
-      vim.keymap.set('n', "<leader>sk", require("telescope.builtin").keymaps, { desc = "Search keymaps" })
-      vim.keymap.set('n', "<leader>sH", require("telescope.builtin").highlights, { desc = "Search highlight groups" })
-      vim.keymap.set('n', "<leader>sM", require("telescope.builtin").man_pages, { desc = "Search man pages" })
+      vim.keymap.set('n', '<leader>s"', require('telescope.builtin').registers, { desc = 'Registers' })
+      vim.keymap.set('n', '<leader>sb', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Current Buffer' })
+      vim.keymap.set('n', '<leader>sc', require('telescope.builtin').command_history, { desc = 'Command History' })
+      vim.keymap.set('n', '<leader>sC', require('telescope.builtin').commands, { desc = 'Commands' })
+      vim.keymap.set('n', '<leader>sa', require('telescope.builtin').autocommands, { desc = 'Autocommands' })
+      vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = 'Help' })
+      vim.keymap.set({ 'n', 'v' }, '<leader>sw', require('telescope.builtin').grep_string, { desc = 'Word' })
+      vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = 'Grep' })
+      vim.keymap.set('n', '<leader>sd', function() require('telescope.builtin').diagnostics({ bufnr = 0 }) end, { desc = 'Diagnostics' })
+      vim.keymap.set('n', '<leader>sD', require('telescope.builtin').diagnostics, { desc = 'Diagnostics (Workspace)' })
+      vim.keymap.set('n', "<leader>ss", require("telescope.builtin").lsp_document_symbols, { desc = 'Goto Symbols' })
+      vim.keymap.set('n', "<leader>sS", require("telescope.builtin").lsp_dynamic_workspace_symbols, { desc = 'Goto Symbols (Workspace)' })
+      vim.keymap.set('n', "<leader>so", require("telescope.builtin").vim_options, { desc = 'VIM Options' })
+      vim.keymap.set('n', "<leader>sk", require("telescope.builtin").keymaps, { desc = 'Keymaps' })
+      vim.keymap.set('n', "<leader>sH", require("telescope.builtin").highlights, { desc = 'Highlights' })
+      vim.keymap.set('n', "<leader>sM", require("telescope.builtin").man_pages, { desc = 'Man Pages' })
       vim.keymap.set('n', '<leader>sR', require('telescope.builtin').resume, { desc = 'Resume' })
     end,
   },
@@ -132,16 +134,17 @@ return {
         ["gs"] = { name = "+surround" },
         ["]"] = { name = "+next" },
         ["["] = { name = "+prev" },
-        ["<leader><tab>"] = { name = "+tabs" },
         ["<leader>b"] = { name = "+buffer" },
         ["<leader>c"] = { name = "+code" },
+        ["<leader>d"] = { name = "+debug" },
         ["<leader>f"] = { name = "+file/find" },
         ["<leader>g"] = { name = "+git" },
         ["<leader>gh"] = { name = "+hunks" },
         ["<leader>q"] = { name = "+quit/session" },
         ["<leader>s"] = { name = "+search" },
+        ["<leader>t"] = { name = "+test" },
         ["<leader>u"] = { name = "+ui" },
-        ["<leader>w"] = { name = "+windows" },
+        ["<leader>w"] = { name = "+windows/workspace" },
         ["<leader>x"] = { name = "+diagnostics/quickfix" },
       })
     end,
