@@ -91,7 +91,8 @@
     "states": {
       "warning": 40,
       "critical": 10
-    }
+    },
+    "interval": 5
   },
   "cpu": {
     "format": " {usage:2}%",
