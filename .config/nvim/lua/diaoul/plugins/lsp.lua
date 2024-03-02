@@ -67,12 +67,12 @@ return {
           end
 
           -- common keymaps
+          -- stylua: ignore start
           map("n", "<leader>cl", "<cmd>LspInfo<cr>", "Lsp Info")
-          -- TODO: inc-rename?
           map("n", "<leader>cr", vim.lsp.buf.rename, "Rename")
           map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
           map("n", "gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
-          map("n", "gr", require("telescope.builtin").lsp_references, "Goto References")
+          map("n", "gr", function() require("telescope.builtin").lsp_references({ trim_text = true }) end, "Goto References")
           map("n", "gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
           map("n", "<leader>gy", require("telescope.builtin").lsp_type_definitions, "Type Definition")
           map("n", "<leader>ds", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
@@ -86,9 +86,8 @@ return {
           map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
           map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "Workspace Add Folder")
           map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "Workspace Remove Folder")
-          map("n", "<leader>wl", function()
-            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-          end, "Workspace List Folders")
+          map("n", "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "Workspace List Folders")
+          -- stylua: ignore end
         end,
       })
 

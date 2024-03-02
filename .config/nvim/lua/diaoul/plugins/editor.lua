@@ -69,8 +69,12 @@ return {
       -- setup telescope
       local actions = require("telescope.actions")
       local trouble = require("trouble.providers.telescope")
+
       require("telescope").setup({
         defaults = {
+          path_display = {
+            truncate = 2,
+          },
           mappings = {
             i = {
               ["<Esc>"] = actions.close,
@@ -79,6 +83,11 @@ return {
             },
           },
           color_devicons = false,
+        },
+        pickers = {
+          lsp_references = {
+            path_display = { "smart", { truncate = 10 } },
+          },
         },
       })
 
@@ -89,18 +98,16 @@ return {
       vim.keymap.set('n', '<leader>:', require('telescope.builtin').command_history, { desc = 'Command History' })
       vim.keymap.set('n', '<leader><space>', require('telescope.builtin').find_files, { desc = 'Find Files' })
       -- find
-      -- stylua: ignore start
       vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = 'Find Files' })
+      vim.keymap.set('n', '<leader>fF', function() require('telescope.builtin').find_files({cwd = require("telescope.utils").buffer_dir()}) end, {desc = 'Find Files (cwd)' })
       vim.keymap.set('n', '<leader>fc', function() require('telescope.builtin').find_files({ cwd = "~/.config/nvim/" }) end, { desc = 'Find config files' })
       vim.keymap.set('n', '<leader>fr', require('telescope.builtin').oldfiles, { desc = 'Find Recent' })
       vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = 'Find Buffers' })
       vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = 'Find Git Files' })
       -- git
-      -- stylua: ignore start
       vim.keymap.set('n', '<leader>gc', require('telescope.builtin').git_commits, { desc = 'Git Commits' })
       vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = 'Git Statuses' })
       -- search
-      -- stylua: ignore start
       vim.keymap.set('n', '<leader>s"', require('telescope.builtin').registers, { desc = 'Registers' })
       vim.keymap.set('n', '<leader>sb', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Current Buffer' })
       vim.keymap.set('n', '<leader>sc', require('telescope.builtin').command_history, { desc = 'Command History' })
@@ -118,6 +125,7 @@ return {
       vim.keymap.set('n', "<leader>sH", require("telescope.builtin").highlights, { desc = 'Highlights' })
       vim.keymap.set('n', "<leader>sM", require("telescope.builtin").man_pages, { desc = 'Man Pages' })
       vim.keymap.set('n', '<leader>sR', require('telescope.builtin').resume, { desc = 'Resume' })
+      -- stylua: ignore end
     end,
   },
 
