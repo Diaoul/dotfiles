@@ -7,6 +7,12 @@ map({ "n", "x" }, "<Down>", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent =
 map({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 map({ "n", "x" }, "<Up>", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 
+-- PUM navigation (disabled, not working as expected)
+-- map("c", "<Esc>", "pumvisible() ? '<C-e>' : '<Esc>'", { expr = true })
+-- map("c", "<CR>", "pumvisible() ? '<C-y>' : '<CR>'", { expr = true })
+-- map("i", "<Down>", "pumvisible() ? '<C-n>' : '<Down>'", { expr = true })
+-- map("i", "<Up>", "pumvisible() ? '<C-p>' : '<Up>'", { expr = true })
+
 -- Window navigation
 map("n", "<C-h>", "<C-w>h", { desc = "Go to left window", remap = true })
 map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window", remap = true })
