@@ -54,9 +54,9 @@ return {
 
       -- lsp and buffer local mappings
       vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-        callback = function(ev)
-          local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
+        callback = function(event)
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client and client.name == "ruff_lsp" then
             -- disable hover in favor of Pyright
             client.server_capabilities.hoverProvider = false
@@ -64,30 +64,20 @@ return {
 
           -- mappings
           local map = function(modes, keys, func, desc)
-            vim.keymap.set(modes, keys, func, { buffer = ev.buf, desc = desc })
+            vim.keymap.set(modes, keys, func, { buffer = event.buf, desc = desc })
           end
-
-          -- common keymaps
           -- stylua: ignore start
           map("n", "<leader>cl", "<cmd>LspInfo<cr>", "Lsp Info")
           map("n", "<leader>cr", vim.lsp.buf.rename, "Rename")
           map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
           map("n", "gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
+          map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
           map("n", "gr", function() require("telescope.builtin").lsp_references({ trim_text = true }) end, "Goto References")
           map("n", "gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
-          map("n", "<leader>gy", require("telescope.builtin").lsp_type_definitions, "Type Definition")
-          map("n", "<leader>ds", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
-          map("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "Workspace Symbols")
-          map("n", "K", vim.lsp.buf.hover, "Hover")
-
-          -- see `:help K` for why this keymap
-          map("n", "<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
-
-          -- lesser used LSP functionality
-          map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
-          map("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, "Workspace Add Folder")
-          map("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, "Workspace Remove Folder")
-          map("n", "<leader>wl", function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, "Workspace List Folders")
+          map("n", "gy", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
+          map("n", "K", vim.lsp.buf.hover, "Hover Documentation")
+          map("n", "gK", vim.lsp.buf.signature_help, "Signature Help")
+          map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature Help")
           -- stylua: ignore end
         end,
       })
