@@ -188,31 +188,31 @@ return {
           vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
         end
 
+        -- stylua: ignore start
         -- navigation
-        -- TODO: they do it differently in git signs default config and kickstart because of conflict with [c and fugitive
-        -- see https://github.com/nvim-lua/kickstart.nvim/blob/master/init.lua#L131C12-L131C12
+        -- NOTE: no need for the special mapping as described in gitsigns docs
+        -- since I don't use fugitive nor ]c and [c
         map("n", "]h", gs.next_hunk, "Next Hunk")
         map("n", "[h", gs.prev_hunk, "Prev Hunk")
 
         -- actions
-        map({ "n", "v" }, "<leader>hs", ":Gitsigns stage_hunk<CR>", "Stage Hunk")
-        map({ "n", "v" }, "<leader>hr", ":Gitsigns reset_hunk<CR>", "Reset Hunk")
+        map('n', '<leader>hs', gs.stage_hunk, "Stage Hunk")
+        map('n', '<leader>hr', gs.reset_hunk, "Reset Hunk")
+        map('v', '<leader>hs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end, "Stage Hunk")
+        map('v', '<leader>hr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end, "Reset Hunk")
         map("n", "<leader>hS", gs.stage_buffer, "Stage Buffer")
         map("n", "<leader>hu", gs.undo_stage_hunk, "Undo Stage Hunk")
         map("n", "<leader>hR", gs.reset_buffer, "Reset Buffer")
         map("n", "<leader>hp", gs.preview_hunk, "Preview Hunk")
-        map("n", "<leader>hb", function()
-          gs.blame_line({ full = true })
-        end, "Blame Line")
-        map("n", "<leader>tb", gs.toggle_current_line_blame, "Toggle Current Line Blame")
+        map("n", "<leader>hb", function() gs.blame_line({ full = true }) end, "Blame Line")
+        map("n", "<leader>hl", gs.toggle_current_line_blame, "Toggle Current Line Blame")
         map("n", "<leader>hd", gs.diffthis, "Diff This")
-        map("n", "<leader>hD", function()
-          gs.diffthis("~")
-        end, "Diff This ~")
-        map("n", "<leader>tb", gs.toggle_deleted, "Toggle Deleted")
+        map("n", "<leader>hD", function() gs.diffthis("~") end, "Diff This ~")
+        map("n", "<leader>hq", gs.toggle_deleted, "Toggle Deleted")
 
         -- text objects
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
+        -- stylua: ignore end
       end,
     },
   },
