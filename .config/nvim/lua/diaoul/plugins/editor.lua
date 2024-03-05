@@ -118,8 +118,8 @@ return {
       vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = 'Grep' })
       vim.keymap.set('n', '<leader>sd', function() require('telescope.builtin').diagnostics({ bufnr = 0 }) end, { desc = 'Diagnostics' })
       vim.keymap.set('n', '<leader>sD', require('telescope.builtin').diagnostics, { desc = 'Diagnostics (Workspace)' })
-      vim.keymap.set('n', "<leader>ss", require("telescope.builtin").lsp_document_symbols, { desc = 'Goto Symbols' })
-      vim.keymap.set('n', "<leader>sS", require("telescope.builtin").lsp_dynamic_workspace_symbols, { desc = 'Goto Symbols (Workspace)' })
+      vim.keymap.set('n', "<leader>ss", require("telescope.builtin").lsp_document_symbols, { desc = 'Symbols' })
+      vim.keymap.set('n', "<leader>sS", require("telescope.builtin").lsp_dynamic_workspace_symbols, { desc = 'Symbols (Workspace)' })
       vim.keymap.set('n', "<leader>so", require("telescope.builtin").vim_options, { desc = 'VIM Options' })
       vim.keymap.set('n', "<leader>sk", require("telescope.builtin").keymaps, { desc = 'Keymaps' })
       vim.keymap.set('n', "<leader>sH", require("telescope.builtin").highlights, { desc = 'Highlights' })
@@ -136,24 +136,23 @@ return {
       local wk = require("which-key")
       wk.setup()
       wk.register({
-        -- TODO: mappings are wrong
         mode = { "n", "v" },
-        ["g"] = { name = "+goto" },
-        ["gs"] = { name = "+surround" },
-        ["]"] = { name = "+next" },
-        ["["] = { name = "+prev" },
-        ["<leader>b"] = { name = "+buffer" },
-        ["<leader>c"] = { name = "+code" },
-        ["<leader>d"] = { name = "+debug" },
-        ["<leader>f"] = { name = "+file/find" },
-        ["<leader>g"] = { name = "+git" },
-        ["<leader>gh"] = { name = "+hunks" },
-        ["<leader>q"] = { name = "+quit/session" },
-        ["<leader>s"] = { name = "+search" },
-        ["<leader>t"] = { name = "+test" },
-        ["<leader>u"] = { name = "+ui" },
-        ["<leader>w"] = { name = "+windows/workspace" },
-        ["<leader>x"] = { name = "+diagnostics/quickfix" },
+        ["g"] = { name = "+Goto" },
+        ["s"] = { name = "+Surround" },
+        ["]"] = { name = "+Next" },
+        ["["] = { name = "+Prev" },
+        ["<leader>b"] = { name = "+Buffer" },
+        ["<leader>c"] = { name = "+Code" },
+        ["<leader>d"] = { name = "+Debug" },
+        ["<leader>f"] = { name = "+File/Find" },
+        ["<leader>g"] = { name = "+Git" },
+        ["<leader>gh"] = { name = "+Hunks" },
+        ["<leader>q"] = { name = "+Quit/Session" },
+        ["<leader>s"] = { name = "+Search" },
+        ["<leader>t"] = { name = "+Test" },
+        ["<leader>u"] = { name = "+UI" },
+        ["<leader>w"] = { name = "+Windows/Workspace" },
+        ["<leader>x"] = { name = "+Diagnostics/Quickfix" },
       })
     end,
   },
