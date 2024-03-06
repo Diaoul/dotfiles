@@ -91,40 +91,52 @@ return {
         },
       })
 
+      local function get_visual()
+        local _, ls, cs = unpack(vim.fn.getpos("v"))
+        local _, le, ce = unpack(vim.fn.getpos("."))
+
+        -- nvim_buf_get_text requires start and end args be in correct order
+        ls, le = math.min(ls, le), math.max(ls, le)
+        cs, ce = math.min(cs, ce), math.max(cs, ce)
+
+        return vim.api.nvim_buf_get_text(0, ls - 1, cs - 1, le - 1, ce, {})[1] or ""
+      end
+
       -- mappings
       -- shortcuts
       -- stylua: ignore start
-      vim.keymap.set('n', '<leader>/', require('telescope.builtin').live_grep, { desc = 'Grep' })
-      vim.keymap.set('n', '<leader>:', require('telescope.builtin').command_history, { desc = 'Command History' })
-      vim.keymap.set('n', '<leader><space>', require('telescope.builtin').find_files, { desc = 'Find Files' })
+      vim.keymap.set("n", "<leader>/", require("telescope.builtin").live_grep, { desc = "Grep" })
+      vim.keymap.set("n", "<leader>:", require("telescope.builtin").command_history, { desc = "Command History" })
+      vim.keymap.set("n", "<leader><space>", require("telescope.builtin").find_files, { desc = "Find Files" })
       -- find
-      vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = 'Find Files' })
-      vim.keymap.set('n', '<leader>fF', function() require('telescope.builtin').find_files({cwd = require("telescope.utils").buffer_dir()}) end, {desc = 'Find Files (cwd)' })
-      vim.keymap.set('n', '<leader>fc', function() require('telescope.builtin').find_files({ cwd = "~/.config/nvim/" }) end, { desc = 'Find config files' })
-      vim.keymap.set('n', '<leader>fr', require('telescope.builtin').oldfiles, { desc = 'Find Recent' })
-      vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = 'Find Buffers' })
-      vim.keymap.set('n', '<leader>fg', require('telescope.builtin').git_files, { desc = 'Find Git Files' })
+      vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "Find Files" })
+      vim.keymap.set("n", "<leader>fF", function() require("telescope.builtin").find_files({ cwd = require("telescope.utils").buffer_dir() }) end, { desc = "Find Files (cwd)" })
+      vim.keymap.set("n", "<leader>fc", function() require("telescope.builtin").find_files({ cwd = "~/.config/nvim/" }) end, { desc = "Find config files" })
+      vim.keymap.set("n", "<leader>fr", require("telescope.builtin").oldfiles, { desc = "Find Recent" })
+      vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, { desc = "Find Buffers" })
+      vim.keymap.set("n", "<leader>fg", require("telescope.builtin").git_files, { desc = "Find Git Files" })
       -- git
-      vim.keymap.set('n', '<leader>gc', require('telescope.builtin').git_commits, { desc = 'Git Commits' })
-      vim.keymap.set('n', '<leader>gs', require('telescope.builtin').git_status, { desc = 'Git Statuses' })
+      vim.keymap.set("n", "<leader>gc", require("telescope.builtin").git_commits, { desc = "Git Commits" })
+      vim.keymap.set("n", "<leader>gs", require("telescope.builtin").git_status, { desc = "Git Statuses" })
       -- search
-      vim.keymap.set('n', '<leader>s"', require('telescope.builtin').registers, { desc = 'Registers' })
-      vim.keymap.set('n', '<leader>sb', require('telescope.builtin').current_buffer_fuzzy_find, { desc = 'Current Buffer' })
-      vim.keymap.set('n', '<leader>sc', require('telescope.builtin').command_history, { desc = 'Command History' })
-      vim.keymap.set('n', '<leader>sC', require('telescope.builtin').commands, { desc = 'Commands' })
-      vim.keymap.set('n', '<leader>sa', require('telescope.builtin').autocommands, { desc = 'Autocommands' })
-      vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = 'Help' })
-      vim.keymap.set({ 'n', 'v' }, '<leader>sw', require('telescope.builtin').grep_string, { desc = 'Word' })
-      vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = 'Grep' })
-      vim.keymap.set('n', '<leader>sd', function() require('telescope.builtin').diagnostics({ bufnr = 0 }) end, { desc = 'Diagnostics' })
-      vim.keymap.set('n', '<leader>sD', require('telescope.builtin').diagnostics, { desc = 'Diagnostics (Workspace)' })
-      vim.keymap.set('n', "<leader>ss", require("telescope.builtin").lsp_document_symbols, { desc = 'Symbols' })
-      vim.keymap.set('n', "<leader>sS", require("telescope.builtin").lsp_dynamic_workspace_symbols, { desc = 'Symbols (Workspace)' })
-      vim.keymap.set('n', "<leader>so", require("telescope.builtin").vim_options, { desc = 'VIM Options' })
-      vim.keymap.set('n', "<leader>sk", require("telescope.builtin").keymaps, { desc = 'Keymaps' })
-      vim.keymap.set('n', "<leader>sH", require("telescope.builtin").highlights, { desc = 'Highlights' })
-      vim.keymap.set('n', "<leader>sM", require("telescope.builtin").man_pages, { desc = 'Man Pages' })
-      vim.keymap.set('n', '<leader>sR', require('telescope.builtin').resume, { desc = 'Resume' })
+      vim.keymap.set("n", "<leader>s\"", require("telescope.builtin").registers, { desc = "Registers" })
+      vim.keymap.set("n", "<leader>sb", require("telescope.builtin").current_buffer_fuzzy_find, { desc = "Current Buffer" })
+      vim.keymap.set("n", "<leader>sc", require("telescope.builtin").command_history, { desc = "Command History" })
+      vim.keymap.set("n", "<leader>sC", require("telescope.builtin").commands, { desc = "Commands" })
+      vim.keymap.set("n", "<leader>sa", require("telescope.builtin").autocommands, { desc = "Autocommands" })
+      vim.keymap.set("n", "<leader>sh", require("telescope.builtin").help_tags, { desc = "Help" })
+      vim.keymap.set("n", "<leader>sw", require("telescope.builtin").grep_string, { desc = "Word" })
+      vim.keymap.set("n", "<leader>sg", require("telescope.builtin").live_grep, { desc = "Grep" })
+      vim.keymap.set("v", "<leader>sg", function() require("telescope.builtin").live_grep({ default_text = get_visual() }) end, { desc = "Grep" })
+      vim.keymap.set("n", "<leader>sd", function() require("telescope.builtin").diagnostics({ bufnr = 0 }) end, { desc = "Diagnostics" })
+      vim.keymap.set("n", "<leader>sD", require("telescope.builtin").diagnostics, { desc = "Diagnostics (Workspace)" })
+      vim.keymap.set("n", "<leader>ss", require("telescope.builtin").lsp_document_symbols, { desc = "Symbols" })
+      vim.keymap.set("n", "<leader>sS", require("telescope.builtin").lsp_dynamic_workspace_symbols, { desc = "Symbols (Workspace)" })
+      vim.keymap.set("n", "<leader>so", require("telescope.builtin").vim_options, { desc = "VIM Options" })
+      vim.keymap.set("n", "<leader>sk", require("telescope.builtin").keymaps, { desc = "Keymaps" })
+      vim.keymap.set("n", "<leader>sH", require("telescope.builtin").highlights, { desc = "Highlights" })
+      vim.keymap.set("n", "<leader>sM", require("telescope.builtin").man_pages, { desc = "Man Pages" })
+      vim.keymap.set("n", "<leader>sR", require("telescope.builtin").resume, { desc = "Resume" })
       -- stylua: ignore end
     end,
   },
@@ -194,12 +206,11 @@ return {
         -- since I don't use fugitive nor ]c and [c
         map("n", "]h", gs.next_hunk, "Next Hunk")
         map("n", "[h", gs.prev_hunk, "Previous Hunk")
-
         -- actions
-        map('n', '<leader>hs', gs.stage_hunk, "Stage Hunk")
-        map('n', '<leader>hr', gs.reset_hunk, "Reset Hunk")
-        map('v', '<leader>hs', function() gs.stage_hunk {vim.fn.line('.'), vim.fn.line('v')} end, "Stage Hunk")
-        map('v', '<leader>hr', function() gs.reset_hunk {vim.fn.line('.'), vim.fn.line('v')} end, "Reset Hunk")
+        map("n", "<leader>hs", gs.stage_hunk, "Stage Hunk")
+        map("n", "<leader>hr", gs.reset_hunk, "Reset Hunk")
+        map("v", "<leader>hs", function() gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, "Stage Hunk")
+        map("v", "<leader>hr", function() gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, "Reset Hunk")
         map("n", "<leader>hS", gs.stage_buffer, "Stage Buffer")
         map("n", "<leader>hu", gs.undo_stage_hunk, "Undo Stage Hunk")
         map("n", "<leader>hR", gs.reset_buffer, "Reset Buffer")
@@ -209,7 +220,6 @@ return {
         map("n", "<leader>hd", gs.diffthis, "Diff This")
         map("n", "<leader>hD", function() gs.diffthis("~") end, "Diff This ~")
         map("n", "<leader>hq", gs.toggle_deleted, "Toggle Deleted")
-
         -- text objects
         map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
         -- stylua: ignore end
