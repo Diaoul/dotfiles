@@ -329,11 +329,6 @@ return {
     "nvim-tree/nvim-web-devicons",
     lazy = true,
     opts = {
-      override = {
-        default_icon = {
-          icon = "",
-        },
-      },
       color_icons = true,
     },
   },
@@ -346,7 +341,6 @@ return {
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     dependencies = {
       "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons",
     },
     opts = {
       include_buftypes = { "" },
