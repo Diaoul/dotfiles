@@ -260,11 +260,6 @@ return {
     end,
   },
 
-  -- Key bindings cheat sheet
-  {
-    "folke/which-key.nvim",
-  },
-
   -- Nicer UI
   {
     "folke/noice.nvim",
