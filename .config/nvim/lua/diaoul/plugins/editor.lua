@@ -193,7 +193,7 @@ return {
         -- NOTE: no need for the special mapping as described in gitsigns docs
         -- since I don't use fugitive nor ]c and [c
         map("n", "]h", gs.next_hunk, "Next Hunk")
-        map("n", "[h", gs.prev_hunk, "Prev Hunk")
+        map("n", "[h", gs.prev_hunk, "Previous Hunk")
 
         -- actions
         map('n', '<leader>hs', gs.stage_hunk, "Stage Hunk")

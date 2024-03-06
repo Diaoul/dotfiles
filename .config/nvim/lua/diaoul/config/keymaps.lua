@@ -44,7 +44,7 @@ map("v", "<S-Down>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 map("v", "<S-Up>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
 -- Buffer navigation
-map("n", "[b", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+map("n", "[b", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 map("n", "]b", "<cmd>bnext<cr>", { desc = "Next buffer" })
 map("n", "<leader>bb", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
 map("n", "<leader>`", "<cmd>e #<cr>", { desc = "Switch to Other Buffer" })
@@ -106,11 +106,11 @@ local diagnostic_goto = function(next, severity)
 end
 map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
 map("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic" })
-map("n", "[d", diagnostic_goto(false), { desc = "Prev Diagnostic" })
+map("n", "[d", diagnostic_goto(false), { desc = "Previous Diagnostic" })
 map("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
-map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error" })
+map("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Previous Error" })
 map("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
-map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
+map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Previous Warning" })
 
 -- toggle options
 -- map("n", "<leader>uf", function() Util.format.toggle() end, { desc = "Toggle auto format (global)" })

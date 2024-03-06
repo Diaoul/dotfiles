@@ -154,10 +154,10 @@ return {
     event = "VeryLazy",
     keys = {
       -- shortcuts
-      { "<s-left>", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
+      { "<s-left>", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous buffer" },
       { "<s-right>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
       { "<s-up>", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
-      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev buffer" },
+      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous buffer" },
       { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
       -- buffer
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
