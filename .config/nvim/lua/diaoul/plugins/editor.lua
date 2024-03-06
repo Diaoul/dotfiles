@@ -225,30 +225,10 @@ return {
       console_log = false,
     },
     keys = {
-      {
-        "<leader>gl",
-        "<cmd>GitLink<cr>",
-        mode = { "n", "v" },
-        desc = "Copy Git URL",
-      },
-      {
-        "<leader>gL",
-        "<cmd>GitLink!<cr>",
-        mode = { "n", "v" },
-        desc = "Open Git URL",
-      },
-      {
-        "<leader>gb",
-        "<cmd>GitLink blame<cr>",
-        mode = { "n", "v" },
-        desc = "Copy Git Blame URL",
-      },
-      {
-        "<leader>gB",
-        "<cmd>GitLink! blame<cr>",
-        mode = { "n", "v" },
-        desc = "Open Git Blame URL",
-      },
+      { "<leader>gl", "<cmd>GitLink<cr>", mode = { "n", "v" }, desc = "Copy Git URL" },
+      { "<leader>gL", "<cmd>GitLink!<cr>", mode = { "n", "v" }, desc = "Open Git URL" },
+      { "<leader>gb", "<cmd>GitLink blame<cr>", mode = { "n", "v" }, desc = "Copy Git Blame URL" },
+      { "<leader>gB", "<cmd>GitLink! blame<cr>", mode = { "n", "v" }, desc = "Open Git Blame URL" },
     },
   },
 
