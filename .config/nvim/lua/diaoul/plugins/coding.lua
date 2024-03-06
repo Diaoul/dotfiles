@@ -148,7 +148,7 @@ return {
         }),
         formatting = {
           format = lspkind.cmp_format({
-            symbol_map = { Copilot = "" },
+            symbol_map = require("diaoul.config").icons.kinds,
           }),
         },
         experimental = {
