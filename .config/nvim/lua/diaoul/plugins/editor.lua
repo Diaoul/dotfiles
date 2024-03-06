@@ -220,7 +220,10 @@ return {
   -- Git links
   {
     "linrongbin16/gitlinker.nvim",
-    opts = {},
+    opts = {
+      message = false,
+      console_log = false,
+    },
     keys = {
       {
         "<leader>gl",
