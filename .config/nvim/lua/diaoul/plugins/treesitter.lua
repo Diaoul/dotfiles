@@ -65,12 +65,6 @@ return {
     end,
   },
 
-  -- Show context of the current function
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    opts = { max_lines = 3 },
-  },
-
   -- Automatically add closing tags for HTML and JSX
   {
     "windwp/nvim-ts-autotag",

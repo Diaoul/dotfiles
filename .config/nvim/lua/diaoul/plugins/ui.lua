@@ -341,6 +341,20 @@ return {
   -- UI components
   { "MunifTanjim/nui.nvim", lazy = true },
 
+  {
+    "utilyre/barbecue.nvim",
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons",
+    },
+    opts = {
+      include_buftypes = { "" },
+      exclude_filetypes = { "gitcommit", "Trouble", "toggleterm" },
+      kinds = require("diaoul.config").icons.kinds,
+    },
+  },
+
   -- Dashboard
   -- TODO: rework this (to include recent projects?)
   {
