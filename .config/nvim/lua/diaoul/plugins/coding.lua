@@ -138,6 +138,7 @@ return {
             name = "luasnip",
             entry_filter = function()
               local context = require("cmp.config.context")
+              -- disable luasnip in strings
               return not context.in_treesitter_capture("string") and not context.in_syntax_group("String")
             end,
           },
@@ -181,14 +182,14 @@ return {
     "JoosepAlviste/nvim-ts-context-commentstring",
     lazy = true,
     opts = {
-      enable_autocmd = false, -- to speed up loading
+      enable_autocmd = false, -- to speed up loading, see mini.comment below
     },
   },
   {
     "echasnovski/mini.comment",
     event = "VeryLazy",
     opts = {
-      -- enable ts context commentstring
+      -- enable ts context commentstring (from above)
       -- see https://github.com/JoosepAlviste/nvim-ts-context-commentstring/wiki/Integrations#minicomment
       options = {
         custom_commentstring = function()
