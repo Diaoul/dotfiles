@@ -1,33 +1,43 @@
 [[themes]]
 name = "gruvbox"
+
 [themes.palette]
-background = "#282828"
-foreground = "#ebdbb2"
-black = "#282828"
+background = "#282828"     # bg0
+foreground = "#ebdbb2"     # fg1
+black = "#282828"          # bg0
 red = "#cc241d"
 green = "#98971a"
 yellow = "#d79921"
 blue = "#458588"
 magenta = "#b16286"
 cyan = "#689d6a"
-white = "#a89984"
-bright_black = "#928374"
+white = "#a89984"          # fg4 (bright gray)
+bright_black = "#928374"   # gray
 bright_red = "#fb4934"
 bright_green = "#b8bb26"
 bright_yellow = "#fabd2f"
 bright_blue = "#83a598"
 bright_magenta = "#d3869b"
 bright_cyan = "#8ec07c"
-bright_white = "#ebdbb2"
+bright_white = "#ebdbb2"   # fg1
+# not usable, here for reference only
+orange = "#d65d0e"
+bright_orange = "#fe8019"
+bg1 = "#3c3836"
+bg2 = "#504945"
+bg3 = "#665c54"
+fg2 = "#d5c4a1"
+fg3 = "#bdae93"
+
 [themes.component_style]
-block_title = { fg = "Cyan"  }
-border = {}
-playback_track = { fg = "Yellow", modifiers = ["Bold"] }
-playback_artists = { fg = "Yellow", modifiers = ["Bold"] }
-playback_album = { fg = "Yellow" }
-playback_metadata = { fg = "BrightBlack" }
-playback_progress_bar = { bg = "BrightBlack", fg = "Green" }
-current_playing = { fg = { Rgb = { r = 254, g = 128, b = 25}}, modifiers = ["Bold"] }
-page_desc = { fg = "Magenta", modifiers = ["Bold", "Italic"] }
-table_header = { fg = "Blue" }
-selection = { modifiers = ["Bold", "Reversed"] }
+block_title = { fg = "BrightBlue", modifiers = ["Bold"] }
+border = { fg = "#bdae93" }
+playback_track = { fg = "BrightYellow", modifiers = ["Bold"] }
+playback_artists = { fg = "BrightYellow", modifiers = ["Bold"] }
+playback_album = { fg = "BrightYellow", modifiers = ["Italic"] }
+playback_metadata = { fg = "White" }
+playback_progress_bar = { fg = "#fe8019", bg = "#504945" }
+current_playing = { fg = "#fe8019", modifiers = ["Bold"] }
+page_desc = { fg = "BrightMagenta", modifiers = ["Bold"] }
+table_header = { fg = "BrightGreen" }
+selection = { fg = "BrightWhite", bg = "#3c3836", modifiers = ["Bold"] }
