@@ -28,7 +28,13 @@ return {
             telemetry = { enable = false },
           },
         },
-        pyright = {},
+        pyright = {
+          enabled = false, -- using basedpyright instead
+        },
+        basedpyright = {},
+        ruff = {
+          enabled = false, -- too early, using basedpyright + ruff_lsp instead
+        },
         ruff_lsp = {},
         html = {},
         rust_analyzer = {},
