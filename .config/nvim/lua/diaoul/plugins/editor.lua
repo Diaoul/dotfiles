@@ -68,7 +68,7 @@ return {
     config = function()
       -- setup telescope
       local actions = require("telescope.actions")
-      local trouble = require("trouble.providers.telescope")
+      local trouble = require("trouble.sources.telescope")
 
       require("telescope").setup({
         defaults = {
