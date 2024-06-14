@@ -60,10 +60,7 @@ I use [Gruvbox-Plus](https://github.com/SylEleuth/gruvbox-plus-icon-pack) using
 I use [Themix](https://github.com/themix-project/themix-gui) to create my own
 theme (and icons) variants.
 
-To preview and apply all those, I run `lxappearance`.
-
-But since there is a bug with [GTK3 on Wayland](https://github.com/swaywm/sway/wiki/GTK-3-settings-on-Wayland),
-I also run [this](.local/bin/import-gsettings.sh).
+To preview and apply all those, I run `nwg-look`.
 
 ### Firefox
 
@@ -119,9 +116,10 @@ Running [Thunar](https://docs.xfce.org/xfce/thunar/start) with a few plugins:
 
 ### Terminal emulators
 
-[foot](https://codeberg.org/dnkl/foot) is my go-to on Wayland but I also have
-configs for [Kitty](https://sw.kovidgoyal.net/kitty/) and
-[Alacritty](https://github.com/alacritty/alacritty), just in case.
+I run [Kitty](https://sw.kovidgoyal.net/kitty/) because I'm a sucker for ligatures.
+
+[foot](https://codeberg.org/dnkl/foot) would be my go-to choice on Wayland otherwise.
+I also have config for [Alacritty](https://github.com/alacritty/alacritty), just in case.
 
 ### Tools
 
