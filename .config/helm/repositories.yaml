@@ -50,15 +50,6 @@ repositories:
   certFile: ""
   insecure_skip_tls_verify: false
   keyFile: ""
-  name: weaveworks-kured
-  pass_credentials_all: false
-  password: ""
-  url: https://weaveworks.github.io/kured
-  username: ""
-- caFile: ""
-  certFile: ""
-  insecure_skip_tls_verify: false
-  keyFile: ""
   name: rook-release
   pass_credentials_all: false
   password: ""
@@ -216,4 +207,22 @@ repositories:
   pass_credentials_all: false
   password: ""
   url: https://kubereboot.github.io/charts/
+  username: ""
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: descheduler
+  pass_credentials_all: false
+  password: ""
+  url: https://kubernetes-sigs.github.io/descheduler
+  username: ""
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: openebs
+  pass_credentials_all: false
+  password: ""
+  url: https://openebs.github.io/openebs
   username: ""
