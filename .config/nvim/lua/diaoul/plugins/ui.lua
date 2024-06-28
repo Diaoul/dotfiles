@@ -353,8 +353,12 @@ return {
   -- TODO: rework this (to include recent projects?)
   {
     "nvimdev/dashboard-nvim",
+    dependencies = {
+      "MaximilianLloyd/ascii.nvim",
+    },
     event = "VimEnter",
     opts = function()
+      local ascii = require("ascii")
       local opts = {
         theme = "doom",
         hide = {
@@ -363,6 +367,7 @@ return {
           statusline = false,
         },
         config = {
+          header = ascii.art.text.neovim.ansi_shadow,
           -- stylua: ignore
           center = {
             { desc = " Find file",       icon = " ", key = "f", action = 'lua require("diaoul.util.pick").files()' },
