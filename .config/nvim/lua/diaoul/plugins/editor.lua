@@ -107,11 +107,11 @@ return {
       -- stylua: ignore start
       vim.keymap.set("n", "<leader>/", require("telescope.builtin").live_grep, { desc = "Grep" })
       vim.keymap.set("n", "<leader>:", require("telescope.builtin").command_history, { desc = "Command History" })
-      vim.keymap.set("n", "<leader><space>", require("telescope.builtin").find_files, { desc = "Find Files" })
+      vim.keymap.set("n", "<leader><space>", require("diaoul.util.pick").files, { desc = "Find Files" })
       -- find
-      vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "Find Files" })
-      vim.keymap.set("n", "<leader>fF", function() require("telescope.builtin").find_files({ cwd = require("telescope.utils").buffer_dir() }) end, { desc = "Find Files (cwd)" })
-      vim.keymap.set("n", "<leader>fc", function() require("telescope.builtin").find_files({ cwd = "~/.config/nvim/" }) end, { desc = "Find config files" })
+      vim.keymap.set("n", "<leader>ff", require("diaoul.util.pick").files, { desc = "Find Files" })
+      vim.keymap.set("n", "<leader>fF", function() require("diaoul.util.pick").files({ cwd = require("telescope.utils").buffer_dir() }) end, { desc = "Find Files (cwd)" })
+      vim.keymap.set("n", "<leader>fc", function() require("diaoul.util.pick").files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find config files" })
       vim.keymap.set("n", "<leader>fr", require("telescope.builtin").oldfiles, { desc = "Find Recent" })
       vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, { desc = "Find Buffers" })
       vim.keymap.set("n", "<leader>fg", require("telescope.builtin").git_files, { desc = "Find Git Files" })
