@@ -13,7 +13,7 @@ k9s:
     reactive: false
     noIcons: false
     skin: gruvbox-dark
-  skipLatestRevCheck: false
+  skipLatestRevCheck: true
   disablePodCounting: false
   shellPod:
     image: busybox:1.35.0
@@ -31,7 +31,7 @@ k9s:
     buffer: 5000
     sinceSeconds: -1
     fullScreen: false
-    textWrap: false
+    textWrap: true
     showTime: false
   thresholds:
     cpu:
