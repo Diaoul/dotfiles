@@ -28,14 +28,8 @@ return {
             telemetry = { enable = false },
           },
         },
-        pyright = {
-          enabled = false, -- using basedpyright instead
-        },
         basedpyright = {},
-        ruff = {
-          enabled = false, -- too early, using basedpyright + ruff_lsp instead
-        },
-        ruff_lsp = {},
+        ruff = {},
         html = {},
         rust_analyzer = {},
         taplo = {},
