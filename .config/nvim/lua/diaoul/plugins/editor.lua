@@ -218,8 +218,10 @@ return {
         -- navigation
         -- NOTE: no need for the special mapping as described in gitsigns docs
         -- since I don't use fugitive nor ]c and [c
-        map("n", "]h", gs.next_hunk, "Next Hunk")
-        map("n", "[h", gs.prev_hunk, "Previous Hunk")
+        map("n", "]h", function() gs.nav_hunk("next") end, "Next Hunk")
+        map("n", "[h", function() gs.nav_hunk("prev") end, "Prev Hunk")
+        map("n", "]H", function() gs.nav_hunk("last") end, "Last Hunk")
+        map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
         -- actions
         map("n", "<leader>hs", gs.stage_hunk, "Stage Hunk")
         map("n", "<leader>hr", gs.reset_hunk, "Reset Hunk")
