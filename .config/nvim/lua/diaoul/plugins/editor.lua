@@ -35,6 +35,9 @@ return {
         desc = "Buffer explorer",
       },
     },
+    deactivate = function()
+      vim.cmd([[Neotree close]])
+    end,
     opts = {
       sources = { "filesystem", "buffers", "git_status", "document_symbols" },
       filesystem = {
