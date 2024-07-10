@@ -262,7 +262,9 @@ return {
   {
     "NvChad/nvim-colorizer.lua",
     event = { "BufReadPost", "BufNewFile" },
-    opts = {},
+    opts = {
+      user_default_options = { names = false },
+    },
   },
 
   -- Automatically highlights other instances of the word under your cursor.
