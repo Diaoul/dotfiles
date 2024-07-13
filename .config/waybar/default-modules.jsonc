@@ -10,7 +10,7 @@
     //     "urgent": "",
     // },
     "on-scroll-up": "hyprctl dispatch workspace r-1",
-    "on-scroll-down": "hyprctl dispatch workspace r+1"
+    "on-scroll-down": "hyprctl dispatch workspace r+1",
   },
   "custom/media": {
     "format": "{icon} {}",
@@ -19,13 +19,13 @@
       "ncspot": "",
       "spotify_player": "",
       "firefox": "󰈹",
-      "default": "🎜"
+      "default": "🎜",
     },
     "max-length": 100,
     "on-click": "playerctl play-pause",
     "exec": "~/.config/waybar/scripts/mediaplayer.py",
     "return-type": "json",
-    "escape": true
+    "escape": true,
   },
   // unused because laggy and errors in logs
   // "mpris": {
@@ -48,18 +48,18 @@
   // },
   "custom/yubikey": {
     "exec": "~/.config/waybar/scripts/yubikey.sh",
-    "return-type": "json"
+    "return-type": "json",
   },
   "custom/systemd": {
     "exec": "~/.config/waybar/scripts/systemd.sh",
     "return-type": "json",
-    "interval": 60
+    "interval": 60,
   },
   "backlight": {
     "format": "{icon}{percent}%",
     "format-icons": [" ", " ", " ", " ", " ", " ", " ", " ", " "],
     "on-scroll-up": "brightnessctl -d intel_backlight -c backlight set +5% > /dev/null",
-    "on-scroll-down": "brightnessctl -d intel_backlight -c backlight set 5%- > /dev/null"
+    "on-scroll-down": "brightnessctl -d intel_backlight -c backlight set 5%- > /dev/null",
   },
   "pulseaudio": {
     "format": "{icon} {volume:2}%",
@@ -77,11 +77,11 @@
       "portable": "",
       "car": "",
       "hifi": "󰓃",
-      "phone": ""
+      "phone": "",
     },
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-click-middle": "pavucontrol",
-    "on-click-right": "~/.config/waybar/scripts/sinks.sh next"
+    "on-click-right": "~/.config/waybar/scripts/sinks.sh next",
   },
   "battery": {
     "format": "{icon}{capacity:3}%",
@@ -90,24 +90,24 @@
     "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
     "states": {
       "warning": 40,
-      "critical": 10
+      "critical": 10,
     },
-    "interval": 5
+    "interval": 5,
   },
   "cpu": {
     "format": " {usage:2}%",
-    "interval": 1
+    "interval": 1,
   },
   "memory": {
     "format": " {:2}%",
-    "interval": 1
+    "interval": 1,
   },
   "temperature": {
     "format": "{icon} {temperatureC:2}°C",
     "format-icons": [""],
     "hwmon-path": "/sys/class/hwmon/hwmon6/temp1_input",
     "critical-threshold": 95,
-    "interval": 1
+    "interval": 1,
   },
   "bluetooth": {
     "format": "󰂯",
@@ -117,18 +117,18 @@
     "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t󰥉 {device_battery_percentage:2}%"
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t󰥉 {device_battery_percentage:2}%",
   },
   "custom/network": {
     "format": "{icon}",
     "format-icons": {
       "ethernet": "󰈀",
       "wifi": "󰤨",
-      "disconnected": ""
+      "disconnected": "",
     },
     "exec": "~/.config/waybar/scripts/network.sh",
     "return-type": "json",
-    "interval": 5
+    "interval": 5,
   },
   // disabled because it does not support the bonding interface
   // see https://github.com/Alexays/Waybar/issues/2570
@@ -145,16 +145,16 @@
     "format-icons": {
       "disconnected": "󱙱",
       "connected": "󰌾",
-      "nonetwork": "󰣮"
+      "nonetwork": "󰣮",
     },
     "exec": "~/.config/waybar/scripts/vpn.sh",
     "return-type": "json",
-    "interval": 5
+    "interval": 5,
   },
   "custom/weather": {
     "exec": "~/.config/waybar/scripts/wttr.py Poissy",
     "return-type": "json",
-    "interval": 3600
+    "interval": 3600,
   },
   "clock": {
     "format": "󰥔 {:%H:%M}",
@@ -168,30 +168,30 @@
         "days": "<span color='#d5c4a1'><b>{}</b></span>",
         "weeks": "<span color='#d3869b'><b>W{}</b></span>",
         "weekdays": "<span color='#fabd2f'><b>{}</b></span>",
-        "today": "<span color='#fb4934'><b>{}</b></span>"
-      }
+        "today": "<span color='#fb4934'><b>{}</b></span>",
+      },
     },
     "actions": {
       "on-click-right": "mode",
       "on-scroll-up": "shift_up",
-      "on-scroll-down": "shift_down"
-    }
+      "on-scroll-down": "shift_down",
+    },
   },
   "custom/wallpaper": {
     "format": " ",
     "tooltip": false,
-    "on-click": "walle random > /dev/null"
+    "on-click": "walle random > /dev/null",
   },
   "tray": {
     "icon-size": 20,
     "spacing": 6,
     "show-passive-items": false,
     "max-length": 6,
-    "min-length": 6
+    "min-length": 6,
   },
   "custom/powermenu": {
     "format": " ",
     "tooltip": false,
-    "on-click": "nwg-bar > /dev/null 2>&1"
-  }
+    "on-click": "nwg-bar > /dev/null 2>&1",
+  },
 }
