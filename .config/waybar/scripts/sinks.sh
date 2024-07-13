@@ -2,13 +2,13 @@
 set pwdump (pw-dump)
 
 # list all audio sinks, excluding some
-set blacklist "HDMI/DP Output 3"
+set blacklist (pactl -f json list sinks | jq -r '.[] | select(.ports[] | .availability == "not available") | .name')
 set ids (
     echo $pwdump | \
     jq -r '
         sort_by(.info.props."node.nick") |
         .[] |
-        select(.info.props."node.description" | IN(
+        select(.info.props."node.name" | IN(
             "'(string join '","' $blacklist)'"
         ) | not) |
         select(.info.props."media.class" == "Audio/Sink") |
@@ -52,9 +52,11 @@ function print_sink
     set id $argv[1]
     set nick (echo $pwdump | jq ".[] | select(.id == $id) | .info.props.\"node.nick\"")
     set name (echo $pwdump | jq ".[] | select(.id == $id) | .info.props.\"node.name\"")
+    set desc (echo $pwdump | jq ".[] | select(.id == $id) | .info.props.\"node.description\"")
     echo "  Id: $id"
     echo "  Nick: $nick"
     echo "  Name: $name"
+    echo "  Description: $desc"
 end
 
 
