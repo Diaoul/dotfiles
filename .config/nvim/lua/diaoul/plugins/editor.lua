@@ -39,7 +39,7 @@ return {
       vim.cmd([[Neotree close]])
     end,
     opts = {
-      sources = { "filesystem", "buffers", "git_status", "document_symbols" },
+      sources = { "filesystem", "buffers", "git_status" },
       filesystem = {
         follow_current_file = { enabled = true },
         filtered_items = {
@@ -64,7 +64,7 @@ return {
     cmd = "Spectre",
     -- stylua: ignore
     keys = {
-      { "<leader>sr", function() require("spectre").toggle() end, desc = "Search and replace in files (toggle)" },
+      { "<leader>sr", function() require("spectre").toggle() end, desc = "Search And Replace In Files (toggle)" },
     },
   },
 
@@ -125,7 +125,7 @@ return {
       -- find
       vim.keymap.set("n", "<leader>ff", require("diaoul.util.pick").files, { desc = "Find Files" })
       vim.keymap.set("n", "<leader>fF", function() require("diaoul.util.pick").files({ cwd = require("telescope.utils").buffer_dir() }) end, { desc = "Find Files (cwd)" })
-      vim.keymap.set("n", "<leader>fc", function() require("diaoul.util.pick").files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find config files" })
+      vim.keymap.set("n", "<leader>fc", function() require("diaoul.util.pick").files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Find Config Files" })
       vim.keymap.set("n", "<leader>fr", require("telescope.builtin").oldfiles, { desc = "Find Recent" })
       vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, { desc = "Find Buffers" })
       vim.keymap.set("n", "<leader>fg", require("telescope.builtin").git_files, { desc = "Find Git Files" })
@@ -158,29 +158,37 @@ return {
   -- Which-key
   {
     "folke/which-key.nvim",
-    config = function()
-      local wk = require("which-key")
-      wk.setup()
-      wk.register({
+    event = "VeryLazy",
+    opts = {
+      spec = {
         mode = { "n", "v" },
-        ["g"] = { name = "+Goto" },
-        ["s"] = { name = "+Surround" },
-        ["]"] = { name = "+Next" },
-        ["["] = { name = "+Prev" },
-        ["<leader>b"] = { name = "+Buffer" },
-        ["<leader>c"] = { name = "+Code" },
-        ["<leader>d"] = { name = "+Debug" },
-        ["<leader>f"] = { name = "+File/Find" },
-        ["<leader>g"] = { name = "+Git" },
-        ["<leader>gh"] = { name = "+Hunks" },
-        ["<leader>q"] = { name = "+Quit/Session" },
-        ["<leader>s"] = { name = "+Search" },
-        ["<leader>t"] = { name = "+Test" },
-        ["<leader>u"] = { name = "+UI" },
-        ["<leader>w"] = { name = "+Windows/Workspace" },
-        ["<leader>x"] = { name = "+Diagnostics/Quickfix" },
-      })
-    end,
+        { "<leader>b", group = "Buffer" },
+        { "<leader>c", group = "Code" },
+        { "<leader>d", group = "Debug" },
+        { "<leader>f", group = "File/Find" },
+        { "<leader>g", group = "Git" },
+        { "<leader>h", group = "Hunk" },
+        { "<leader>q", group = "Quit/Session" },
+        { "<leader>s", group = "Search" },
+        { "<leader>t", group = "Test" },
+        { "<leader>u", group = "UI" },
+        { "<leader>w", group = "Windows/Workspace" },
+        { "<leader>x", group = "Diagnostics/Quickfix" },
+        { "[", group = "Prev" },
+        { "]", group = "Next" },
+        { "g", group = "Goto" },
+        { "s", group = "Surround" },
+      },
+    },
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
+    },
   },
 
   -- Git signs in gutter
@@ -369,8 +377,8 @@ return {
     config = true,
     -- stylua: ignore
     keys = {
-      { "]t",         function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
-      { "[t",         function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+      { "]t",         function() require("todo-comments").jump_next() end, desc = "Next Todo Comment" },
+      { "[t",         function() require("todo-comments").jump_prev() end, desc = "Previous Todo Comment" },
       { "<leader>xt", "<cmd>TodoTrouble<cr>",                              desc = "Todo (Trouble)" },
       { "<leader>xT", "<cmd>TodoTrouble keywords=TODO,FIX,FIXME<cr>",      desc = "Todo/Fix/Fixme (Trouble)" },
       { "<leader>st", "<cmd>TodoTelescope<cr>",                            desc = "Todo" },

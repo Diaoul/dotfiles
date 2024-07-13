@@ -165,17 +165,17 @@ return {
     event = "VeryLazy",
     keys = {
       -- shortcuts
-      { "<s-left>", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous buffer" },
-      { "<s-right>", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
-      { "<s-up>", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
-      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous buffer" },
-      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
+      { "<s-left>", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous Buffer" },
+      { "<s-right>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+      { "<s-up>", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
+      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous Buffer" },
+      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
       -- buffer
-      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle pin" },
-      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete non-pinned buffers" },
-      { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete other buffers" },
-      { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete buffers to the right" },
-      { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete buffers to the left" },
+      { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
+      { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
+      { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
+      { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers To The Right" },
+      { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers To The Left" },
     },
     opts = {
       options = {
