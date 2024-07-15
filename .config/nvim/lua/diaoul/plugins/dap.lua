@@ -65,7 +65,8 @@ return {
             if tok[1] ~= "whitespace" then
               if tok[1] == "string" then
                 -- cut off quotes and replace escaped quotes
-                table.insert(t, tok[2]:sub(2, -2):gsub("\\(['\"])", "%1"))
+                local v, _ = tok[2]:sub(2, -2):gsub("\\(['\"])", "%1")
+                table.insert(t, v)
               else
                 table.insert(t, tok[2])
               end
