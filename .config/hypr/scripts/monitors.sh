@@ -135,7 +135,7 @@ case "$1" in
         ;;
     listen)
         echo "Listening to monitor events..."
-        socat - UNIX-CONNECT:/tmp/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock | while read -r line; do handle_event "$line"; done
+        socat -U - "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" | while read -r line; do handle_event "$line"; done
         ;;
     help)
         cli_help
