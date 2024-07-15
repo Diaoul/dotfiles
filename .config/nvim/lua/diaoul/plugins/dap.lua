@@ -30,11 +30,9 @@ return {
           dapui.close()
         end
 
-        -- string parser with quote escaping capabilities
-        -- inspired by http://lua-users.org/wiki/LpegRecipes
-        --- @param input string
+        --- @param args string
         --- @return table
-        local function split(input)
+        local function split_args(args)
           local lpeg = vim.lpeg
 
           local P, S, C, Cc, Ct = lpeg.P, lpeg.S, lpeg.C, lpeg.Cc, lpeg.Ct
@@ -56,7 +54,7 @@ return {
           local pattern = Ct((string + whitespace + word) ^ 0)
 
           local t = {}
-          local tokens = lpeg.match(pattern, input)
+          local tokens = lpeg.match(pattern, args)
 
           -- somehow, this did not work out
           if tokens == nil or type(tokens) == "integer" then
@@ -84,7 +82,7 @@ return {
 
           for k, v in pairs(vim.deepcopy(config)) do
             if k == "args" and type(v) == "string" then
-              c[k] = split(v)
+              c[k] = split_args(v)
             else
               c[k] = v
             end
