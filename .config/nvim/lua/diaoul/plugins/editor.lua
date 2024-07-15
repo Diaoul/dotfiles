@@ -100,7 +100,7 @@ return {
         },
         pickers = {
           live_grep = {
-            additional_args = { "--hidden", "--glob", "!.git/" },
+            additional_args = { "--hidden", "--glob", "!.git/", "--trim" },
           },
           lsp_references = {
             path_display = { "smart", { truncate = 10 } },
