@@ -91,3 +91,24 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     vim.fn.mkdir(vim.fn.fnamemodify(file, ":p:h"), "p")
   end,
 })
+
+-- QMK dynamic configurations
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = augroup("qmk_corne"),
+  pattern = "*/corne/*/keymap.c",
+  callback = function()
+    require("qmk").setup({
+      name = "LAYOUT_split_3x6_3",
+      auto_format_pattern = "*/corne/*/keymap.c",
+      comment_preview = {
+        position = "none",
+      },
+      layout = {
+        "x x x x x x _ _ _ x x x x x x",
+        "x x x x x x _ _ _ x x x x x x",
+        "x x x x x x _ _ _ x x x x x x",
+        "_ _ _ _ x x x _ x x x _ _ _ _",
+      },
+    })
+  end,
+})

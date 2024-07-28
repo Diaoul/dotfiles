@@ -25,49 +25,54 @@ end, {
 })
 
 return {
-  "stevearc/conform.nvim",
-  event = { "BufWritePre" },
-  cmd = { "ConformInfo" },
-  keys = {
-    {
-      "<leader>cf",
-      function()
-        require("conform").format({ async = true, lsp_fallback = true })
-      end,
-      mode = { "n", "v" },
-      desc = "Format Buffer",
-    },
-  },
-  opts = {
-    formatters_by_ft = {
-      lua = { "stylua" },
-      python = { "ruff_format" },
-      javascript = { "prettier" },
-      javascriptreact = { "prettier" },
-      typescript = { "prettier" },
-      typescriptreact = { "prettier" },
-      vue = { "prettier" },
-      css = { "prettier" },
-      scss = { "prettier" },
-      less = { "prettier" },
-      html = { "prettier" },
-      json = { "prettier" },
-      jsonc = { "prettier" },
-      yaml = { "prettier" },
-      markdown = { "prettier" },
-      ["_"] = { "trim_whitespace" },
-    },
-    format_on_save = function(bufnr)
-      if not util.enabled(bufnr) then
-        return
-      end
-      return { timeout_ms = 500, lsp_fallback = true }
-    end,
-
-    formatters = {
-      shfmt = {
-        prepend_args = { "-i", "2" },
+  {
+    "stevearc/conform.nvim",
+    event = { "BufWritePre" },
+    cmd = { "ConformInfo" },
+    keys = {
+      {
+        "<leader>cf",
+        function()
+          require("conform").format({ async = true, lsp_fallback = true })
+        end,
+        mode = { "n", "v" },
+        desc = "Format Buffer",
       },
     },
+    opts = {
+      formatters_by_ft = {
+        lua = { "stylua" },
+        python = { "ruff_format" },
+        javascript = { "prettier" },
+        javascriptreact = { "prettier" },
+        typescript = { "prettier" },
+        typescriptreact = { "prettier" },
+        vue = { "prettier" },
+        css = { "prettier" },
+        scss = { "prettier" },
+        less = { "prettier" },
+        html = { "prettier" },
+        json = { "prettier" },
+        jsonc = { "prettier" },
+        yaml = { "prettier" },
+        markdown = { "prettier" },
+        ["_"] = { "trim_whitespace" },
+      },
+      format_on_save = function(bufnr)
+        if not util.enabled(bufnr) then
+          return
+        end
+        return { timeout_ms = 500, lsp_fallback = true }
+      end,
+
+      formatters = {
+        shfmt = {
+          prepend_args = { "-i", "2" },
+        },
+      },
+    },
+  },
+  {
+    "codethread/qmk.nvim",
   },
 }
