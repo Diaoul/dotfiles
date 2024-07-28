@@ -12,7 +12,11 @@ return {
       servers = {
         ansiblels = {},
         bashls = {},
-        clangd = {},
+        clangd = {
+          capabilities = {
+            offsetEncoding = { "utf-16" },
+          },
+        },
         dockerls = {},
         jsonls = {},
         lua_ls = {
