@@ -92,7 +92,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
   end,
 })
 
--- QMK dynamic configurations
+-- qmk.nvim dynamic configurations
 vim.api.nvim_create_autocmd("BufEnter", {
   group = augroup("qmk_corne"),
   pattern = "*/corne/*/keymap.c",
@@ -108,6 +108,44 @@ vim.api.nvim_create_autocmd("BufEnter", {
         "x x x x x x _ _ _ x x x x x x",
         "x x x x x x _ _ _ x x x x x x",
         "_ _ _ _ x x x _ x x x _ _ _ _",
+      },
+    })
+  end,
+})
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = augroup("qmk_skeletyl"),
+  pattern = "*/skeletyl/*/keymap.c",
+  callback = function()
+    require("qmk").setup({
+      name = "LAYOUT_split_3x5_3",
+      auto_format_pattern = "*/skeletyl/*/keymap.c",
+      comment_preview = {
+        position = "none",
+      },
+      layout = {
+        "x x x x x _ _ _ x x x x x",
+        "x x x x x _ _ _ x x x x x",
+        "x x x x x _ _ _ x x x x x",
+        "_ _ _ x x x _ x x x _ _ _",
+      },
+    })
+  end,
+})
+vim.api.nvim_create_autocmd("BufEnter", {
+  group = augroup("qmk_kyria"),
+  pattern = "*/kyria/*/keymap.c",
+  callback = function()
+    require("qmk").setup({
+      name = "LAYOUT_split_3x6_5",
+      auto_format_pattern = "*/kyria/*/keymap.c",
+      comment_preview = {
+        position = "none",
+      },
+      layout = {
+        "x x x x x x _ _ _ _ _ x x x x x x",
+        "x x x x x x _ _ _ _ _ x x x x x x",
+        "x x x x x x x x _ x x x x x x x x",
+        "_ _ _ x x x x x _ x x x x x _ _ _",
       },
     })
   end,
