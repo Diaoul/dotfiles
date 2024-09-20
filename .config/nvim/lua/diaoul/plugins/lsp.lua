@@ -37,7 +37,7 @@ return {
         html = {},
         rust_analyzer = {},
         taplo = {},
-        tsserver = {},
+        ts_ls = {},
         yamlls = {
           settings = {
             yaml = {
