@@ -339,11 +339,18 @@ return {
 
   -- Icons
   {
-    "nvim-tree/nvim-web-devicons",
+    "echasnovski/mini.icons",
+    opts = {},
     lazy = true,
-    opts = {
-      color_icons = true,
+    specs = {
+      { "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
     },
+    init = function()
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
   },
 
   -- UI components
