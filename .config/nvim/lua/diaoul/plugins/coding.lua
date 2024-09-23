@@ -83,7 +83,9 @@ return {
       local luasnip = require("luasnip")
 
       -- highlight for ghost text
-      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+      local cmpghosttext_hl = vim.api.nvim_get_hl_by_name("Comment", true)
+      cmpghosttext_hl.italic = false
+      vim.api.nvim_set_hl(0, "CmpGhostText", cmpghosttext_hl)
 
       -- configuration
       return {
