@@ -150,9 +150,12 @@ return {
           { name = "buffer" },
         }),
         formatting = {
-          format = lspkind.cmp_format({
-            symbol_map = require("diaoul.config").icons.kinds,
-          }),
+          format = function(_, vim_item)
+            local icon, hl = MiniIcons.get("lsp", vim_item.kind)
+            vim_item.kind = icon .. " " .. vim_item.kind
+            vim_item.kind_hl_group = hl
+            return vim_item
+          end,
         },
         experimental = {
           -- disabled as it conflicts with copilot
