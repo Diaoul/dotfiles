@@ -1,5 +1,33 @@
 return {
-  -- File explorer
+  -- File explorers
+  {
+    "stevearc/oil.nvim",
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {
+      lsp_file_methods = {
+        timeout_ms = 3000,
+      },
+    },
+    keys = {
+      {
+        "<leader>fo",
+        function()
+          require("oil").toggle_float()
+        end,
+        desc = "Explorer Oil",
+      },
+      {
+        "<leader>fO",
+        function()
+          require("oil").toggle_float(vim.uv.cwd())
+        end,
+        desc = "Explorer Oil (cwd)",
+      },
+      { "<leader>o", "<leader>fo", desc = "Explorer Oil", remap = true },
+      { "<leader>O", "<leader>fO", desc = "Explorer Oil (cwd)", remap = true },
+    },
+  },
   {
     "nvim-neo-tree/neo-tree.nvim",
     cmd = "Neotree",
