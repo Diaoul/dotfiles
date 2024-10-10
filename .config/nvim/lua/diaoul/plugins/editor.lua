@@ -68,8 +68,10 @@ return {
     end,
     opts = {
       sources = { "filesystem", "buffers", "git_status" },
+      open_files_do_not_replace_types = { "terminal", "Trouble", "trouble", "qf", "Outline" },
       filesystem = {
         follow_current_file = { enabled = true },
+        use_libuv_file_watcher = true,
         filtered_items = {
           visible = true,
           hide_dotfiles = false,
@@ -81,6 +83,12 @@ return {
           with_expanders = true,
           expander_collapsed = require("diaoul.config").icons.tree.collapsed,
           expander_expanded = require("diaoul.config").icons.tree.expanded,
+        },
+        git_status = {
+          symbols = {
+            unstaged = "󰄱",
+            staged = "󰱒",
+          },
         },
       },
     },
@@ -402,7 +410,7 @@ return {
     "folke/todo-comments.nvim",
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     cmd = { "TodoTrouble", "TodoTelescope" },
-    config = true,
+    opts = {},
     -- stylua: ignore
     keys = {
       { "]t",         function() require("todo-comments").jump_next() end, desc = "Next Todo Comment" },

@@ -34,6 +34,10 @@ return {
           dismiss = "<M-e>",
         },
       },
+      filetypes = {
+        markdown = true,
+        help = true,
+      },
     },
   },
 
@@ -107,8 +111,8 @@ return {
         sources = cmp.config.sources({
           { name = "copilot" },
           { name = "nvim_lsp" },
-          { name = "snippets" },
           { name = "lazydev" },
+          { name = "snippets" },
           { name = "path" },
         }, {
           { name = "buffer" },
