@@ -122,7 +122,7 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",
-    branch = "0.1.x",
+    version = false, -- telescope did only one release, so use HEAD for now
     dependencies = {
       {
         "nvim-telescope/telescope-fzf-native.nvim",
@@ -132,18 +132,25 @@ return {
     config = function()
       -- setup telescope
       local actions = require("telescope.actions")
-      local trouble = require("trouble.sources.telescope")
+      local open_with_trouble = function(...)
+        return require("trouble.sources.telescope").open(...)
+      end
 
       require("telescope").setup({
         defaults = {
-          path_display = {
-            truncate = 2,
-          },
+          prompt_prefix = " ",
+          selection_caret = " ",
           mappings = {
             i = {
-              ["<Esc>"] = actions.close,
-              ["<c-t>"] = trouble.open_with_trouble,
-              ["<a-t>"] = trouble.open_selected_with_trouble,
+              ["<c-t>"] = open_with_trouble,
+              ["<a-t>"] = open_with_trouble,
+              ["<C-Down>"] = actions.cycle_history_next,
+              ["<C-Up>"] = actions.cycle_history_prev,
+              ["<C-f>"] = actions.preview_scrolling_down,
+              ["<C-b>"] = actions.preview_scrolling_up,
+            },
+            n = {
+              ["q"] = actions.close,
             },
           },
           color_devicons = false,
@@ -157,6 +164,9 @@ return {
           },
         },
       })
+
+      -- enable extensions
+      pcall(require("telescope").load_extension, "fzf")
 
       local function get_visual()
         local _, ls, cs = unpack(vim.fn.getpos("v"))
