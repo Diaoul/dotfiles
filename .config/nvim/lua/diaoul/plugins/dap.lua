@@ -11,15 +11,17 @@ return {
       },
       opts = {},
       config = function(_, opts)
+        local dap = require("dap")
+        local daputils = require("dap.utils")
+        local dapui = require("dapui")
+
         -- setup dap config by VSCode launch.json file
         require("dap.ext.vscode").load_launchjs()
 
         -- setup dapui
-        local dapui = require("dapui")
         dapui.setup(opts)
 
         -- open and close windows automatically
-        local dap = require("dap")
         dap.listeners.after.event_initialized["dapui_config"] = function()
           dapui.open()
         end
@@ -30,52 +32,6 @@ return {
           dapui.close()
         end
 
-        --- @param args string
-        --- @return table
-        local function split_args(args)
-          local lpeg = vim.lpeg
-
-          local P, S, C, Cc, Ct = lpeg.P, lpeg.S, lpeg.C, lpeg.Cc, lpeg.Ct
-
-          --- @param id string
-          --- @param patt vim.lpeg.Capture
-          --- @return vim.lpeg.Pattern
-          local function token(id, patt)
-            return Ct(Cc(id) * C(patt))
-          end
-
-          local single_quoted = P("'") * ((1 - S("'\r\n\f\\")) + (P("\\") * 1)) ^ 0 * "'"
-          local double_quoted = P('"') * ((1 - S('"\r\n\f\\')) + (P("\\") * 1)) ^ 0 * '"'
-
-          local whitespace = token("whitespace", S("\r\n\f\t ") ^ 1)
-          local word = token("word", (1 - S("' \r\n\f\t\"")) ^ 1)
-          local string = token("string", single_quoted + double_quoted)
-
-          local pattern = Ct((string + whitespace + word) ^ 0)
-
-          local t = {}
-          local tokens = lpeg.match(pattern, args)
-
-          -- somehow, this did not work out
-          if tokens == nil or type(tokens) == "integer" then
-            return t
-          end
-
-          for _, tok in ipairs(tokens) do
-            if tok[1] ~= "whitespace" then
-              if tok[1] == "string" then
-                -- cut off quotes and replace escaped quotes
-                local v, _ = tok[2]:sub(2, -2):gsub("\\(['\"])", "%1")
-                table.insert(t, v)
-              else
-                table.insert(t, tok[2])
-              end
-            end
-          end
-
-          return t
-        end
-
         -- add debugpy capability to specify args as string
         dap.listeners.on_config["debugpy"] = function(config)
           -- copy the config and split the args if it is a string
@@ -83,7 +39,7 @@ return {
 
           for k, v in pairs(vim.deepcopy(config)) do
             if k == "args" and type(v) == "string" then
-              c[k] = split_args(v)
+              c[k] = daputils.splitstr(v)
             else
               c[k] = v
             end
@@ -112,6 +68,7 @@ return {
         automatic_installation = true,
       },
     },
+
     -- python
     {
       "mfussenegger/nvim-dap-python",

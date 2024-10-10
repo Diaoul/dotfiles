@@ -80,7 +80,7 @@ return {
 
       -- configuration
       return {
-        auto_brackets = {}, -- configure any filetype to auto add brackets
+        auto_brackets = { "python" }, -- configure any filetype to auto add brackets
         completion = {
           completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
         },
