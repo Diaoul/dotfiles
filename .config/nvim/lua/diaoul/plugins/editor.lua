@@ -88,11 +88,25 @@ return {
 
   -- Search and replace in multiple files
   {
-    "nvim-pack/nvim-spectre",
-    cmd = "Spectre",
-    -- stylua: ignore
+    "MagicDuck/grug-far.nvim",
+    opts = { headerMaxWidth = 80 },
+    cmd = "GrugFar",
     keys = {
-      { "<leader>sr", function() require("spectre").toggle() end, desc = "Search And Replace In Files (toggle)" },
+      {
+        "<leader>sr",
+        function()
+          local grug = require("grug-far")
+          local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
+          grug.open({
+            transient = true,
+            prefills = {
+              filesFilter = ext and ext ~= "" and "*." .. ext or nil,
+            },
+          })
+        end,
+        mode = { "n", "v" },
+        desc = "Search and Replace",
+      },
     },
   },
 
