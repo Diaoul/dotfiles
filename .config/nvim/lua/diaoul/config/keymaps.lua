@@ -115,9 +115,6 @@ map("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Previous Warning" })
 -- toggle options
 -- map("n", "<leader>uf", function() Util.format.toggle() end, { desc = "Toggle auto format (global)" })
 -- map("n", "<leader>uF", function() Util.format.toggle(true) end, { desc = "Toggle auto format (buffer)" })
-map("n", "<leader>uh", function()
-  vim.lsp.inlay_hint.enable(0, nil)
-end, { desc = "Toggle Inlay Hints" })
 
 -- Quit
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })

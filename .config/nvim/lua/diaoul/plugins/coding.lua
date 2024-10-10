@@ -1,4 +1,19 @@
 return {
+  -- Neovim completions
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    cmd = "LazyDev",
+    opts = {
+      library = {
+        { path = "luvit-meta/library", words = { "vim%.uv" } },
+        { path = "lazy.nvim", words = { "LazyVim" } },
+      },
+    },
+  },
+  -- Manage libuv types with lazy. Plugin will never be loaded
+  { "Bilal2453/luvit-meta", lazy = true },
+
   -- Copilot
   {
     "zbirenbaum/copilot.lua",
@@ -21,38 +36,6 @@ return {
       },
     },
   },
-  -- Snippets
-  {
-    "L3MON4D3/LuaSnip",
-    build = "make install_jsregexp",
-    dependencies = {
-      "rafamadriz/friendly-snippets",
-      config = function()
-        require("luasnip.loaders.from_vscode").lazy_load()
-      end,
-    },
-    -- TODO: use ext_opts to customize the colors when in snippet
-    keys = {
-      {
-        "<C-e>",
-        function()
-          if require("luasnip").expand_or_locally_jumpable() then
-            require("luasnip").expand_or_jump()
-          end
-        end,
-        mode = { "i", "s" },
-      },
-      {
-        "<C-n>",
-        function()
-          if require("luasnip").jumpable(-1) then
-            require("luasnip").jump(-1)
-          end
-        end,
-        mode = { "i", "s" },
-      },
-    },
-  },
 
   -- Auto completion
   -- Expected behavior:
@@ -71,90 +54,80 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "saadparwaiz1/cmp_luasnip",
-      "onsails/lspkind-nvim",
+      {
+        "garymjr/nvim-snippets",
+        opts = {
+          friendly_snippets = true,
+        },
+        dependencies = { "rafamadriz/friendly-snippets" },
+      },
       -- disabled in favor of copilot
       -- { "zbirenbaum/copilot-cmp", dependencies = "copilot.lua", opts = {} },
     },
     ---@return cmp.ConfigSchema
     opts = function()
       local cmp = require("cmp")
-      local lspkind = require("lspkind")
-      local luasnip = require("luasnip")
 
       -- highlight for ghost text
-      local cmpghosttext_hl = vim.api.nvim_get_hl_by_name("Comment", true)
-      cmpghosttext_hl.italic = false
-      vim.api.nvim_set_hl(0, "CmpGhostText", cmpghosttext_hl)
+      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+
+      -- configure auto-select
+      local auto_select = false
 
       -- configuration
       return {
-        -- automatically select the first item in the menu, disabled for copilot
-        -- completion = {
-        --   completeopt = "menu,menuone,noinsert",
-        -- },
+        auto_brackets = {}, -- configure any filetype to auto add brackets
+        completion = {
+          completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
+        },
+        preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
+        mapping = {
+          ["<C-Space>"] = { i = cmp.mapping.complete() },
+          ["<Down>"] = { i = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }) },
+          ["<Up>"] = { i = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }) },
+          ["<C-b>"] = { i = cmp.mapping.scroll_docs(-4) },
+          ["<C-f>"] = { i = cmp.mapping.scroll_docs(4) },
+          ["<C-q>"] = { i = cmp.mapping.abort() },
+          ["<CR>"] = { i = cmp.mapping.confirm({ select = auto_select }) },
+          ["<S-CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace }),
+          ["<C-CR>"] = function(fallback)
+            cmp.abort()
+            fallback()
+          end,
+          ["<Tab>"] = cmp.mapping(function(fallback)
+            if require("copilot.suggestion").is_visible() then
+              require("copilot.suggestion").accept()
+            elseif cmp.visible() and cmp.get_active_entry() then
+              cmp.complete({ select = true })
+            else
+              fallback()
+            end
+          end, { "i", "s" }),
+        },
+        sources = cmp.config.sources({
+          { name = "copilot" },
+          { name = "nvim_lsp" },
+          { name = "snippets" },
+          { name = "lazydev" },
+          { name = "path" },
+        }, {
+          { name = "buffer" },
+        }),
         snippet = {
           expand = function(args)
-            luasnip.lsp_expand(args.body)
+            vim.snippet.expand(args.body)
           end,
         },
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
-        mapping = {
-          ["<C-Space>"] = { i = cmp.mapping.complete() },
-          ["<Down>"] = { i = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }) },
-          ["<Up>"] = { i = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }) },
-          ["<C-b>"] = { i = cmp.mapping.scroll_docs(-4) },
-          ["<C-f>"] = { i = cmp.mapping.scroll_docs(4) },
-          ["<C-q>"] = { i = cmp.mapping.abort() },
-          ["<CR>"] = { i = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false }) },
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if require("copilot.suggestion").is_visible() then
-              require("copilot.suggestion").accept()
-            elseif cmp.visible() and cmp.get_active_entry() then
-              cmp.complete({ behavior = cmp.ConfirmBehavior.Replace, select = true })
-            -- disabled to use default luasnip mappings
-            -- elseif luasnip.expand_or_jumpable() then
-            --   luasnip.expand_or_jump()
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-          -- disabled to use default luasnip mappings
-          -- ["<S-Tab>"] = cmp.mapping(function(fallback)
-          --   if cmp.visible() then
-          --     cmp.select_prev_item()
-          --   elseif luasnip.jumpable(-1) then
-          --     luasnip.jump(-1)
-          --   else
-          --     fallback()
-          --   end
-          -- end, { "i", "s" }),
-        },
-        sources = cmp.config.sources({
-          { name = "copilot" },
-          { name = "nvim_lsp" },
-          {
-            name = "luasnip",
-            entry_filter = function()
-              local context = require("cmp.config.context")
-              -- disable luasnip in strings
-              return not context.in_treesitter_capture("string") and not context.in_syntax_group("String")
-            end,
-          },
-          { name = "buffer" },
-          { name = "path" },
-        }, {
-          { name = "buffer" },
-        }),
         formatting = {
-          format = function(_, vim_item)
-            local icon, hl = MiniIcons.get("lsp", vim_item.kind)
-            vim_item.kind = icon .. " " .. vim_item.kind
-            vim_item.kind_hl_group = hl
-            return vim_item
+          format = function(_, item)
+            local icon, hl = MiniIcons.get("lsp", item.kind)
+            item.kind = icon .. " " .. item.kind
+            item.kind_hl_group = hl
+            return item
           end,
         },
         experimental = {
@@ -184,24 +157,9 @@ return {
 
   -- Comments
   {
-    "JoosepAlviste/nvim-ts-context-commentstring",
-    lazy = true,
-    opts = {
-      enable_autocmd = false, -- to speed up loading, see mini.comment below
-    },
-  },
-  {
-    "echasnovski/mini.comment",
+    "folke/ts-comments.nvim",
     event = "VeryLazy",
-    opts = {
-      -- enable ts context commentstring (from above)
-      -- see https://github.com/JoosepAlviste/nvim-ts-context-commentstring/wiki/Integrations#minicomment
-      options = {
-        custom_commentstring = function()
-          return require("ts_context_commentstring.internal").calculate_commentstring() or vim.bo.commentstring
-        end,
-      },
-    },
+    opts = {},
   },
 
   -- Better text-objects
@@ -213,6 +171,7 @@ return {
       -- see https://github.com/nvim-treesitter/nvim-treesitter-textobjects#text-objects-select
       local ai = require("mini.ai")
       return {
+        n_lines = 500,
         custom_textobjects = {
           o = ai.gen_spec.treesitter({ -- code block
             a = { "@block.outer", "@conditional.outer", "@loop.outer" },

@@ -306,25 +306,6 @@ return {
     },
   },
 
-  -- Automatically highlights other instances of the word under your cursor.
-  -- This works with LSP, Treesitter, and regexp matching to find the other
-  -- instances.
-  {
-    "RRethy/vim-illuminate",
-    event = { "BufReadPost", "BufWritePost", "BufNewFile" },
-    opts = {
-      delay = 200,
-    },
-    config = function(_, opts)
-      require("illuminate").configure(opts)
-
-      -- mappings
-      -- stylua: ignore
-      vim.keymap.set("n", "]]", require("illuminate").goto_next_reference, { desc = "Next Reference" })
-      vim.keymap.set("n", "[[", require("illuminate").goto_prev_reference, { desc = "Previous Reference" })
-    end,
-  },
-
   -- Buffer remove
   {
     "echasnovski/mini.bufremove",

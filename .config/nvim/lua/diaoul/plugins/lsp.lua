@@ -3,12 +3,12 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      { "folke/neodev.nvim", opts = {} },
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
     },
     opts = {
-      -- server configuration
+      -- LSP Server Settings
+      ---@type lspconfig.options
       servers = {
         ansiblels = {},
         bashls = {},
@@ -58,14 +58,8 @@ return {
 
       -- lsp and buffer local mappings
       vim.api.nvim_create_autocmd("LspAttach", {
-        group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
+        group = vim.api.nvim_create_augroup("lsp_attach", { clear = true }),
         callback = function(event)
-          local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client.name == "ruff" then
-            -- disable hover in favor of Pyright
-            client.server_capabilities.hoverProvider = false
-          end
-
           -- mappings
           local map = function(modes, keys, func, desc)
             vim.keymap.set(modes, keys, func, { buffer = event.buf, desc = desc })
@@ -83,13 +77,50 @@ return {
           map("n", "gK", vim.lsp.buf.signature_help, "Signature Help")
           map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature Help")
           -- stylua: ignore end
+
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+          -- disable hover for ruff
+          if client and client.name == "ruff" then
+            client.server_capabilities.hoverProvider = false
+          end
+
+          -- highlight word on CursorHold
+          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+            local highlight_augroup = vim.api.nvim_create_augroup("lsp_highlight", { clear = false })
+            vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+              buffer = event.buf,
+              group = highlight_augroup,
+              callback = vim.lsp.buf.document_highlight,
+            })
+
+            vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+              buffer = event.buf,
+              group = highlight_augroup,
+              callback = vim.lsp.buf.clear_references,
+            })
+
+            vim.api.nvim_create_autocmd("LspDetach", {
+              group = vim.api.nvim_create_augroup("lsp_detach", { clear = true }),
+              callback = function(event2)
+                vim.lsp.buf.clear_references()
+                vim.api.nvim_clear_autocmds({ group = "lsp_highlight", buffer = event2.buf })
+              end,
+            })
+          end
+
+          -- toggle inlay hints
+          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+            map("n", "<leader>uh", function()
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+            end, "Toggle Inlay Hints")
+          end
         end,
       })
 
       -- configuration
       require("mason").setup()
       require("mason-lspconfig").setup()
-      require("neodev").setup()
 
       -- add cmp capabilities
       local capabilities = vim.lsp.protocol.make_client_capabilities()
