@@ -50,12 +50,11 @@ vim.api.nvim_create_autocmd("FileType", {
   group = augroup("close_with_q"),
   pattern = {
     "PlenaryTestPopup",
+    "grug-far",
     "help",
     "lspinfo",
-    "man",
     "notify",
     "qf",
-    "query",
     "spectre_panel",
     "startuptime",
     "tsplayground",
@@ -63,20 +62,40 @@ vim.api.nvim_create_autocmd("FileType", {
     "checkhealth",
     "neotest-summary",
     "neotest-output-panel",
+    "dbout",
+    "gitsigns-blame",
   },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
-    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true, desc = "Quit buffer" })
+  end,
+})
+
+-- Make it easier to close man-files when opened inline
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("man_unlisted"),
+  pattern = { "man" },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
   end,
 })
 
 -- Wrap and check for spell in text filetypes
 vim.api.nvim_create_autocmd("FileType", {
   group = augroup("wrap_spell"),
-  pattern = { "gitcommit", "markdown" },
+  pattern = { "text", "plaintex", "typst", "gitcommit", "markdown" },
   callback = function()
     vim.opt_local.wrap = true
     vim.opt_local.spell = true
+  end,
+})
+
+-- Fix conceallevel for json files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = augroup("json_conceal"),
+  pattern = { "json", "jsonc", "json5" },
+  callback = function()
+    vim.opt_local.conceallevel = 0
   end,
 })
 
