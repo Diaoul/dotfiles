@@ -109,9 +109,9 @@ return {
           end, { "i", "s" }),
         },
         sources = cmp.config.sources({
+          { name = "lazydev", group_index = 0 },
           { name = "copilot" },
           { name = "nvim_lsp" },
-          { name = "lazydev" },
           { name = "snippets" },
           { name = "path" },
         }, {
