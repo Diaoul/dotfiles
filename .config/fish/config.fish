@@ -26,6 +26,9 @@ end
 # direnv
 direnv hook fish | source
 
+# mise-en-place
+mise activate fish | source
+
 # thefuck
 thefuck --alias | source
 

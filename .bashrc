@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # exports
 export EDITOR='nvim'
-export HISTCONTROL='ignoreboth';
+export HISTCONTROL='ignoreboth'
 export HISTSIZE='10000'
 export HISTFILESIZE='20000'
 
@@ -57,13 +57,15 @@ alias grep='rg'
 alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
 
 # pyenv
-if command -v pyenv &> /dev/null
-then
+if command -v pyenv &>/dev/null; then
   eval "$(pyenv init -)"
 fi
 
 # direnv
 eval "$(direnv hook bash)"
+
+# mise-en-place
+eval "$(mise activate bash)"
 
 # thefuck
 eval "$(thefuck --alias)"
