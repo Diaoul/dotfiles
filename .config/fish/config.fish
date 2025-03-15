@@ -1,17 +1,21 @@
 #!/usr/bin/fish
-# cursor
-# disabled to fix https://github.com/fish-shell/fish-shell/issues/3481
-function fish_vi_cursor; end
-# set fish_cursor_default block blink
-# set fish_cursor_insert line blink
-# set fish_cursor_replace_one underscore blink
-# set fish_cursor_visual block
-
+#
 # key bindings
-if ! set -q NVIM_LISTEN_ADDRESS
-    fish_vi_key_bindings
+function fish_user_key_bindings
+  fish_default_key_bindings -M insert
+
+  if ! set -q NVIM_LISTEN_ADDRESS
+    fish_vi_key_bindings --no-erase insert
+  end
 end
-bind -M insert \b backward-kill-word
+
+# cursor
+set fish_cursor_default block
+set fish_cursor_insert line
+set fish_cursor_replace_one underscore
+set fish_cursor_replace underscore
+set fish_cursor_external line
+set fish_cursor_visual block
 
 # GPG
 set -gx GPG_TTY (tty)
@@ -49,9 +53,6 @@ abbr -a grep rg
 # fd
 abbr -a find fd
 
-# dog
-abbr -a dig dog
-
 # cat
 abbr -a cat bat
 
@@ -67,9 +68,8 @@ abbr -a ga git add
 abbr -a gaa git add -A
 abbr -a gau git add -u
 abbr -a gb git branch -v
-abbr -a gc git commit
+abbr -a --set-cursor gc 'git commit -m "%"'
 abbr -a gca git commit -a
-abbr -a gcm git commit -m
 abbr -a gcam git commit -am
 abbr -a gl git pull
 abbr -a gp git push
@@ -79,15 +79,16 @@ abbr -a glga glg --all
 abbr -a glgn glg '(git describe --tags --abbrev=0 @^)..@'
 
 # kubernetes
+abbr -a k kubectl
 abbr -a kx kubectx
 abbr -a kn kubens
-abbr -a k kubectl
 abbr -a ka kubectl apply
 abbr -a kaf kubectl apply -f
 abbr -a kd kubectl describe
 abbr -a kdel kubectl delete
 abbr -a kg kubectl get
 abbr -a kgp kubectl get pods
+abbr -a kgn kubectl get nodes
 abbr -a kga kubectl get -A
 abbr -a kex kubectl exec -it
 
