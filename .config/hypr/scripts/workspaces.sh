@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Maintain 10 persistent workspaces across multiple monitors
+# This script assumes that the monitors are in horizontal layout and already
+# correctly setup
+
 declare -i last_called=0
 declare -i throttle_by=4
 
@@ -16,7 +20,7 @@ declare -i throttle_by=4
   last_called=$(date +%s)
 }
 
-function move_workspace() {
+function move() {
   workspaces_json="$1"
   id=$2
   monitor=$3
@@ -36,10 +40,7 @@ function move_workspace() {
   fi
 }
 
-function arrange_workspaces() {
-  # Maintain 10 persistent workspaces across multiple monitors
-  # This script assumes that the monitors are in horizontal layout and already
-  # correctly setup
+function arrange() {
   monitors_json=$(hyprctl monitors -j)
   workspaces_json=$(hyprctl workspaces -j)
 
@@ -51,24 +52,24 @@ function arrange_workspaces() {
   # assign and move workspaces
   if [[ "${#monitors[@]}" == 1 ]]; then
     for ((i = 10; i >= 1; i--)); do
-      move_workspace "$workspaces_json" $i "${monitors[0]}"
+      move "$workspaces_json" $i "${monitors[0]}"
     done
   elif [[ "${#monitors[@]}" == 2 ]]; then
     for ((i = 10; i >= 6; i--)); do
-      move_workspace "$workspaces_json" $i "${monitors[1]}"
+      move "$workspaces_json" $i "${monitors[1]}"
     done
     for ((i = 5; i >= 1; i--)); do
-      move_workspace "$workspaces_json" $i "${monitors[0]}"
+      move "$workspaces_json" $i "${monitors[0]}"
     done
   elif [[ "${#monitors[@]}" == 3 ]]; then
     for ((i = 10; i >= 8; i--)); do
-      move_workspace "$workspaces_json" $i "${monitors[2]}"
+      move "$workspaces_json" $i "${monitors[2]}"
     done
     for ((i = 7; i >= 4; i--)); do
-      move_workspace "$workspaces_json" $i "${monitors[1]}"
+      move "$workspaces_json" $i "${monitors[1]}"
     done
     for ((i = 3; i >= 1; i--)); do
-      move_workspace "$workspaces_json" $i "${monitors[0]}"
+      move "$workspaces_json" $i "${monitors[0]}"
     done
   else # more than 3 monitors...
     echo "Too many monitors"
@@ -89,22 +90,13 @@ function arrange_workspaces() {
 
 }
 
-function configure_monitors() {
-  # rely an kanshi for profile detection and output configuration
-  # see https://todo.sr.ht/~emersion/kanshi/54#event-235509
-  echo "Configuring monitors..."
-  kanshi >/dev/null 2>&1 &
-  sleep 1
-  killall kanshi
-}
-
 function handle_event() {
   if [[ ${1:0:12} == "monitoradded" ]]; then
     echo "Event detected: monitor added"
-    @throttle configure_monitors
+    @throttle arrange
   elif [[ ${1:0:14} == "monitorremoved" ]]; then
     echo "Event detected: monitor removed"
-    @throttle configure_monitors
+    @throttle arrange
   fi
 }
 
@@ -112,26 +104,18 @@ cli_help() {
   cli_name=${0##*/}
   echo "
 $cli_name
-Hyprland monitors control
+Hyprland workspaces control
 Usage: $cli_name [command]
 Commands:
-  configure_monitors    Configure monitors using kanshi
-  arrange_workspaces    Arrange workspaces on monitors
+  arrange   Arrange workspaces on monitors
   listen    Listen for hypr monitor events and arrange workspaces automatically
   help      Help
 "
 }
 
 case "$1" in
-initialize)
-  # configure_monitors
-  # arrange_workspaces
-  ;;
-configure_monitors)
-  # configure_monitors
-  ;;
-arrange_workspaces)
-  # arrange_workspaces
+arrange)
+  arrange
   ;;
 listen)
   echo "Listening to monitor events..."
