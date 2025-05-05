@@ -53,6 +53,7 @@ opt.updatetime = 250 -- Save swap file and trigger CursorHold
 opt.virtualedit = "block" -- Allow cursor to move where there is no text in visual block mode
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
+opt.winborder = "none" -- Default border style for all floating windows
 opt.wrap = false -- Line wrap
 opt.linebreak = true -- Break long lines smartly
 opt.breakindent = true -- Ident broken lines
