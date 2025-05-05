@@ -1,172 +1,19 @@
 return {
-  -- Neovim completions
+  -- auto pairs
   {
-    "folke/lazydev.nvim",
-    ft = "lua",
-    cmd = "LazyDev",
-    opts = {
-      library = {
-        { path = "luvit-meta/library", words = { "vim%.uv" } },
-        { path = "lazy.nvim", words = { "LazyVim" } },
-      },
-    },
-  },
-  -- Manage libuv types with lazy. Plugin will never be loaded
-  { "Bilal2453/luvit-meta", lazy = true },
-
-  -- Copilot
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter", -- not needed if using cmp
-    build = ":Copilot auth",
-    opts = {
-      panel = { enabled = false },
-      suggestion = {
-        enabled = true, -- set to false if using cmp
-        auto_trigger = true,
-        keymap = {
-          accept = false,
-          accept_word = false,
-          accept_line = false,
-          next = "<M-]>",
-          prev = "<M-[>",
-          dismiss = "<M-e>",
-        },
-      },
-      filetypes = {
-        markdown = true,
-        help = true,
-      },
-    },
-  },
-
-  -- Auto completion
-  -- Expected behavior:
-  --   <Tab> complete ghost text
-  --   <C-Space> to trigger completion menu manually
-  --   <Up> and <Down> navigate the completion menu
-  --   <CR> confirm the selected item
-  --
-  -- Currently, support for ghost text in cmp is limited to one line only
-  -- so I rely on copilot for that instead.
-  -- Addionally, indentation is messed up with cmp-copilot.
-  {
-    "hrsh7th/nvim-cmp",
+    "windwp/nvim-autopairs",
     event = "InsertEnter",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      {
-        "garymjr/nvim-snippets",
-        opts = {
-          friendly_snippets = true,
-        },
-        dependencies = { "rafamadriz/friendly-snippets" },
-      },
-      -- disabled in favor of copilot
-      -- { "zbirenbaum/copilot-cmp", dependencies = "copilot.lua", opts = {} },
-    },
-    ---@return cmp.ConfigSchema
-    opts = function()
-      local cmp = require("cmp")
-
-      -- highlight for ghost text
-      vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
-
-      -- configure auto-select
-      local auto_select = false
-
-      -- configuration
-      return {
-        auto_brackets = { "python" }, -- configure any filetype to auto add brackets
-        completion = {
-          completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
-        },
-        preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
-        mapping = {
-          ["<C-Space>"] = { i = cmp.mapping.complete() },
-          ["<Down>"] = { i = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }) },
-          ["<Up>"] = { i = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }) },
-          ["<C-b>"] = { i = cmp.mapping.scroll_docs(-4) },
-          ["<C-f>"] = { i = cmp.mapping.scroll_docs(4) },
-          ["<C-q>"] = { i = cmp.mapping.abort() },
-          ["<CR>"] = { i = cmp.mapping.confirm({ select = auto_select }) },
-          ["<S-CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace }),
-          ["<C-CR>"] = function(fallback)
-            cmp.abort()
-            fallback()
-          end,
-          ["<Tab>"] = cmp.mapping(function(fallback)
-            if require("copilot.suggestion").is_visible() then
-              require("copilot.suggestion").accept()
-            elseif cmp.visible() and cmp.get_active_entry() then
-              cmp.complete({ select = true })
-            else
-              fallback()
-            end
-          end, { "i", "s" }),
-        },
-        sources = cmp.config.sources({
-          { name = "lazydev", group_index = 0 },
-          { name = "copilot" },
-          { name = "nvim_lsp" },
-          { name = "snippets" },
-          { name = "path" },
-        }, {
-          { name = "buffer" },
-        }),
-        snippet = {
-          expand = function(args)
-            vim.snippet.expand(args.body)
-          end,
-        },
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
-        },
-        formatting = {
-          format = function(_, item)
-            local icon, hl = MiniIcons.get("lsp", item.kind)
-            item.kind = icon .. " " .. item.kind
-            item.kind_hl_group = hl
-            return item
-          end,
-        },
-        experimental = {
-          -- disabled as it conflicts with copilot
-          -- ghost_text = {
-          --   hl_group = "CmpGhostText",
-          -- },
-        },
-      }
-    end,
-  },
-
-  -- Auto pairs
-  {
-    "echasnovski/mini.pairs",
-    event = "VeryLazy",
     opts = {},
   },
 
-  -- Surround actions
-  {
-    "echasnovski/mini.surround",
-    opts = {
-      silent = true,
-    },
-  },
-
-  -- Comments
+  -- comments
   {
     "folke/ts-comments.nvim",
     event = "VeryLazy",
     opts = {},
   },
 
-  -- Better text-objects
+  -- better text-objects
   {
     "echasnovski/mini.ai",
     event = "VeryLazy",
@@ -254,5 +101,110 @@ return {
       end
       require("which-key").add(ret, { notify = false })
     end,
+  },
+
+  -- neovim completions
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    cmd = "LazyDev",
+    opts = {
+      library = {
+        { path = "luvit-meta/library", words = { "vim%.uv" } },
+        { path = "snacks.nvim", words = { "Snacks" } },
+        { path = "lazy.nvim", words = { "LazyVim" } },
+      },
+    },
+  },
+
+  -- copilot
+  {
+    "zbirenbaum/copilot.lua",
+    enabled = false,
+    cmd = "Copilot",
+    event = "BufReadPost",
+    build = ":Copilot auth",
+    opts = {
+      suggestion = {
+        enabled = false,
+        auto_trigger = true,
+        hide_during_completion = true,
+        keymap = {
+          accept = false, -- handled by nvim-cmp / blink.cmp
+          next = "<M-]>",
+          prev = "<M-[>",
+        },
+      },
+      panel = { enabled = false },
+      filetypes = {
+        markdown = true,
+        help = true,
+      },
+    },
+  },
+
+  -- completions
+  {
+    "saghen/blink.cmp",
+    event = "InsertEnter",
+    enabled = false,
+    version = "*",
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      "folke/lazydev.nvim",
+    },
+    --- @module 'blink.cmp'
+    --- @type blink.cmp.Config
+    opts = {
+      keymap = {
+        preset = "super-tab",
+      },
+      sources = {
+        default = { "lsp", "path", "snippets", "lazydev", "buffer" },
+        providers = {
+          lazydev = {
+            module = "lazydev.integrations.blink",
+            score_offset = 100,
+          },
+        },
+      },
+      completion = {
+        accept = {
+          -- experimental auto-brackets support
+          auto_brackets = {
+            enabled = true,
+          },
+        },
+        menu = {
+          auto_show = false,
+          border = "rounded",
+          draw = {
+            treesitter = { "lsp" },
+          },
+        },
+        documentation = {
+          auto_show = false,
+          auto_show_delay_ms = 500,
+          window = { border = "rounded" },
+        },
+        ghost_text = {
+          enabled = true,
+        },
+      },
+      fuzzy = { implementation = "prefer_rust_with_warning" },
+      -- managed by noice.nvim
+      signature = {
+        enabled = false,
+        window = { border = "rounded" },
+      },
+    },
+  },
+
+  -- surround actions
+  {
+    "echasnovski/mini.surround",
+    opts = {
+      silent = true,
+    },
   },
 }
