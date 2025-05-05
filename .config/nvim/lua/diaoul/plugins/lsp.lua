@@ -3,7 +3,7 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "mason.nvim",
+      "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
     },
     opts = {
@@ -86,7 +86,7 @@ return {
           end
 
           -- highlight word on CursorHold
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup("lsp_highlight", { clear = false })
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
               buffer = event.buf,
@@ -110,7 +110,7 @@ return {
           end
 
           -- toggle inlay hints
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             map("n", "<leader>uh", function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
             end, "Toggle Inlay Hints")
@@ -134,8 +134,10 @@ return {
 
       mason_lspconfig.setup_handlers({
         function(server_name)
+          local server = opts.servers[server_name] or {}
+
           -- only setup lsps defined above
-          if not opts.servers[server_name] then
+          if not server then
             vim.notify(
               ("Server %s installed but not configured"):format(server_name),
               vim.log.levels.WARN,
@@ -143,11 +145,9 @@ return {
             )
             return
           end
-          local server_opts = { capabilities = capabilities }
-          for k, v in pairs(opts.servers[server_name]) do
-            server_opts[k] = v
-          end
-          require("lspconfig")[server_name].setup(server_opts)
+
+          server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+          require("lspconfig")[server_name].setup(server)
         end,
       })
 
