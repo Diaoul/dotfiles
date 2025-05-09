@@ -65,17 +65,20 @@ return {
             vim.keymap.set(modes, keys, func, { buffer = event.buf, desc = desc })
           end
           -- stylua: ignore start
-          map("n", "<leader>cl", "<cmd>LspInfo<cr>", "Lsp Info")
-          map("n", "<leader>cr", vim.lsp.buf.rename, "Rename")
-          map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
-          map("n", "gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
+          map("n", "<leader>cl", function() Snacks.picker.lsp_config() end, "Lsp Info")
+          map("n", "gd", vim.lsp.buf.definition, "Goto Definition")
+          map("n", "gr", vim.lsp.buf.references, "Goto References")
+          map("n", "gI", vim.lsp.buf.implementation, "Goto Implementation")
+          map("n", "gy", vim.lsp.buf.type_definition, "Goto Type Definition")
           map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
-          map("n", "gr", function() require("telescope.builtin").lsp_references({ trim_text = true }) end, "Goto References")
-          map("n", "gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
-          map("n", "gy", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
-          map("n", "K", vim.lsp.buf.hover, "Hover Documentation")
+          map("n", "K", vim.lsp.buf.hover, "Hover")
           map("n", "gK", vim.lsp.buf.signature_help, "Signature Help")
           map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature Help")
+          map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
+          map({ "n", "v" }, "<leader>cc", vim.lsp.codelens.run, "Run Codelens")
+          map("n", "<leader>cC", vim.lsp.codelens.refresh, "Refresh & Display Codelens")
+          map("n", "<leader>cR", function() Snacks.rename.rename_file() end, "Rename File")
+          map("n", "<leader>cr", vim.lsp.buf.rename, "Rename")
           -- stylua: ignore end
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
