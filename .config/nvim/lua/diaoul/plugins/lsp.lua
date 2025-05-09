@@ -4,7 +4,7 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      { "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
     },
     opts = {
       -- LSP Server Settings
@@ -160,6 +160,7 @@ return {
   -- cmdline tools and lsp servers
   {
     "williamboman/mason.nvim",
+    version = "^1.0.0",
     cmd = "Mason",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     build = ":MasonUpdate",
