@@ -249,15 +249,6 @@ return {
     },
   },
 
-  -- status column
-  -- TODO: fixed width with diagnostics > line number > git signs or fold
-  -- {
-  --   "luukvbaal/statuscol.nvim",
-  --   opts = {
-  --     relculright = true,
-  --   },
-  -- },
-
   -- icons
   {
     "echasnovski/mini.icons",
