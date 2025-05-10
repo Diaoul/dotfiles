@@ -4,9 +4,28 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "williamboman/mason.nvim",
-      { "williamboman/mason-lspconfig.nvim", version = "^1.0.0" },
+      "williamboman/mason-lspconfig.nvim",
     },
     opts = {
+      -- options for vim.diagnostic.config()
+      ---@type vim.diagnostic.Opts
+      diagnostics = {
+        severity_sort = true,
+        underline = { severity = vim.diagnostic.severity.ERROR },
+        virtual_text = {
+          spacing = 2,
+          source = "if_many",
+          prefix = "●",
+        },
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = require("diaoul.config").icons.diagnostics.error,
+            [vim.diagnostic.severity.WARN] = require("diaoul.config").icons.diagnostics.warn,
+            [vim.diagnostic.severity.HINT] = require("diaoul.config").icons.diagnostics.hint,
+            [vim.diagnostic.severity.INFO] = require("diaoul.config").icons.diagnostics.info,
+          },
+        },
+      },
       -- LSP Server Settings
       ---@type lspconfig.options
       servers = {
@@ -50,43 +69,35 @@ return {
       },
     },
     config = function(_, opts)
-      -- diagnostic signs
-      for name, icon in pairs(require("diaoul.config").icons.diagnostics) do
-        name = "DiagnosticSign" .. name:gsub("^%l", string.upper)
-        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-      end
+      -- configure diagnostics
+      vim.diagnostic.config(opts.diagnostics)
 
       -- lsp and buffer local mappings
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp_attach", { clear = true }),
         callback = function(event)
           -- mappings
-          local map = function(modes, keys, func, desc)
-            vim.keymap.set(modes, keys, func, { buffer = event.buf, desc = desc })
+          -- stylua: ignore
+          local mappings = {
+            { "gK", vim.lsp.buf.signature_help, desc = "Signature Help" },
+            { "<C-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help" },
+            { "<leader>ca", vim.lsp.buf.code_action, mode = { "n", "v" }, desc = "Code Action" },
+            { "<leader>cc", vim.lsp.codelens.run, mode = { "n", "v" }, desc = "Run Codelens" },
+            { "<leader>cC", vim.lsp.codelens.refresh, mode = "n", desc = "Refresh & Display Codelens" },
+            { "<leader>cR", function() Snacks.rename.rename_file() end, mode = "n", desc = "Rename File" },
+            { "<leader>cr", vim.lsp.buf.rename, mode = "n", expr = true, desc = "Rename" },
+          }
+          for _, map in ipairs(mappings) do
+            local mode = map.mode or "n"
+            local mapping_opts = {
+              buffer = event.buf,
+              desc = map.desc,
+              expr = map.expr,
+            }
+            vim.keymap.set(mode, map[1], map[2], mapping_opts)
           end
-          -- stylua: ignore start
-          map("n", "<leader>cl", function() Snacks.picker.lsp_config() end, "Lsp Info")
-          map("n", "gd", vim.lsp.buf.definition, "Goto Definition")
-          map("n", "gr", vim.lsp.buf.references, "Goto References")
-          map("n", "gI", vim.lsp.buf.implementation, "Goto Implementation")
-          map("n", "gy", vim.lsp.buf.type_definition, "Goto Type Definition")
-          map("n", "gD", vim.lsp.buf.declaration, "Goto Declaration")
-          map("n", "K", vim.lsp.buf.hover, "Hover")
-          map("n", "gK", vim.lsp.buf.signature_help, "Signature Help")
-          map("i", "<C-k>", vim.lsp.buf.signature_help, "Signature Help")
-          map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "Code Action")
-          map({ "n", "v" }, "<leader>cc", vim.lsp.codelens.run, "Run Codelens")
-          map("n", "<leader>cC", vim.lsp.codelens.refresh, "Refresh & Display Codelens")
-          map("n", "<leader>cR", function() Snacks.rename.rename_file() end, "Rename File")
-          map("n", "<leader>cr", vim.lsp.buf.rename, "Rename")
-          -- stylua: ignore end
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-
-          -- disable hover for ruff
-          if client and client.name == "ruff" then
-            client.server_capabilities.hoverProvider = false
-          end
 
           -- highlight word on CursorHold
           if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
@@ -111,47 +122,24 @@ return {
               end,
             })
           end
-
-          -- toggle inlay hints
-          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
-            map("n", "<leader>uh", function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-            end, "Toggle Inlay Hints")
-          end
         end,
       })
 
       -- configuration
       require("mason").setup()
-      require("mason-lspconfig").setup()
 
       -- add cmp capabilities
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
+      -- configure servers
+      for server_name, server in pairs(opts.servers) do
+        server.capabilities = capabilities
+        vim.lsp.config(server_name, server)
+      end
+
       -- install servers
-      local mason_lspconfig = require("mason-lspconfig")
-
-      mason_lspconfig.setup({
+      require("mason-lspconfig").setup({
         ensure_installed = vim.tbl_keys(opts.servers),
-      })
-
-      mason_lspconfig.setup_handlers({
-        function(server_name)
-          local server = opts.servers[server_name] or {}
-
-          -- only setup lsps defined above
-          if not server then
-            vim.notify(
-              ("Server %s installed but not configured"):format(server_name),
-              vim.log.levels.WARN,
-              { title = "LSP" }
-            )
-            return
-          end
-
-          server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-          require("lspconfig")[server_name].setup(server)
-        end,
       })
 
       -- add border to the windows
@@ -163,7 +151,6 @@ return {
   -- cmdline tools and lsp servers
   {
     "williamboman/mason.nvim",
-    version = "^1.0.0",
     cmd = "Mason",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     build = ":MasonUpdate",
