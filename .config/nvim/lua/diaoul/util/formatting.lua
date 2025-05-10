@@ -1,10 +1,11 @@
+-- based off LazyVim https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/util/format.lua
 M = {}
 
----@param bufnr? number
-function M.enabled(bufnr)
-  bufnr = (bufnr == nil or bufnr == 0) and vim.api.nvim_get_current_buf() or bufnr
+---@param buf? number
+function M.enabled(buf)
+  buf = (buf == nil or buf == 0) and vim.api.nvim_get_current_buf() or buf
   local gaf = vim.g.autoformat
-  local baf = vim.b[bufnr].autoformat
+  local baf = vim.b[buf].autoformat
 
   -- if the buffer has a local value, use that
   if baf ~= nil then
@@ -15,22 +16,39 @@ function M.enabled(bufnr)
   return gaf == nil or gaf
 end
 
-function M.toggle_buf()
-  vim.b.autoformat = vim.b.autoformat ~= nil and not vim.b.autoformat or false
-  if vim.b.autoformat then
-    vim.notify("Autoformat enabled for this buffer", "info", { title = "Formatting" })
+---@param buf? boolean
+function M.toggle(buf)
+  M.enable(not M.enabled(), buf)
+end
+
+---@param enable? boolean
+---@param buf? boolean
+function M.enable(enable, buf)
+  if enable == nil then
+    enable = true
+  end
+  if buf then
+    vim.b.autoformat = enable
   else
-    vim.notify("Autoformat disabled for this buffer", "info", { title = "Formatting" })
+    vim.g.autoformat = enable
+    vim.b.autoformat = nil
   end
 end
 
-function M.toggle()
-  vim.g.autoformat = vim.g.autoformat ~= nil and not vim.g.autoformat or false
-  if vim.g.autoformat then
-    vim.notify("Autoformat enabled", "info", { title = "Formatting" })
-  else
-    vim.notify("Autoformat disabled", "info", { title = "Formatting" })
-  end
+---@param buf? boolean
+function M.snacks_toggle(buf)
+  return Snacks.toggle({
+    name = "Auto Format (" .. (buf and "Buffer" or "Global") .. ")",
+    get = function()
+      if not buf then
+        return vim.g.autoformat == nil or vim.g.autoformat
+      end
+      return require("diaoul.util.formatting").enabled()
+    end,
+    set = function(state)
+      require("diaoul.util.formatting").enable(state, buf)
+    end,
+  })
 end
 
 return M
