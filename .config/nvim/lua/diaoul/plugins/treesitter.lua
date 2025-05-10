@@ -1,10 +1,11 @@
 return {
-  -- Treesitter
+  -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
     build = function()
       require("nvim-treesitter.install").update({ with_sync = true })()
     end,
+    event = "VeryLazy",
     dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
@@ -18,27 +19,34 @@ return {
         "bash",
         "c",
         "cpp",
+        "css",
         "diff",
         "html",
         "javascript",
         "jsdoc",
         "json",
         "json5",
+        "latex",
         "lua",
         "luadoc",
         "luau",
         "markdown",
         "markdown_inline",
         "ninja",
+        "norg",
         "python",
         "query",
         "regex",
         "rst",
+        "scss",
+        "svelte",
         "toml",
         "tsx",
         "typescript",
+        "typst",
         "vim",
         "vimdoc",
+        "vue",
         "yaml",
       },
       incremental_selection = {
