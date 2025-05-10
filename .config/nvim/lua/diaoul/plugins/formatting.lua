@@ -1,6 +1,6 @@
 local util = require("diaoul.util.formatting")
 
--- Define commands
+-- define commands
 vim.api.nvim_create_user_command("Format", function(args)
   local range = nil
   if args.count ~= -1 then
