@@ -298,7 +298,9 @@ return {
       picker = { enabled = true },
       quickfile = { enabled = true },
       scope = { enabled = true },
-      scroll = { enabled = true },
+      -- disabled because glitchy when holding keys
+      -- see https://github.com/folke/snacks.nvim/pull/1799
+      scroll = { enabled = false },
       statuscolumn = { enabled = true },
       words = { enabled = true },
     },
