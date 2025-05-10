@@ -11,7 +11,6 @@ return {
       ---@type vim.diagnostic.Opts
       diagnostics = {
         severity_sort = true,
-        underline = { severity = vim.diagnostic.severity.ERROR },
         virtual_text = {
           spacing = 2,
           source = "if_many",
