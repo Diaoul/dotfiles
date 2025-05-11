@@ -226,62 +226,18 @@ return {
     },
   },
 
-  -- Git links
+  -- highlights
   {
-    "linrongbin16/gitlinker.nvim",
-    opts = {
-      message = false,
-      console_log = false,
-    },
-    keys = {
-      { "<leader>gl", "<cmd>GitLink<cr>", mode = { "n", "v" }, desc = "Copy Git URL" },
-      { "<leader>gL", "<cmd>GitLink!<cr>", mode = { "n", "v" }, desc = "Open Git URL" },
-      { "<leader>gb", "<cmd>GitLink blame<cr>", mode = { "n", "v" }, desc = "Copy Git Blame URL" },
-      { "<leader>gB", "<cmd>GitLink! blame<cr>", mode = { "n", "v" }, desc = "Open Git Blame URL" },
-    },
-  },
-
-  -- Colorizer
-  {
-    "NvChad/nvim-colorizer.lua",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = {
-      user_default_options = { names = false },
-    },
-  },
-
-  -- Buffer remove
-  {
-    "echasnovski/mini.bufremove",
-    keys = {
-      {
-        "<leader>bd",
-        function()
-          local bd = require("mini.bufremove").delete
-          -- better confirmation message
-          if vim.bo.modified then
-            local choice = vim.fn.confirm(("Save changes to %q?"):format(vim.fn.bufname()), "&Yes\n&No\n&Cancel")
-            if choice == 1 then -- Yes
-              vim.cmd.write()
-              bd(0)
-            elseif choice == 2 then -- No
-              bd(0, true)
-            end
-          else
-            bd(0)
-          end
-        end,
-        desc = "Delete Buffer",
-      },
-      -- stylua: ignore
-      {
-        "<leader>bD",
-        function()
-          require("mini.bufremove").delete(0, true)
-        end,
-        desc = "Delete Buffer (Force)",
-      },
-    },
+    "echasnovski/mini.hipatterns",
+    event = "VeryLazy",
+    opts = function()
+      local hi = require("mini.hipatterns")
+      return {
+        highlighters = {
+          hex_color = hi.gen_highlighter.hex_color(),
+        },
+      }
+    end,
   },
 
   -- Better diagnostics list and others
