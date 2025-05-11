@@ -1,9 +1,11 @@
 return {
   {
     "mfussenegger/nvim-lint",
+    event = { "BufWritePost", "BufReadPost", "InsertLeave" },
     -- custom configuration options similar to conform.nvim (based on LazyVim)
     -- see https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/linting.lua
     opts = {
+      -- event to trigger linters
       events = { "BufWritePost", "BufReadPost", "InsertLeave" },
       linters_by_ft = {
         fish = { "fish" },

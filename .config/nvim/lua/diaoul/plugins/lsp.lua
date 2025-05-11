@@ -2,6 +2,7 @@ return {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
+    event = { "BufWritePost", "BufReadPost", "InsertLeave" },
     dependencies = {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",

@@ -5,7 +5,7 @@ return {
     build = function()
       require("nvim-treesitter.install").update({ with_sync = true })()
     end,
-    event = "VeryLazy",
+    event = { "BufWritePost", "BufReadPost", "InsertLeave", "VeryLazy" },
     dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
     cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
@@ -76,5 +76,7 @@ return {
   -- automatically add closing tags for HTML and JSX
   {
     "windwp/nvim-ts-autotag",
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
+    opts = {},
   },
 }

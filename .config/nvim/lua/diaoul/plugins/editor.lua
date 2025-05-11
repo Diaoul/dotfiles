@@ -165,6 +165,7 @@ return {
   -- git signs
   {
     "lewis6991/gitsigns.nvim",
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     opts = {
       signs = {
         add = { text = require("diaoul.config").icons.git_signs.add },
@@ -235,7 +236,7 @@ return {
   -- highlights
   {
     "echasnovski/mini.hipatterns",
-    event = "VeryLazy",
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     opts = function()
       local hi = require("mini.hipatterns")
       return {

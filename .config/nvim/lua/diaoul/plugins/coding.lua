@@ -210,6 +210,7 @@ return {
   -- better yank/paste
   {
     "gbprod/yanky.nvim",
+    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
     opts = {
       highlight = { timer = 150 },
     },
