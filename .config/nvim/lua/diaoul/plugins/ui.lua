@@ -156,25 +156,26 @@ return {
     "akinsho/bufferline.nvim",
     event = "VeryLazy",
     keys = {
-      -- shortcuts
-      { "<s-left>", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous Buffer" },
-      { "<s-right>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-      { "<s-up>", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
-      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous Buffer" },
-      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
       -- buffer
       { "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
       { "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
       { "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", desc = "Delete Other Buffers" },
       { "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers To The Right" },
       { "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers To The Left" },
+      -- shortcuts
+      { "<s-left>", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous Buffer" },
+      { "<s-right>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous Buffer" },
+      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
+      { "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move Buffer Prev" },
+      { "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move Buffer Next" },
     },
     opts = {
       options = {
         -- stylua: ignore
-        close_command = function(n) require("mini.bufremove").delete(n, false) end,
+        close_command = function(n) Snacks.bufdelete(n) end,
         -- stylua: ignore
-        right_mouse_command = function(n) require("mini.bufremove").delete(n, false) end,
+        right_mouse_command = function(n) Snacks.bufdelete(n) end,
         diagnostics = "nvim_lsp",
         diagnostics_indicator = function(_, _, diag)
           local icons = require("diaoul.config").icons.diagnostics
@@ -194,13 +195,16 @@ return {
             highlight = "Directory",
             text_align = "left",
           },
+          {
+            filetype = "snacks_layout_box",
+          },
         },
       },
     },
     config = function(_, opts)
       require("bufferline").setup(opts)
       -- fix bufferline when restoring a session
-      vim.api.nvim_create_autocmd("BufAdd", {
+      vim.api.nvim_create_autocmd({ "BufAdd", "BufDelete" }, {
         callback = function()
           vim.schedule(function()
             pcall(nvim_bufferline)
