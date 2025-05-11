@@ -207,20 +207,20 @@ return {
         },
       },
       routes = {
-        -- Route to the mini view
+        -- route to the mini view
         {
           filter = {
             event = "msg_show",
             any = {
-              -- Written messages
+              -- written messages
               { find = "%d+L, %d+B" },
-              -- Undo/redo
+              -- undo/redo
               { find = "; after #%d+" },
               { find = "; before #%d+" },
-              -- Adding/deleting lines
+              -- adding/deleting lines
               { find = "%d more lines" },
               { find = "%d fewer lines" },
-              -- Yanking
+              -- yanking
               { find = "%d lines yanked" },
             },
           },

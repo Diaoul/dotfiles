@@ -1,5 +1,5 @@
 return {
-  -- File explorers
+  -- file explorers
   {
     "stevearc/oil.nvim",
     ---@module 'oil'
@@ -94,7 +94,7 @@ return {
     },
   },
 
-  -- Search and replace in multiple files
+  -- search and replace in multiple files
   {
     "MagicDuck/grug-far.nvim",
     opts = { headerMaxWidth = 80 },
@@ -156,7 +156,7 @@ return {
     },
   },
 
-  -- Git signs in gutter
+  -- git signs
   {
     "lewis6991/gitsigns.nvim",
     opts = {
@@ -240,7 +240,7 @@ return {
     end,
   },
 
-  -- Better diagnostics list and others
+  -- better diagnostics list and others
   {
     "folke/trouble.nvim",
     cmd = { "Trouble" },

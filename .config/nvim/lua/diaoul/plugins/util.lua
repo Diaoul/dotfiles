@@ -1,5 +1,5 @@
 return {
-  -- Startup time
+  -- startup time
   {
     "dstein64/vim-startuptime",
     cmd = "StartupTime",
@@ -8,7 +8,7 @@ return {
     end,
   },
 
-  -- Session management
+  -- session management
   {
     "folke/persistence.nvim",
     event = "BufReadPre",
@@ -21,6 +21,6 @@ return {
     },
   },
 
-  -- Library
+  -- library
   { "nvim-lua/plenary.nvim", lazy = true },
 }
