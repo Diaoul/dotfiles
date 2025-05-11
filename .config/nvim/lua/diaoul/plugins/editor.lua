@@ -131,6 +131,7 @@ return {
         { "<leader>d", group = "Debug" },
         { "<leader>f", group = "File/Find" },
         { "<leader>g", group = "Git" },
+        { "<leader>gh", group = "Hunks" },
         { "<leader>h", group = "Hunk" },
         { "<leader>q", group = "Quit/Session" },
         { "<leader>s", group = "Search" },
