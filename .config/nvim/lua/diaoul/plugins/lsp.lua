@@ -14,7 +14,7 @@ return {
         virtual_text = {
           spacing = 2,
           source = "if_many",
-          prefix = "●",
+          prefix = require("diaoul.config").icons.diagnostic_prefix,
         },
         signs = {
           text = {
