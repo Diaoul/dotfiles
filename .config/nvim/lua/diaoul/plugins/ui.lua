@@ -198,8 +198,6 @@ return {
     event = "VeryLazy",
     opts = {
       lsp = {
-        -- Disable this to use fidget instead
-        -- enable = false,
         override = {
           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
           ["vim.lsp.util.stylize_markdown"] = true,
