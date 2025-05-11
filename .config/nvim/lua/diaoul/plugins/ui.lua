@@ -1,7 +1,23 @@
 return {
+  -- breadcurmbs
+  {
+    "SmiteshP/nvim-navic",
+    lazy = true,
+    opts = {
+      separator = "  ",
+      highlight = true,
+      icons = require("diaoul.config").icons.kinds,
+      depth_limit = 5,
+      lazy_update_context = true,
+    },
+  },
+
   -- status line
   {
     "nvim-lualine/lualine.nvim",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+    },
     event = "VeryLazy",
     init = function()
       if vim.fn.argc(-1) > 0 then
@@ -51,6 +67,7 @@ return {
           },
         }
       end
+
       return {
         options = {
           theme = theme,
@@ -61,8 +78,8 @@ return {
           -- style: boxy
           -- component_separators = "|",
           -- section_separators = { left = "", right = "" },
-          globalstatus = true,
-          disabled_filetypes = { statusline = { "dashboard", "starter" } },
+          globalstatus = vim.o.laststatus == 3,
+          disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" } },
         },
         sections = {
           lualine_a = { "mode" },
@@ -78,57 +95,58 @@ return {
               "filetype",
               separator = "",
               padding = { left = 1, right = 0 },
-              colored = false,
               icon_only = true,
             },
             {
               "filename",
+              separator = "",
               path = 1,
               symbols = require("diaoul.config").icons.file,
             },
+            {
+              "navic",
+              color_correction = "dynamic",
+            },
           },
           lualine_x = {
+            -- stylua: ignore start
             {
-              function()
-                return require("noice").api.status.command.get()
-              end,
-              cond = function()
-                return require("noice").api.status.command.has()
-              end,
+              function() return require("noice").api.status.command.get() end,
+              cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+              color = function() return { fg = Snacks.util.color("Statement") } end,
             },
             {
-              function()
-                return require("noice").api.status.mode.get()
-              end,
-              cond = function()
-                return require("noice").api.status.mode.has()
-              end,
+              function() return require("noice").api.status.mode.get() end,
+              cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+              color = function() return { fg = Snacks.util.color("Constant") } end,
             },
             {
-              function()
-                return "  " .. require("dap").status()
-              end,
-              cond = function()
-                return package.loaded["dap"] and require("dap").status() ~= ""
-              end,
+              function() return "  " .. require("dap").status() end,
+              cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
+              color = function() return { fg = Snacks.util.color("Debug") } end,
             },
             {
               require("lazy.status").updates,
               cond = require("lazy.status").has_updates,
+              color = function() return { fg = Snacks.util.color("Special") } end,
             },
+            -- stylua: ignore end
             {
               "diagnostics",
               symbols = require("diaoul.config").icons.diagnostics,
             },
           },
           lualine_y = {
-            { "progress" },
+            { "progress", separator = " ", padding = { left = 1, right = 0 } },
+            { "location", padding = { left = 0, right = 1 } },
           },
           lualine_z = {
-            { "location", padding = { right = 1 } },
+            function()
+              return " " .. os.date("%R")
+            end,
           },
         },
-        extensions = { "neo-tree", "lazy" },
+        extensions = { "neo-tree", "lazy", "fzf" },
       }
     end,
   },
@@ -262,20 +280,6 @@ return {
 
   -- ui components
   { "MunifTanjim/nui.nvim", lazy = true },
-
-  -- breadcrumbs
-  {
-    "utilyre/barbecue.nvim",
-    event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-    dependencies = {
-      "SmiteshP/nvim-navic",
-    },
-    opts = {
-      include_buftypes = { "" },
-      exclude_filetypes = { "gitcommit", "Trouble", "toggleterm" },
-      kinds = require("diaoul.config").icons.kinds,
-    },
-  },
 
   -- smart qol
   {

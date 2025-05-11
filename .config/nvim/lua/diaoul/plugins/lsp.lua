@@ -98,6 +98,11 @@ return {
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
 
+          -- attach navic
+          if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentSymbol) then
+            require("nvim-navic").attach(client, event.buf)
+          end
+
           -- highlight word on CursorHold
           if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup("lsp_highlight", { clear = false })
