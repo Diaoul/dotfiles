@@ -77,8 +77,8 @@ opt.foldlevelstart = 10
 opt.foldnestmax = 5
 opt.foldminlines = 1
 
--- Status column (unused, set by statuscol.nvim)
--- opt.statuscolumn = [[%!v:lua.require'diaoul.config.ui'.statuscolumn()]]
+-- Status column
+opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 
 -- Formating
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
