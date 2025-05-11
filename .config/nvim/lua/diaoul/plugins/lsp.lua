@@ -144,6 +144,7 @@ return {
       -- install servers
       require("mason-lspconfig").setup({
         ensure_installed = vim.tbl_keys(opts.servers),
+        automatic_enable = true,
       })
 
       -- add border to the windows
