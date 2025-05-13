@@ -10,21 +10,21 @@ M.icons = {
     BreakpointRejected = { " ", "DiagnosticError" },
     LogPoint = ".>",
   },
-  diagnostic_prefix = "●", -- ■ ● ▎x
+  diagnostic_prefix = "●", -- ■ ● ▎
   diagnostics = {
-    error = " ", --     
-    warn = " ", --    𥉉
-    info = " ", --    
-    hint = " ", --     𥉉
+    error = " ", -- 
+    warn = " ", --   
+    info = " ", --   
+    hint = " ", --   
   },
   file = {
     modified = "●", --   ●
-    readonly = "", --    
+    readonly = "", -- 
   },
   git = {
-    added = " ", --    洛 
-    modified = " ", --    柳ﱢ  綠
-    removed = " ", --    ﯰ   
+    added = " ", --       
+    modified = " ", --    
+    removed = " ", --     
   },
   git_signs = {
     add = "▍",
@@ -35,8 +35,8 @@ M.icons = {
     untracked = "▍",
   },
   tree = {
-    collapsed = "", --    ▸
-    expanded = "", --    ▾ 
+    collapsed = "", --   ▸
+    expanded = "", --     ▾
   },
   kinds = {
     Array = " ",
