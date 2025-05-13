@@ -1,21 +1,31 @@
 return {
+  -- rosé pine
+  {
+    "rose-pine/neovim",
+    lazy = false, -- make sure we load this during startup (main color scheme)
+    priority = 1000, -- make sure to load this before all the other start plugins
+    name = "rose-pine",
+    config = function()
+      -- load the colorscheme here
+      vim.cmd([[colorscheme rose-pine]])
+    end,
+  },
+
   -- gruvbox
-  -- disabled because poor support for all the UI stuff I use
-  -- {
-  --   "ellisonleao/gruvbox.nvim",
-  --   opts = {
-  --     italic = {
-  --       strings = false,
-  --     },
-  --   },
-  --   init = function()
-  --     vim.cmd.colorscheme("gruvbox")
-  --   end,
-  -- },
+  {
+    "ellisonleao/gruvbox.nvim",
+    lazy = true,
+    opts = {
+      italic = {
+        strings = false,
+      },
+    },
+  },
 
   -- catppuccin
   {
     "catppuccin/nvim",
+    lazy = true,
     name = "catppuccin",
     opts = {
       integrations = {
@@ -24,6 +34,8 @@ return {
         cmp = true,
         dashboard = true,
         flash = true,
+        fzf = true,
+        grug_far = true,
         gitsigns = true,
         headlines = true,
         illuminate = true,
@@ -48,41 +60,18 @@ return {
         noice = true,
         notify = true,
         semantic_tokens = true,
+        snacks = true,
         telescope = true,
         treesitter = true,
         treesitter_context = true,
         which_key = true,
       },
     },
-    init = function()
-      vim.cmd.colorscheme("catppuccin")
-    end,
   },
 
-  -- rosé pine
-  -- {
-  --   "rose-pine/neovim",
-  --   name = "rose-pine",
-  --   init = function()
-  --     vim.cmd.colorscheme("rose-pine")
-  --   end,
-  -- },
-
   -- kanagawa
-  -- {
-  --   "rebelot/kanagawa.nvim",
-  --   init = function()
-  --     vim.cmd.colorscheme("kanagawa")
-  --   end,
-  -- },
-
-  -- my own gruvbox.nvim
-  -- {
-  --   "Diaoul/gruvbox.nvim",
-  --   dir = "~/projects/gruvbox.nvim",
-  --   dev = true,
-  --   init = function()
-  --     vim.cmd.colorscheme("rose-pine")
-  --   end,
-  -- },
+  {
+    "rebelot/kanagawa.nvim",
+    lazy = true,
+  },
 }
