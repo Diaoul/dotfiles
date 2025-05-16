@@ -1,5 +1,5 @@
 #!/usr/bin/fish
-#
+
 # key bindings
 function fish_user_key_bindings
   fish_default_key_bindings -M insert
