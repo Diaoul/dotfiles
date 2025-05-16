@@ -21,5 +21,5 @@ require("lazy").setup({
   spec = {
     { import = "diaoul.plugins" },
   },
-  checker = { enabled = true },
+  checker = { enabled = true, notify = false },
 })
