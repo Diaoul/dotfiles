@@ -11,6 +11,12 @@ return {
     end,
   },
 
+  -- nightfox
+  {
+    "EdenEast/nightfox.nvim",
+    lazy = true,
+  },
+
   -- gruvbox
   {
     "ellisonleao/gruvbox.nvim",
