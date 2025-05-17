@@ -1,21 +1,12 @@
-initial-window-size-pixels=960x600
-pad=10x10
-font=monospace:size=13
-
-[scrollback]
-lines=10000
-
-[cursor]
-style=block
-blink=yes
-
+# -*- conf -*-
 # Rosé Pine
+
 [cursor]
-color=191724 e0def4
+color=191724 e0def4 
 
 [colors]
-background=191724
-foreground=e0def4
+background=191724 
+foreground=e0def4 
 
 regular0=26233a     # black (Overlay)
 regular1=eb6f92     # red (Love)
