@@ -98,6 +98,14 @@ return {
           end
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client == nil then
+            return
+          end
+
+          -- disable hover in favor of basedpyright
+          if client.name == "ruff" then
+            client.server_capabilities.hoverProvider = false
+          end
 
           -- attach navic
           if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentSymbol) then
