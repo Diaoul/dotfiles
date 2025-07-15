@@ -80,3 +80,5 @@
     merge-conflict-theirs-diff-header-style = rose-pine.gold bold
     merge-conflict-ours-diff-header-decoration-style = rose-pine.gold box
     merge-conflict-theirs-diff-header-decoration-style = rose-pine.gold box
+[rebase]
+	updateRefs = true
