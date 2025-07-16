@@ -34,7 +34,7 @@ set -Ux FZF_DEFAULT_OPTS "
 	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa \
   --cycle --border --height=90% --preview-window=wrap --marker=\">\""
 
-# ls_colors
+# ls colors
 set -Ux LS_COLORS (vivid generate rose-pine)
 
 # navigation
@@ -53,3 +53,8 @@ alias -s dotfiles "git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 
 # fisher
 curl -sL https://git.io/fisher | source && fisher update
+
+# local configuration
+if test -f ~/.config/fish/local.fish
+  source ~/.config/fish/local.fish
+end

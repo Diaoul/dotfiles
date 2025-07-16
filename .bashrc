@@ -1,15 +1,42 @@
 #!/usr/bin/env bash
-# exports
+# editor
 export EDITOR='nvim'
+export VISUAL="$EDITOR"
+
+# bash options
 export HISTCONTROL='ignoreboth'
 export HISTSIZE='10000'
 export HISTFILESIZE='20000'
 
-# export PATH
-export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
+# PATH
+export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.krew/bin:$PATH
+
+# man
+export MANROFFOPT="-c"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# ripgrep
+export RIPGREP_CONFIG_PATH=~/.config/ripgrep
+
+# swww
+export SWWW_TRANSITION=grow
+export SWWW_TRANSITION_POS=0.75,0.7
 
 # if not running interactively, don't do anything else
 [[ $- != *i* ]] && return
+
+# fzf
+# see https://minsw.github.io/fzf-color-picker/
+export FZF_DEFAULT_OPTS="
+	--color=fg:#908caa,bg:#191724,hl:#ebbcba
+	--color=fg+:#e0def4,bg+:#26233a,hl+:#ebbcba
+	--color=border:#403d52,header:#31748f,gutter:#191724
+	--color=spinner:#f6c177,info:#9ccfd8
+	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa \
+  --cycle --border --height=90% --preview-window=wrap --marker=\">\""
+
+# ls colors
+export LS_COLORS="$(vivid generate rose-pine)"
 
 # gpg
 export GPG_TTY="$(tty)"
@@ -52,6 +79,9 @@ alias lt='exa -aT --group-directories-first'
 
 # ripgrep
 alias grep='rg'
+
+# internet ip address
+alias myip="dog --short myip.opendns.com @resolver1.opendns.com"
 
 # dotfiles git bare
 alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
