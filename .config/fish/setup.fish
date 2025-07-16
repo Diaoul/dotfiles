@@ -35,7 +35,7 @@ set -Ux FZF_DEFAULT_OPTS "
   --cycle --border --height=90% --preview-window=wrap --marker=\">\""
 
 # ls_colors
-set -Ux LS_COLORS (vivid -m 8-bit generate gruvbox-dark)
+set -Ux LS_COLORS (vivid generate rose-pine)
 
 # navigation
 alias -s .. "cd .."
