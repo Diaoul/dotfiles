@@ -21,6 +21,21 @@ return {
     },
   },
 
+  -- store
+  {
+    "alex-popov-tech/store.nvim",
+    -- see https://github.com/alex-popov-tech/store.nvim/issues/6
+    -- dependencies = {
+    --   "OXY2DEV/markview.nvim",
+    -- },
+    cmd = "Store",
+    -- stylua: ignore
+    keys = {
+      { "<leader>s", function() require("store").open() end, desc = "Open Plugin Store" },
+    },
+    opts = {},
+  },
+
   -- library
   { "nvim-lua/plenary.nvim", lazy = true },
 }
