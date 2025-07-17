@@ -178,6 +178,8 @@ return {
         "ansible-lint",
         "eslint_d",
         "lua-language-server",
+        "markdownlint-cli2",
+        "markdown-toc",
         "mypy",
         "ruff",
         "rust-analyzer",

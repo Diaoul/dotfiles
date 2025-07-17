@@ -428,6 +428,20 @@ return {
           Snacks.toggle.profiler_highlights():map("<leader>dph")
           Snacks.toggle.scroll():map("<leader>uS")
           Snacks.toggle.treesitter():map("<leader>uT")
+          Snacks.toggle({
+            name = "Render Markdown",
+            get = function()
+              return require("render-markdown.state").enabled
+            end,
+            set = function(enabled)
+              local m = require("render-markdown")
+              if enabled then
+                m.enable()
+              else
+                m.disable()
+              end
+            end,
+          }):map("<leader>um")
           require("diaoul.util.formatting").snacks_toggle():map("<leader>uf")
           require("diaoul.util.formatting").snacks_toggle(true):map("<leader>uF")
           -- stylua: ignore end
