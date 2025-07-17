@@ -67,6 +67,7 @@ return {
       preset = "helix",
       spec = {
         mode = { "n", "v" },
+        { "<leader>a", desc = "AI" },
         { "<leader>b", group = "Buffer" },
         { "<leader>c", group = "Code" },
         { "<leader>d", group = "Debug" },
