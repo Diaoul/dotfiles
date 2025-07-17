@@ -236,4 +236,21 @@ return {
       { "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put Before Applying a Filter" },
     },
   },
+
+  -- image pasting
+  {
+    "HakonHarnes/img-clip.nvim",
+    event = "VeryLazy",
+    opts = {
+      default = {
+        prompt_for_file_name = false,
+        drag_and_drop = {
+          insert_mode = true,
+        },
+      },
+    },
+    keys = {
+      { "<leader>i", "<cmd>PasteImage<cr>", desc = "Paste image" },
+    },
+  },
 }
