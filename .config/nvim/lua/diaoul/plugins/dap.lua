@@ -17,7 +17,7 @@ return {
           { "<leader>dk", function() require('dap-python').test_class() end, desc = "Debug Nearest Class", ft = "python" },
         },
         config = function()
-          require("dap-python").setup(vim.fn.expand("$MASON/packages/debugpy/venv/bin/python"))
+          require("dap-python").setup("debugpy-adapter")
         end,
       },
     },
