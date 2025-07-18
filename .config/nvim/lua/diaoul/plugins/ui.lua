@@ -82,7 +82,7 @@ return {
           -- component_separators = "|",
           -- section_separators = { left = "", right = "" },
           globalstatus = true,
-          disabled_filetypes = { statusline = { "dashboard", "alpha", "ministarter", "snacks_dashboard" } },
+          disabled_filetypes = { statusline = { "snacks_dashboard" } },
         },
         sections = {
           lualine_a = { "mode" },
@@ -129,28 +129,28 @@ return {
               cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
               color = function() return { fg = Snacks.util.color("Debug") } end,
             },
-            {
-              require("lazy.status").updates,
-              cond = require("lazy.status").has_updates,
-              color = function() return { fg = Snacks.util.color("Special") } end,
-            },
             -- stylua: ignore end
             {
               "diagnostics",
               symbols = require("diaoul.config").icons.diagnostics,
             },
+            {
+              require("lazy.status").updates,
+              cond = require("lazy.status").has_updates,
+              -- stylua: ignore
+              color = function() return { fg = Snacks.util.color("Special") } end,
+            },
           },
           lualine_y = {
+            { "lsp_status" },
+            { require("mcphub.extensions.lualine"), colored = false },
+          },
+          lualine_z = {
             { "progress", separator = " ", padding = { left = 1, right = 0 } },
             { "location", padding = { left = 0, right = 1 } },
           },
-          lualine_z = {
-            function()
-              return " " .. os.date("%R")
-            end,
-          },
         },
-        extensions = { "neo-tree", "lazy", "fzf" },
+        extensions = { "neo-tree", "lazy", "mason", "oil", "trouble", "toggleterm", "nvim-dap-ui", "avante" },
       }
     end,
   },
