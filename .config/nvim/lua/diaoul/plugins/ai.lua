@@ -25,6 +25,7 @@ return {
     },
   },
 
+  -- mcp hub
   {
     "ravitemer/mcphub.nvim",
     cmd = "MCPHub",
@@ -37,6 +38,8 @@ return {
       { "<leader>am", "<cmd>MCPHub<cr>", mode = { "n" }, desc = "MCPHub" },
     },
   },
+
+  -- avante
   {
     "yetone/avante.nvim",
     event = "VeryLazy",
@@ -45,7 +48,7 @@ return {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
       "folke/snacks.nvim",
-      "hrsh7th/nvim-cmp",
+      "saghen/blink.cmp",
       "echasnovski/mini.icons",
       "ravitemer/mcphub.nvim",
       "MeanderingProgrammer/render-markdown.nvim",
