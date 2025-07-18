@@ -180,6 +180,8 @@ return {
         close_command = function(n) Snacks.bufdelete(n) end,
         -- stylua: ignore
         right_mouse_command = function(n) Snacks.bufdelete(n) end,
+        separator_style = "slant",
+        show_buffer_close_icons = false,
         diagnostics = "nvim_lsp",
         diagnostics_indicator = function(_, _, diag)
           local icons = require("diaoul.config").icons.diagnostics
