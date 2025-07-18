@@ -2,12 +2,12 @@ return {
   -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
+    branch = "master",
+    lazy = false,
     build = function()
       require("nvim-treesitter.install").update({ with_sync = true })()
     end,
-    event = { "BufWritePost", "BufReadPost", "InsertLeave", "VeryLazy" },
     dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
-    cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
     keys = {
       { "<CR>", desc = "Increment selection" },
       { "<BS>", desc = "Decrement selection", mode = "x" },
