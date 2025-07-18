@@ -3,8 +3,8 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      "mason.nvim",
+      { "mason-org/mason-lspconfig.nvim", config = function() end },
     },
     opts = {
       -- options for vim.diagnostic.config()
@@ -140,6 +140,11 @@ return {
       -- configuration
       require("mason").setup()
 
+      -- install servers
+      require("mason-lspconfig").setup({
+        ensure_installed = vim.tbl_keys(opts.servers),
+      })
+
       -- add cmp capabilities
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
@@ -149,12 +154,6 @@ return {
         vim.lsp.config(server_name, server)
       end
 
-      -- install servers
-      require("mason-lspconfig").setup({
-        ensure_installed = vim.tbl_keys(opts.servers),
-        automatic_enable = true,
-      })
-
       -- add border to the windows
       require("lspconfig.ui.windows").default_options.border = "single"
       vim.api.nvim_set_hl(0, "LspInfoBorder", { link = "FloatBorder" })
@@ -163,14 +162,14 @@ return {
 
   -- cmdline tools and lsp servers
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     cmd = "Mason",
     keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
     build = ":MasonUpdate",
     config = function(_, opts)
       require("mason").setup(opts)
       -- ensure some packages are installed
-      -- see https://github.com/williamboman/mason.nvim/issues/1338
+      -- see https://github.com/mason-org/mason.nvim/issues/1338
       local registry = require("mason-registry")
 
       local packages = {
