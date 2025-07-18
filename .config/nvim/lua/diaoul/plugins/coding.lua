@@ -154,7 +154,7 @@ return {
           },
         },
         menu = {
-          auto_show = false,
+          auto_show = true,
           border = "rounded",
           draw = {
             treesitter = { "lsp" },
