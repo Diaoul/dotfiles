@@ -12,11 +12,23 @@ return {
     },
   },
 
+  -- harpoon
+  {
+    "letieu/harpoon-lualine",
+    dependencies = {
+      {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+      },
+    },
+  },
+
   -- status line
   {
     "nvim-lualine/lualine.nvim",
     dependencies = {
       "SmiteshP/nvim-navic",
+      "letieu/harpoon-lualine",
     },
     event = "VeryLazy",
     opts = function()
@@ -106,6 +118,7 @@ return {
               cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
               color = function() return { fg = Snacks.util.color("Statement") } end,
             },
+            { "harpoon2", icon = "󰀱" },
             {
               function() return require("noice").api.status.mode.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
