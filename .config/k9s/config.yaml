@@ -12,7 +12,7 @@ k9s:
     crumbsless: false
     reactive: false
     noIcons: false
-    skin: gruvbox-dark
+    skin: rose-pine
   skipLatestRevCheck: true
   disablePodCounting: false
   shellPod:
