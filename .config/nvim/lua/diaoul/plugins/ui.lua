@@ -143,7 +143,6 @@ return {
           },
           lualine_y = {
             { "lsp_status" },
-            { require("mcphub.extensions.lualine"), colored = false },
           },
           lualine_z = {
             { "progress", separator = " ", padding = { left = 1, right = 0 } },
