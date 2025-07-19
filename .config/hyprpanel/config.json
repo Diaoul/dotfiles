@@ -378,8 +378,13 @@
   "bar.workspaces.workspaces": 10,
   "bar.layouts": {
     "0": {
-      "left": ["dashboard", "workspaces"],
-      "middle": ["media"],
+      "left": [
+        "dashboard",
+        "workspaces"
+      ],
+      "middle": [
+        "clock"
+      ],
       "right": [
         "volume",
         "network",
@@ -388,13 +393,17 @@
         "battery",
         "systray",
         "hypridle",
-        "clock",
         "notifications"
       ]
     },
     "1": {
-      "left": ["dashboard", "workspaces"],
-      "middle": ["media"],
+      "left": [
+        "dashboard",
+        "workspaces"
+      ],
+      "middle": [
+        "clock"
+      ],
       "right": [
         "volume",
         "network",
@@ -403,13 +412,17 @@
         "battery",
         "systray",
         "hypridle",
-        "clock",
         "notifications"
       ]
     },
     "2": {
-      "left": ["dashboard", "workspaces"],
-      "middle": ["media"],
+      "left": [
+        "dashboard",
+        "workspaces"
+      ],
+      "middle": [
+        "clock"
+      ],
       "right": [
         "volume",
         "network",
@@ -418,7 +431,6 @@
         "battery",
         "systray",
         "hypridle",
-        "clock",
         "notifications"
       ]
     }
@@ -428,7 +440,7 @@
   "bar.network.label": false,
   "bar.bluetooth.label": false,
   "bar.battery.label": true,
-  "bar.clock.format": "%H:%M",
+  "bar.clock.format": "%d/%m %H:%M",
   "bar.clock.showTime": true,
   "bar.clock.showIcon": true,
   "bar.clock.icon": "󰃰",
@@ -483,6 +495,12 @@
   "theme.bar.dropdownGap": "2.9em",
   "bar.customModules.hyprsunset.label": false,
   "bar.customModules.hypridle.label": false,
-  "bar.customModules.hypridle.onIcon": "󰅶"
+  "bar.customModules.hypridle.onIcon": "󰅶",
+  "menus.clock.weather.key": "1442b6cb1d87431fbb7131021251805",
+  "bar.customModules.storage.paths": [
+    "/"
+  ],
+  "wallpaper.image": "/home/antoine/wallpapers/current",
+  "wallpaper.enable": true,
+  "theme.bar.buttons.dashboard.enableBorder": false
 }
-
