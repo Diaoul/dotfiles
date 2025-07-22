@@ -104,15 +104,6 @@ repositories:
   certFile: ""
   insecure_skip_tls_verify: false
   keyFile: ""
-  name: k8s-at-home
-  pass_credentials_all: false
-  password: ""
-  url: https://k8s-at-home.com/charts/
-  username: ""
-- caFile: ""
-  certFile: ""
-  insecure_skip_tls_verify: false
-  keyFile: ""
   name: diaoul
   pass_credentials_all: false
   password: ""
@@ -149,28 +140,10 @@ repositories:
   certFile: ""
   insecure_skip_tls_verify: false
   keyFile: ""
-  name: bjw-s
-  pass_credentials_all: false
-  password: ""
-  url: http://bjw-s.github.io/helm-charts/
-  username: ""
-- caFile: ""
-  certFile: ""
-  insecure_skip_tls_verify: false
-  keyFile: ""
   name: vector
   pass_credentials_all: false
   password: ""
   url: https://helm.vector.dev
-  username: ""
-- caFile: ""
-  certFile: ""
-  insecure_skip_tls_verify: false
-  keyFile: ""
-  name: k8s_gateway
-  pass_credentials_all: false
-  password: ""
-  url: https://ori-edge.github.io/k8s_gateway/
   username: ""
 - caFile: ""
   certFile: ""
@@ -266,8 +239,17 @@ repositories:
   certFile: ""
   insecure_skip_tls_verify: false
   keyFile: ""
-  name: k8s-gateway
+  name: bjw-s
   pass_credentials_all: false
   password: ""
-  url: https://ori-edge.github.io/k8s_gateway/
+  url: https://bjw-s-labs.github.io/helm-charts
+  username: ""
+- caFile: ""
+  certFile: ""
+  insecure_skip_tls_verify: false
+  keyFile: ""
+  name: k8s_gateway
+  pass_credentials_all: false
+  password: ""
+  url: https://k8s-gateway.github.io/k8s_gateway/
   username: ""
