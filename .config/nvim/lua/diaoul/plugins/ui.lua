@@ -299,14 +299,27 @@ return {
     opts = {
       bigfile = { enabled = true },
       dashboard = { enabled = true },
-      explorer = { enabled = true },
+      explorer = {
+        enabled = true,
+        hidden = true,
+      },
       indent = { enabled = true },
       input = { enabled = true },
       notifier = {
         enabled = true,
         timeout = 3000,
       },
-      picker = { enabled = true },
+      picker = {
+        enabled = true,
+        sources = {
+          files = {
+            hidden = true,
+          },
+          grep = {
+            hidden = true,
+          },
+        },
+      },
       quickfile = { enabled = true },
       scope = { enabled = true },
       -- disabled because glitchy when holding keys

@@ -8,6 +8,9 @@ return {
       lsp_file_methods = {
         timeout_ms = 3000,
       },
+      view_options = {
+        show_hidden = true,
+      },
     },
     keys = {
       {
