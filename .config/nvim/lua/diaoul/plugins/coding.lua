@@ -131,7 +131,18 @@ return {
     --- @type blink.cmp.Config
     opts = {
       keymap = {
-        preset = "super-tab",
+        preset = "enter",
+        ["<Tab>"] = {
+          "snippet_forward",
+          function() -- sidekick next edit suggestion
+            require("sidekick").clear()
+            return require("sidekick").nes_jump_or_apply()
+          end,
+          function() -- Neovim's native inline completions
+            return vim.lsp.inline_completion.get()
+          end,
+          "fallback",
+        },
       },
       sources = {
         default = { "avante", "lsp", "path", "snippets", "lazydev", "buffer" },
@@ -154,22 +165,29 @@ return {
           },
         },
         menu = {
-          auto_show = true,
-          border = "rounded",
           draw = {
             treesitter = { "lsp" },
           },
         },
         documentation = {
-          auto_show = false,
-          auto_show_delay_ms = 500,
-          window = { border = "rounded" },
+          auto_show = true,
+          auto_show_delay_ms = 300,
+        },
+        ghost_text = {
+          enabled = false,
+        },
+      },
+      cmdline = {
+        enabled = true,
+        keymap = {
+          preset = "cmdline",
+          ["<Right>"] = false,
+          ["<Left>"] = false,
         },
         ghost_text = {
           enabled = true,
         },
       },
-      fuzzy = { implementation = "prefer_rust_with_warning" },
       -- managed by noice.nvim
       signature = {
         enabled = false,
