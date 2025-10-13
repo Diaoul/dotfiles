@@ -36,9 +36,7 @@ return {
       },
       {
         "<leader>as",
-        function() require("sidekick.cli").select() end,
-        -- Or to select only installed tools:
-        -- require("sidekick.cli").select({ filter = { installed = true } })
+        function() require("sidekick.cli").select({ filter = { installed = true } }) end,
         desc = "Select CLI",
       },
       {
@@ -69,7 +67,6 @@ return {
         mode = { "n", "x" },
         desc = "Sidekick Select Prompt",
       },
-      -- Example of a keybinding to open Claude directly
       {
         "<leader>ac",
         function() require("sidekick.cli").toggle({ name = "claude", focus = true }) end,
