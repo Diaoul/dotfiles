@@ -1,5 +1,5 @@
 return {
-  -- breadcurmbs
+  -- breadcrumbs
   {
     "SmiteshP/nvim-navic",
     lazy = true,
