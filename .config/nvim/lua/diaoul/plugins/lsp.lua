@@ -36,6 +36,7 @@ return {
             offsetEncoding = { "utf-16" },
           },
         },
+        copilot = {},
         dockerls = {},
         jsonls = {},
         lua_ls = {
