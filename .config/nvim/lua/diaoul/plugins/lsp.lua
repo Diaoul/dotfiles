@@ -112,6 +112,11 @@ return {
             require("nvim-navic").attach(client, event.buf)
           end
 
+          -- enable inline completion
+          if client:supports_method(vim.lsp.protocol.Methods.textDocument_inlineCompletion, event.buf) then
+            vim.lsp.inline_completion.enable(true, { bufnr = event.buf })
+          end
+
           -- highlight word on CursorHold
           if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local highlight_augroup = vim.api.nvim_create_augroup("lsp_highlight", { clear = false })
