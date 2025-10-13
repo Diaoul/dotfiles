@@ -184,9 +184,6 @@ return {
           ["<Right>"] = false,
           ["<Left>"] = false,
         },
-        ghost_text = {
-          enabled = true,
-        },
       },
       -- managed by noice.nvim
       signature = {
