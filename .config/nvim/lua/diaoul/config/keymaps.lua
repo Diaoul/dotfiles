@@ -145,8 +145,23 @@ map("n", "<leader>uI", function()
 end, { desc = "Inspect Tree" })
 
 -- terminal navigation
-map("t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" })
-map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
+-- stylua: ignore start
+map("t", "<C-h>", function() vim.cmd.wincmd("h") end, { desc = "Go To Left Window"})
+map("t", "<C-j>", function() vim.cmd.wincmd("j") end, { desc = "Go To Lower Window"})
+map("t", "<C-k>", function() vim.cmd.wincmd("k") end, { desc = "Go To Upper Window"})
+map("t", "<C-l>", function() vim.cmd.wincmd("l") end, { desc = "Go To Right Window"})
+map("t", "<C-Left>", function() vim.cmd.wincmd("h") end, { desc = "Go To Left Window"})
+map("t", "<C-Down>", function() vim.cmd.wincmd("j") end, { desc = "Go To Lower Window"})
+map("t", "<C-Up>", function() vim.cmd.wincmd("k") end, { desc = "Go To Upper Window"})
+map("t", "<C-Right>", function() vim.cmd.wincmd("l") end, { desc = "Go To Right Window"})
+-- stylua: ignore end
+
+-- terminal
+-- stylua: ignore start
+map("n", "<leader>ft", function() Snacks.terminal() end, { desc = "Toggle Terminal" })
+map({ "n", "t" }, "<c-/>", function() Snacks.terminal() end, { desc = "Toggle Terminal" })
+map({ "n", "t" }, "<c-_>", function() Snacks.terminal() end, { desc = "which_key_ignore" })
+-- stylua: ignore end
 
 -- window management
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
