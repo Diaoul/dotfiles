@@ -34,9 +34,7 @@ function move() {
   fi
   if [ -z "$workspace_json" ] || [ "$current_monitor" != "$monitor" ]; then
     echo "Setting workspace $id to monitor $monitor"
-    hyprctl keyword workspace "$id, monitor:$monitor,persistent:true" >/dev/null
-    hyprctl dispatch moveworkspacetomonitor $i "$monitor" >/dev/null
-
+    hyprctl dispatch moveworkspacetomonitor "$id" "$monitor" >/dev/null
   fi
 }
 
