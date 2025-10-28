@@ -1,0 +1,2 @@
+export TERMINAL=kitty
+export WLR_RENDERER=vulkan
