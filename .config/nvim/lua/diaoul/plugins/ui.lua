@@ -321,10 +321,6 @@ return {
     opts = {
       bigfile = { enabled = true },
       dashboard = { enabled = true },
-      explorer = {
-        enabled = true,
-        hidden = true,
-      },
       indent = { enabled = true },
       input = { enabled = true },
       notifier = {
@@ -334,6 +330,9 @@ return {
       picker = {
         enabled = true,
         sources = {
+          explorer = {
+            hidden = true,
+          },
           files = {
             hidden = true,
           },
