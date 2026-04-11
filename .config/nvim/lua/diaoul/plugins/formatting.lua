@@ -54,7 +54,7 @@ return {
         html = { "prettier" },
         json = { "prettier" },
         jsonc = { "prettier" },
-        yaml = { "prettier" },
+        yaml = { "yamlfmt" },
         markdown = { "prettier", "markdownlint-cli2", "markdown-toc" },
         ["markdown.mdx"] = { "prettier", "markdownlint-cli2", "markdown-toc" },
         ["_"] = { "trim_whitespace" },
