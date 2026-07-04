@@ -36,7 +36,6 @@ return {
             offsetEncoding = { "utf-16" },
           },
         },
-        copilot = {},
         dockerls = {},
         jsonls = {},
         lua_ls = {
@@ -58,12 +57,11 @@ return {
         rust_analyzer = {},
         taplo = {},
         ts_ls = {},
-        yamlls = {
+        home_assistant = {
           settings = {
-            yaml = {
-              schemas = {
-                ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-              },
+            homeassistant = {
+              host = os.getenv("HASS_URL"),
+              longLivedAccessToken = os.getenv("HASS_TOKEN"),
             },
           },
         },
@@ -144,6 +142,11 @@ return {
         end,
       })
 
+      -- disable home assistant if missing config
+      if (os.getenv("HASS_URL") or "") == "" or (os.getenv("HASS_TOKEN") or "") == "" then
+        opts.servers.home_assistant = nil
+      end
+
       -- configuration
       require("mason").setup()
 
@@ -160,6 +163,15 @@ return {
         server.capabilities = capabilities
         vim.lsp.config(server_name, server)
       end
+
+      -- yayamlls: Flux-aware YAML LS (not Mason-managed, installed via AUR)
+      vim.lsp.config("yayamlls", {
+        cmd = { "yayamlls" },
+        filetypes = { "yaml" },
+        root_markers = { ".yayamlls.yaml", ".git" },
+        capabilities = capabilities,
+      })
+      vim.lsp.enable("yayamlls")
 
       -- add border to the windows
       require("lspconfig.ui.windows").default_options.border = "single"
