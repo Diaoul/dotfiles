@@ -147,24 +147,27 @@ return {
               -- stylua: ignore
               color = function() return { fg = Snacks.util.color("Special") } end,
             },
+          },
+          lualine_y = {
+            -- stylua: ignore
             {
               function()
                 local status = require("sidekick.status").get()
                 return status and vim.tbl_get(sidekick_icons, status.kind, 1)
               end,
-              cond = function()
-                return require("sidekick.status").get() ~= nil
-              end,
-              color = function()
-                local status = require("sidekick.status").get()
-                -- stylua: ignore
-                local hl = status and (status.busy and "DiagnosticWarn" or vim.tbl_get(sidekick_icons, status.kind, 2))
-                return { fg = Snacks.util.color(hl) }
-              end,
+              cond = function() return require("sidekick.status").get() ~= nil end,
+              separator = "",
             },
-          },
-          lualine_y = {
-            { "lsp_status" },
+            -- stylua: ignore
+            {
+              function()
+                local status = require("sidekick.status").cli()
+                return "󰚩 " .. (#status > 1 and #status or "")
+              end,
+              cond = function() return #require("sidekick.status").cli() > 0 end,
+              separator = "",
+            },
+            { "lsp_status", show_name = false, ignore_lsp = { "copilot" }, symbols = { done = "" } },
           },
           lualine_z = {
             { "progress", separator = " ", padding = { left = 1, right = 0 } },
@@ -321,6 +324,7 @@ return {
     opts = {
       bigfile = { enabled = true },
       dashboard = { enabled = true },
+      image = { enabled = true },
       indent = { enabled = true },
       input = { enabled = true },
       notifier = {
@@ -338,6 +342,19 @@ return {
           },
           grep = {
             hidden = true,
+          },
+        },
+        -- send the picker selection to a sidekick CLI session with <a-a>
+        actions = {
+          sidekick_send = function(...)
+            return require("sidekick.cli.picker.snacks").send(...)
+          end,
+        },
+        win = {
+          input = {
+            keys = {
+              ["<a-a>"] = { "sidekick_send", mode = { "n", "i" } },
+            },
           },
         },
       },
