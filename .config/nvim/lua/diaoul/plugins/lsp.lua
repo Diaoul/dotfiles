@@ -77,30 +77,32 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("lsp_attach", { clear = true }),
         callback = function(event)
-          -- mappings
-          -- stylua: ignore
-          local mappings = {
-            { "gK", vim.lsp.buf.signature_help, desc = "Signature Help" },
-            { "<C-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help" },
-            { "<leader>ca", vim.lsp.buf.code_action, mode = { "n", "v" }, desc = "Code Action" },
-            { "<leader>cc", vim.lsp.codelens.run, mode = { "n", "v" }, desc = "Run Codelens" },
-            { "<leader>cC", vim.lsp.codelens.refresh, mode = "n", desc = "Refresh & Display Codelens" },
-            { "<leader>cR", function() Snacks.rename.rename_file() end, mode = "n", desc = "Rename File" },
-            { "<leader>cr", vim.lsp.buf.rename, mode = "n", expr = true, desc = "Rename" },
-          }
-          for _, map in ipairs(mappings) do
-            local mode = map.mode or "n"
-            local mapping_opts = {
-              buffer = event.buf,
-              desc = map.desc,
-              expr = map.expr,
-            }
-            vim.keymap.set(mode, map[1], map[2], mapping_opts)
-          end
-
           local client = vim.lsp.get_client_by_id(event.data.client_id)
           if client == nil then
             return
+          end
+
+          -- mappings (only set when the client supports the required method)
+          -- stylua: ignore
+          local mappings = {
+            { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "textDocument/signatureHelp" },
+            { "<C-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "textDocument/signatureHelp" },
+            { "<leader>ca", vim.lsp.buf.code_action, mode = { "n", "v" }, desc = "Code Action", has = "textDocument/codeAction" },
+            { "<leader>cA", function() vim.lsp.buf.code_action({ context = { only = { "source" }, diagnostics = {} } }) end, desc = "Source Action", has = "textDocument/codeAction" },
+            { "<leader>co", function() vim.lsp.buf.code_action({ context = { only = { "source.organizeImports" }, diagnostics = {} }, apply = true }) end, desc = "Organize Imports", has = "textDocument/codeAction" },
+            { "<leader>cc", vim.lsp.codelens.run, mode = { "n", "v" }, desc = "Run Codelens", has = "textDocument/codeLens" },
+            { "<leader>cC", vim.lsp.codelens.refresh, mode = "n", desc = "Refresh & Display Codelens", has = "textDocument/codeLens" },
+            { "<leader>cR", function() Snacks.rename.rename_file() end, mode = "n", desc = "Rename File" },
+            { "<leader>cr", vim.lsp.buf.rename, mode = "n", expr = true, desc = "Rename", has = "textDocument/rename" },
+          }
+          for _, map in ipairs(mappings) do
+            if not map.has or client:supports_method(map.has) then
+              vim.keymap.set(map.mode or "n", map[1], map[2], {
+                buffer = event.buf,
+                desc = map.desc,
+                expr = map.expr,
+              })
+            end
           end
 
           -- disable hover in favor of basedpyright
