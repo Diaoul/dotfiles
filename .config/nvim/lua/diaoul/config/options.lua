@@ -5,7 +5,7 @@ vim.g.maplocalleader = ","
 local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write
-opt.clipboard = "unnamedplus" -- Sync with system clipboard
+opt.clipboard = vim.env.SSH_CONNECTION and "" or "unnamedplus" -- Sync with system clipboard (empty over SSH so OSC52 works)
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 3 -- Hide * markup for bold and italic
 opt.confirm = true -- Confirm to save changes before exiting modified buffer
@@ -16,6 +16,7 @@ opt.grepformat = "%f:%l:%c:%m" -- With ripgrep
 opt.grepprg = "rg --vimgrep" -- Use ripgrep
 opt.ignorecase = true -- Ignore case
 opt.inccommand = "nosplit" -- Preview incremental substitute
+opt.jumpoptions = "view" -- Restore fold/scroll view when jumping
 opt.laststatus = 3 -- Global statusline
 opt.list = true -- Show some invisible characters (tabs...
 opt.listchars = {
