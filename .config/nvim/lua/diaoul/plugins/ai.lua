@@ -12,6 +12,7 @@ return {
     },
     -- stylua: ignore
     keys = {
+      { "<leader>a", "", desc = "+ai", mode = { "n", "v" } },
       {
         "<tab>",
         function()
