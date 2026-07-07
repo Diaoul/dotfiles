@@ -413,37 +413,11 @@ return {
   },
   -- markdown
   {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = function()
-      require("lazy").load({ plugins = { "markdown-preview.nvim" } })
-      vim.fn["mkdp#util#install"]()
-    end,
-    keys = {
-      { "<leader>cp", ft = "markdown", "<cmd>MarkdownPreviewToggle<cr>", desc = "Markdown Preview" },
-    },
-  },
-  {
     "MeanderingProgrammer/render-markdown.nvim",
-    enabled = true,
     ft = { "markdown", "codecompanion", "Avante" },
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {},
-  },
-  {
-    "OXY2DEV/markview.nvim",
-    enabled = false,
-    lazy = false,
-    priority = 49,
-    ---@module 'markview'
-    ---@type markview.config
-    opts = {
-      preview = {
-        icon_provider = "mini",
-      },
-    },
   },
 
   -- quick file navigation

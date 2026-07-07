@@ -54,6 +54,7 @@ return {
         basedpyright = {},
         ruff = {},
         html = {},
+        marksman = {},
         rust_analyzer = {},
         taplo = {},
         ts_ls = {},
