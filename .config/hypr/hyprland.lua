@@ -301,7 +301,7 @@ hl.bind("SUPER + right", hl.dsp.focus({ direction = "right" }))
 -- direction
 hl.bind("SUPER + U", hl.dsp.focus({ workspace = "m+1" }))
 hl.bind("SUPER + L", hl.dsp.focus({ workspace = "m-1" }))
-hl.bind("SUPER + minus", hl.dsp.workspace.toggle_special(""))
+hl.bind("SUPER + minus", hl.dsp.workspace.toggle_special("scratchpad"))
 
 -- focus monitor
 -- direction
@@ -324,7 +324,7 @@ hl.bind("SUPER + SHIFT + right", hl.dsp.window.move({ direction = "right" }))
 -- direction
 hl.bind("SUPER + SHIFT + U", hl.dsp.window.move({ workspace = "m+1", follow = true }))
 hl.bind("SUPER + SHIFT + L", hl.dsp.window.move({ workspace = "m-1", follow = true }))
-hl.bind("SUPER + SHIFT + minus", hl.dsp.window.move({ workspace = "special", follow = true }))
+hl.bind("SUPER + SHIFT + minus", hl.dsp.window.move({ workspace = "special:scratchpad", follow = true }))
 
 -- move window to monitor
 -- direction
