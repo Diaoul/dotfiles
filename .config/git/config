@@ -84,10 +84,10 @@
 	updateRefs = true
 [credential "https://github.com"]
 	helper = 
-	helper = !/Users/antoine.bertin/.alan/bin/gh auth git-credential
+	helper = !gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !/Users/antoine.bertin/.alan/bin/gh auth git-credential
+	helper = !gh auth git-credential
 [fetch]
 	prune = true
 	pruneTags = true
