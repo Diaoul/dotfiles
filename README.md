@@ -20,6 +20,7 @@ ignore certain files.
 git clone --bare https://github.com/Diaoul/dotfiles.git ~/.dotfiles
 alias dotfiles "git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 dotfiles config --local status.showUntrackedFiles no
+dotfiles config --local remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 dotfiles sparse-checkout set --no-cone "/*" "!/.github/"
 dotfiles checkout
 
