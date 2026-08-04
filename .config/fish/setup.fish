@@ -46,7 +46,7 @@ alias -s ..... "cd ../../../.."
 alias -s .4 "cd ../../../.."
 
 # internet ip address
-alias -s myip "dog --short myip.opendns.com @resolver1.opendns.com"
+alias -s myip "curl -s https://checkip.amazonaws.com"
 
 # dotfiles
 alias -s dotfiles "git --git-dir=$HOME/.dotfiles --work-tree=$HOME"

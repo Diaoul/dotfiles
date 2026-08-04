@@ -134,7 +134,7 @@ _Amazing tools I use all the time!_
 
 - [eza](https://github.com/eza-community/eza) as a replacement for `ls`
 - [bat](https://github.com/sharkdp/bat) instead of `cat` (with wings)
-- [dog](https://dns.lookup.dog/) for coloured (and usable) `dig`
+- [doggo](https://doggo.mrkaran.dev/) for coloured (and usable) `dig`
 - [delta](https://github.com/dandavison/delta): `diff` with style
 - [fd](https://github.com/sharkdp/fd) as a `find` alternative
 - [ripgrep](https://github.com/BurntSushi/ripgrep) to kill old `grep`
