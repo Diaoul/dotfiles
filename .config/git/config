@@ -82,3 +82,12 @@
     merge-conflict-theirs-diff-header-decoration-style = rose-pine.gold box
 [rebase]
 	updateRefs = true
+[credential "https://github.com"]
+	helper = 
+	helper = !/Users/antoine.bertin/.alan/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/Users/antoine.bertin/.alan/bin/gh auth git-credential
+[fetch]
+	prune = true
+	pruneTags = true
