@@ -53,7 +53,9 @@ alias -s dotfiles "git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 
 # gnome/gtk desktop settings (persisted in dconf, reapplied here)
 # middle-click primary-selection paste for GTK apps (ghostty, etc.)
-gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true
+if type -q gsettings
+  gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true
+end
 
 # fisher
 curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher update
