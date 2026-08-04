@@ -51,6 +51,9 @@ alias -s myip "curl -s https://checkip.amazonaws.com"
 # dotfiles
 alias -s dotfiles "git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 
+# lazyvim
+alias -s lazyvim "NVIM_APPNAME=lazyvim nvim"
+
 # gnome/gtk desktop settings (persisted in dconf, reapplied here)
 # middle-click primary-selection paste for GTK apps (ghostty, etc.)
 if type -q gsettings
