@@ -12,6 +12,9 @@ set -U fish_user_paths \
   $HOME/.local/bin \
   $HOME/.cargo/bin \
   $HOME/.krew/bin
+if test (uname) = Darwin
+  set -U fish_user_paths /opt/homebrew/bin $fish_user_paths
+end
 
 # man
 set -Ux MANROFFOPT "-c"
@@ -69,4 +72,9 @@ curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fi
 # local configuration
 if test -f ~/.config/fish/local.fish
   source ~/.config/fish/local.fish
+end
+
+# lazygit
+if test (uname) = "Darwin"
+  set -Ux LG_CONFIG_FILE "$HOME/.config/lazygit/config.yml"
 end
