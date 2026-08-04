@@ -56,7 +56,7 @@ alias -s dotfiles "git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true
 
 # fisher
-curl -sL https://git.io/fisher | source && fisher update
+curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher update
 
 # local configuration
 if test -f ~/.config/fish/local.fish

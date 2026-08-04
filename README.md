@@ -20,12 +20,19 @@ ignore certain files.
 git clone --bare https://github.com/Diaoul/dotfiles.git ~/.dotfiles
 alias dotfiles "git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
 dotfiles config --local status.showUntrackedFiles no
-dotfiles sparse-checkout init
-dotfiles sparse-checkout set "/*"
-dotfiles sparse-checkout add "!/.github/"
+dotfiles sparse-checkout set --no-cone "/*" "!/.github/"
 dotfiles checkout
 
 GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME pre-commit install
+```
+
+If `dotfiles checkout` refuses to overwrite pre-existing files (e.g. a stock
+`.bashrc`), move them out of the way and retry, or use `dotfiles checkout -f`.
+
+On macOS, then run:
+
+```fish
+~/setup-macos.sh
 ```
 
 ## :art: Style
