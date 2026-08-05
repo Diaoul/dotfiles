@@ -279,17 +279,12 @@ function ws --description "Create worktree + tmux session"
         return
     end
 
-    # Restore sessions for all existing worktrees
+    # `ws restore` used to rebuild a session per worktree. tmux-continuum owns
+    # session restoration now (@continuum-restore on), so it would duplicate.
     if test "$argv[1]" = "restore"
-        for wt in (git -C $base_dir worktree list --porcelain | string match 'worktree *' | string replace 'worktree ' '')
-            set -l name (basename $wt)
-            if test "$name" = "main"
-                continue
-            end
-            echo "Restoring $name..."
-            ws $name
-        end
-        return
+        echo "ws restore is gone — tmux-continuum restores sessions on server start." >&2
+        echo "Force a restore now: prefix + C-r" >&2
+        return 1
     end
 
     # ws next / ws free → print best reuse slot to stdout (pipeable)
