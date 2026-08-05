@@ -1,5 +1,11 @@
+config-version = 2
+persistent-workspaces = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+
+# PATH for every command here comes from [exec.env-vars] below. It also reaches
+# the sketchybar plugin scripts: they are spawned by the daemon started here and
+# inherit its environment, so they cannot be fixed from sketchybarrc.
 after-startup-command = [
-    'exec-and-forget sketchybar',
+    'exec-and-forget /bin/bash -c "sketchybar --reload || sketchybar"',
     'exec-and-forget borders',
     'exec-and-forget ~/.config/aerospace/scripts/workspaces.sh'
 ]
@@ -21,6 +27,15 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
 automatically-unhide-macos-hidden-apps = true
 
+# AeroSpace is started by launchd, whose PATH has no /opt/homebrew/bin, so
+# exec-and-forget and exec-on-workspace-change cannot find sketchybar, borders
+# or aerospace itself unless the Homebrew prefix is put back here.
+[exec]
+    inherit-env-vars = true
+
+    [exec.env-vars]
+        PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
+
 [key-mapping]
     preset = 'qwerty'
 
@@ -32,28 +47,126 @@ automatically-unhide-macos-hidden-apps = true
     outer.top =        52
     outer.right =      16
 
-#[workspace-to-monitor-force-assignment]
-#    1 = '^built-in retina display$'
-#    2 = '^built-in retina display$'
-#    3 = '^built-in retina display$'
-#    4 = ['main', '^built-in retina display$']
-#    5 = [ 'main', '^built-in retina display$' ]
-#    6 = [ 'main', '^built-in retina display$' ]
-#    7 = [ 'main', '^built-in retina display$' ]
-#    8 = [ 'pa248', '^built-in retina display$' ]
-#    9 = [ 'pa248', '^built-in retina display$' ]
-#    10 = [ 'pa248', '^built-in retina display$' ]
+# Workspace-to-monitor placement is done by scripts/workspaces.sh rather than by
+# [workspace-to-monitor-force-assignment]: that table matches monitor names, so
+# it breaks on any setup built from different screens. The script splits the
+# workspaces by monitor count instead, and sketchybar re-runs it on every
+# display_change so docking and undocking are handled too.
+
+# Pin apps that always belong on the same workspace. No --focus-follows-window:
+# a window appearing elsewhere should not yank you off what you are doing.
+[[on-window-detected]]
+if.app-id = 'com.quillmeetings.Quill-desktop'
+run = 'move-node-to-workspace 3'
+
+# Float the windows that tiling actively makes worse: settings panels, small
+# utilities, credential prompts, recorder controls and fixed-aspect-ratio
+# mirrors. Everything not listed here still tiles.
+
+## System settings and system dialogs
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.SystemProfiler'
+run = 'layout floating'
+
+# the process behind classic modal alerts ("... wants to use your keychain")
+[[on-window-detected]]
+if.app-id = 'com.apple.UserNotificationCenter'
+run = 'layout floating'
+
+## Finder file-operation progress windows, but not Finder browser windows
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+if.window-title-regex-substring = '^(Copy|Move|Deleting|Emptying|Preparing|Get Info|.* Info)'
+run = 'layout floating'
+
+## Small utilities that are dialogs pretending to be windows
+[[on-window-detected]]
+if.app-id = 'com.apple.calculator'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ColorSyncUtility'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.DigitalColorMeter'
+run = 'layout floating'
+
+## Credential prompts
+[[on-window-detected]]
+if.app-id = 'com.bitwarden.desktop'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.Passwords'
+run = 'layout floating'
+
+## Input-remapping and gesture tools: settings panels only
+[[on-window-detected]]
+if.app-id = 'org.pqrs.Karabiner-Elements.Settings'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'org.pqrs.Karabiner-EventViewer'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.hegenberg.BetterTouchTool'
+run = 'layout floating'
+
+# Hammerspoon ships no CFBundleIdentifier in its Info.plist, so match the name
+[[on-window-detected]]
+if.app-name-regex-substring = 'Hammerspoon'
+run = 'layout floating'
+
+## Corporate agents: status popups, never worth a tile
+[[on-window-detected]]
+if.app-id = 'com.cloudflare.1dot1dot1dot1.macos'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.barco.clickshare.updater'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'io.kandji.Self-Service'
+run = 'layout floating'
+
+## Screen recording and sharing: floating overlays and fixed aspect ratios
+[[on-window-detected]]
+if.app-id = 'com.loom.desktop'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ScreenContinuity'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.ScreenSharing'
+run = 'layout floating'
+
+# Raycast draws a panel rather than a standard window, so aerospace usually
+# ignores it already; this is insurance for the times it does not
+[[on-window-detected]]
+if.app-id = 'com.raycast.macos'
+run = 'layout floating'
 
 [mode.main.binding]
     # Focus
     ## Nodes
-    alt-m = 'focus --boundaries all-monitors-outer-frame left'
-    alt-n = 'focus --boundaries all-monitors-outer-frame down'
-    alt-e = 'focus --boundaries all-monitors-outer-frame up'
-    alt-i = 'focus --boundaries all-monitors-outer-frame right'
+    # --wrap-around is rejected alongside --boundaries; the equivalent is
+    # spelling the wrap out as the boundaries-action
+    alt-m = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors left'
+    alt-n = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors down'
+    alt-e = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors up'
+    alt-i = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors right'
     ## Workspaces
-    alt-u = 'workspace next'
-    alt-l = 'workspace prev'
+    alt-u = 'workspace --wrap-around next'
+    alt-l = 'workspace --wrap-around prev'
     alt-1 = 'workspace 1'
     alt-2 = 'workspace 2'
     alt-3 = 'workspace 3'
@@ -72,8 +185,8 @@ automatically-unhide-macos-hidden-apps = true
     alt-shift-i = 'move right'
     alt-shift-ctrl-m = 'move-node-to-monitor --focus-follows-window left'
     alt-shift-ctrl-i = 'move-node-to-monitor --focus-follows-window right'
-    alt-shift-u = [ 'move-node-to-workspace next', 'workspace next' ]
-    alt-shift-l = [ 'move-node-to-workspace prev', 'workspace prev' ]
+    alt-shift-u = [ 'move-node-to-workspace --wrap-around next', 'workspace --wrap-around next' ]
+    alt-shift-l = [ 'move-node-to-workspace --wrap-around prev', 'workspace --wrap-around prev' ]
     alt-shift-1 = 'move-node-to-workspace --focus-follows-window 1'
     alt-shift-2 = 'move-node-to-workspace --focus-follows-window 2'
     alt-shift-3 = 'move-node-to-workspace --focus-follows-window 3'
@@ -88,7 +201,10 @@ automatically-unhide-macos-hidden-apps = true
     # Utils
     alt-backtick = 'workspace-back-and-forth'
     alt-j = 'fullscreen --no-outer-gaps'
-    alt-w = 'close'
-    alt-q = 'close --quit-if-last-window'
+    # Same key as hyprland's SUPER,W,killactive. macOS keeps an app alive with
+    # zero windows, leaving it in the Dock after its last window is gone, so
+    # --quit-if-last-window is needed to match what killactive ends up doing.
+    # Plain `close` is deliberately unbound: cmd-W already does it per-app.
+    alt-w = 'close --quit-if-last-window'
     alt-cmd-r = 'reload-config'
     alt-enter = 'exec-and-forget open -n /Applications/kitty.app'
