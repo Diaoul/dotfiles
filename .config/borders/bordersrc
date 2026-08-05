@@ -2,8 +2,11 @@
 
 options=(
   style=round
-  width=4.0
-  hidpi=off
+  width=3.0
+  hidpi=on
+  # undocumented (missing from the man page): draws the border over the window
+  # edge so the native macOS outline stops showing as a second border
+  order=above
   active_color=0xffebbcba
   inactive_color=0xff414550
 )
