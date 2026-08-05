@@ -21,7 +21,7 @@ set -Ux MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -Ux RIPGREP_CONFIG_PATH ~/.config/ripgrep
 
 # zoxide
-set -Ux _ZO_EXCLUDE_DIRS "$HOME:$HOME/.local/*"
+set -Ux _ZO_EXCLUDE_DIRS "$HOME:$HOME/.local*"
 
 # swww
 set -Ux SWWW_TRANSITION grow
