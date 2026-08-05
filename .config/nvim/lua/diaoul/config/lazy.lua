@@ -22,4 +22,16 @@ require("lazy").setup({
     { import = "diaoul.plugins" },
   },
   checker = { enabled = true, notify = false },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "netrwPlugin", -- oil.nvim is the file explorer
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
 })

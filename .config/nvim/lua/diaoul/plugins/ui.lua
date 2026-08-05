@@ -12,23 +12,11 @@ return {
     },
   },
 
-  -- harpoon
-  {
-    "letieu/harpoon-lualine",
-    dependencies = {
-      {
-        "ThePrimeagen/harpoon",
-        branch = "harpoon2",
-      },
-    },
-  },
-
   -- status line
   {
     "nvim-lualine/lualine.nvim",
     dependencies = {
       "SmiteshP/nvim-navic",
-      "letieu/harpoon-lualine",
     },
     event = "VeryLazy",
     opts = function()
@@ -125,7 +113,6 @@ return {
               cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
               color = function() return { fg = Snacks.util.color("Statement") } end,
             },
-            { "harpoon2", icon = "󰀱" },
             {
               function() return require("noice").api.status.mode.get() end,
               cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
@@ -174,7 +161,7 @@ return {
             { "location", padding = { left = 0, right = 1 } },
           },
         },
-        extensions = { "neo-tree", "lazy", "mason", "oil", "trouble", "toggleterm", "nvim-dap-ui", "avante" },
+        extensions = { "neo-tree", "lazy", "mason", "oil", "trouble", "toggleterm", "nvim-dap-ui" },
       }
     end,
   },
@@ -399,7 +386,6 @@ return {
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
     { '<leader>s/', function() Snacks.picker.search_history() end, desc = "Search History" },
     { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
-    { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
     { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands" },
     { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
@@ -431,7 +417,6 @@ return {
     { "<leader>Z",  function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
     { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
     { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
-    { "<leader>n",  function() Snacks.notifier.show_history() end, desc = "Notification History" },
     { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
     { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
     { "<leader>gc", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },

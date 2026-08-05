@@ -154,9 +154,11 @@ return {
       -- configuration
       require("mason").setup()
 
-      -- install servers
+      -- install and enable only from list
+      local server_names = vim.tbl_keys(opts.servers)
       require("mason-lspconfig").setup({
-        ensure_installed = vim.tbl_keys(opts.servers),
+        ensure_installed = server_names,
+        automatic_enable = server_names,
       })
 
       -- add cmp capabilities
@@ -176,10 +178,6 @@ return {
         capabilities = capabilities,
       })
       vim.lsp.enable("yayamlls")
-
-      -- add border to the windows
-      require("lspconfig.ui.windows").default_options.border = "single"
-      vim.api.nvim_set_hl(0, "LspInfoBorder", { link = "FloatBorder" })
     end,
   },
 
@@ -197,16 +195,13 @@ return {
 
       local packages = {
         "ansible-lint",
-        "eslint_d",
         "lua-language-server",
         "markdownlint-cli2",
         "markdown-toc",
-        "mypy",
         "ruff",
         "rust-analyzer",
         "shellcheck",
         "stylua",
-        "yamllint",
       }
 
       registry.refresh(function()

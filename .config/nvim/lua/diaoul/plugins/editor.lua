@@ -239,7 +239,7 @@ return {
   {
     "folke/todo-comments.nvim",
     event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-    cmd = { "TodoTrouble", "TodoTelescope" },
+    cmd = { "TodoTrouble" },
     opts = {},
     -- stylua: ignore
     keys = {
@@ -247,8 +247,8 @@ return {
       { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous Todo Comment" },
       { "<leader>xt", "<cmd>Trouble todo toggle<cr>", desc = "Todo (Trouble)" },
       { "<leader>xT", "<cmd>Trouble todo toggle filter = {tag = {TODO,FIX,FIXME}}<cr>", desc = "Todo/Fix/Fixme (Trouble)" },
-      { "<leader>st", "<cmd>TodoTelescope<cr>", desc = "Todo" },
-      { "<leader>sT", "<cmd>TodoTelescope keywords=TODO,FIX,FIXME<cr>", desc = "Todo/Fix/Fixme" },
+      { "<leader>st", function() Snacks.picker.todo_comments() end, desc = "Todo" },
+      { "<leader>sT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
     },
   },
 
@@ -414,28 +414,9 @@ return {
   -- markdown
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "markdown", "codecompanion", "Avante" },
+    ft = { "markdown", "codecompanion" },
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {},
-  },
-
-  -- quick file navigation
-  {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    opts = {},
-    -- stylua: ignore
-    keys = {
-      { "<leader>ha", function() require("harpoon"):list():add() end, desc = "Add to Harpoon" },
-      { "<leader>hh", function() require("harpoon").ui:toggle_quick_menu(require("harpoon"):list()) end, desc = "Harpoon Menu" },
-      { "<leader>hp", function() require("harpoon"):list():prev() end, desc = "Harpoon Previous" },
-      { "<leader>hn", function() require("harpoon"):list():next() end, desc = "Harpoon Next" },
-      { "<leader>1", function() require("harpoon"):list():select(1) end, desc = "Harpoon 1" },
-      { "<leader>2", function() require("harpoon"):list():select(2) end, desc = "Harpoon 2" },
-      { "<leader>3", function() require("harpoon"):list():select(3) end, desc = "Harpoon 3" },
-      { "<leader>4", function() require("harpoon"):list():select(4) end, desc = "Harpoon 4" },
-    },
   },
 }
