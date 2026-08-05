@@ -210,4 +210,4 @@ run = 'layout floating'
     # put it on the clipboard, never on disk.
     alt-s = 'exec-and-forget screencapture -i -c'
     alt-cmd-r = 'reload-config'
-    alt-enter = 'exec-and-forget open -n /Applications/kitty.app'
+    alt-enter = 'exec-and-forget open -na Ghostty'
