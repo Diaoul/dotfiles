@@ -33,6 +33,9 @@ direnv hook fish | source
 # mise-en-place
 mise activate fish | source
 
+# zoxide
+zoxide init fish | source
+
 # thefuck
 thefuck --alias | source
 

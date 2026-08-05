@@ -20,6 +20,10 @@ set -Ux MANPAGER "sh -c 'col -bx | bat -l man -p'"
 # ripgrep
 set -Ux RIPGREP_CONFIG_PATH ~/.config/ripgrep
 
+# zoxide
+# NOTE: setting this replaces zoxide's built-in $HOME exclusion, so $HOME is re-listed
+set -Ux _ZO_EXCLUDE_DIRS "$HOME:$HOME/.local:$HOME/.local/*"
+
 # swww
 set -Ux SWWW_TRANSITION grow
 set -Ux SWWW_TRANSITION_POS 0.75,0.7
