@@ -206,5 +206,8 @@ run = 'layout floating'
     # --quit-if-last-window is needed to match what killactive ends up doing.
     # Plain `close` is deliberately unbound: cmd-W already does it per-app.
     alt-w = 'close --quit-if-last-window'
+    # Shorter alias for the macOS cmd-ctrl-shift-4 built-in: drag a region and
+    # put it on the clipboard, never on disk.
+    alt-s = 'exec-and-forget screencapture -i -c'
     alt-cmd-r = 'reload-config'
     alt-enter = 'exec-and-forget open -n /Applications/kitty.app'
