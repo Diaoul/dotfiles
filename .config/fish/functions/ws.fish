@@ -250,19 +250,33 @@ function ws --description "Create worktree + tmux session"
         return
     end
 
-    # Create new worktree with next available NATO name
+    # Create new worktree: reuse the best free/ready/merged-clean slot before
+    # burning a fresh NATO name, so the fleet stops leaking slots.
     if test "$argv[1]" = "--new"
-        set -l nato alpha bravo charlie delta echo foxtrot golf hotel india juliet kilo lima mike november oscar papa quebec romeo sierra tango uniform victor whiskey xray yankee zulu
-        set -l existing (git -C $base_dir worktree list --porcelain | string match 'worktree *' | string replace 'worktree ' '' | xargs -n1 basename)
-        for name in $nato
-            if not contains $name $existing
-                echo "Creating worktree '$name'..."
-                ws $name
-                return
-            end
+        set -l slot (__ws_pick_slot $base_dir)
+        if test -z "$slot"
+            echo "No reusable or free slot available (all 26 in use, none clean)." >&2
+            echo "Free one up: ws status --dirty, then ws ready / ws -d <name>" >&2
+            return 1
         end
-        echo "All 26 NATO names are in use!"
-        return 1
+        set -l slot_path $base_dir/$slot
+        if test -d $slot_path
+            # Reusing an existing slot: repoint it at a fresh branch off origin/main
+            set -l old (git -C $slot_path branch --show-current 2>/dev/null)
+            set -l new_branch "abe-"(date +'%m%d')"-$slot"
+            echo "Reusing worktree '$slot' (was: $old) → $new_branch"
+            git -C $slot_path fetch origin main
+            git -C $slot_path checkout -B $new_branch origin/main
+            or return 1
+            # Parked placeholder branches are disposable; real branches are kept.
+            if test -n "$old"; and test "$old" != "$new_branch"; and string match -q 'ws-ready/*' $old
+                git -C $base_dir branch -D $old 2>/dev/null
+            end
+        else
+            echo "Creating worktree '$slot'..."
+        end
+        ws $slot
+        return
     end
 
     # Restore sessions for all existing worktrees
@@ -286,6 +300,23 @@ function ws --description "Create worktree + tmux session"
             return 1
         end
         echo $slot
+        return
+    end
+
+    # ws pick → fuzzy switcher over the fleet, with branch/PR/CI in the list
+    if test "$argv[1]" = pick
+        set -l table (begin
+                printf 'NAME\tBRANCH\tPR\tCI\tREUSE\tAGE\n'
+                ws status --json | jq -r '.[] |
+                    [.name, .branch, "\(.pr) \(.state)", .ci, .reuse, .age] | @tsv'
+            end | column -t -s \t)
+        if test (count $table) -le 1
+            echo "No worktrees to pick from. Try: ws --new" >&2
+            return 1
+        end
+        set -l line (printf '%s\n' $table | fzf --header-lines=1 --reverse --no-multi --prompt 'worktree> ')
+        test -z "$line"; and return
+        ws (string split -n ' ' -- $line)[1]
         return
     end
 

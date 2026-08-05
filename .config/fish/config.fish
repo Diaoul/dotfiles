@@ -7,6 +7,10 @@ function fish_user_key_bindings
   if ! set -q NVIM_LISTEN_ADDRESS
     fish_vi_key_bindings --no-erase insert
   end
+
+  # fuzzy-pick a worktree session
+  bind --preset -M insert \cg 'ws pick; commandline -f repaint'
+  bind --preset \cg 'ws pick; commandline -f repaint'
 end
 
 # cursor
