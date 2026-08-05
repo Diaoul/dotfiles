@@ -28,6 +28,10 @@ brew trust nikitabobko/tap
 # install packages
 brew bundle install --file="$HOME/Brewfile"
 
+# install the "Monospace" family alias (macOS has no fontconfig, so the shared
+# terminal configs asking for "Monospace" need a real font by that name)
+~/.local/bin/install-monospace-font-alias.py
+
 # setup fish
 fish ~/.config/fish/setup.fish
 

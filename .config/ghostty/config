@@ -1,5 +1,8 @@
 font-family = Monospace
 font-size = 13
+
+# cursive italics; on Linux fontconfig already sets this on the resolved family
+font-feature = ss01
 theme = Rose Pine
 window-padding-x = 8
 window-padding-y = 6
