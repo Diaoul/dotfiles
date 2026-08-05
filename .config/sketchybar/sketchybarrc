@@ -5,42 +5,55 @@ PLUGIN_DIR="$CONFIG_DIR/plugins"
 # theme
 source "$CONFIG_DIR/colors.sh"
 
+# No bar background at all: the widgets are opaque overlay pills, so they float
+# directly on the wallpaper. corner_radius and blur_radius only shape a fill that
+# no longer exists, and a border would outline empty space.
 bar=(
   position=top
   height=36
   margin=16
   y_offset=8
-  corner_radius=10
-  blur_radius=30
-  color="$BAR_COLOR"
+  blur_radius=0
+  color="$TRANSPARENT"
+  border_width=0
 )
 sketchybar --bar "${bar[@]}"
 
+# A pill's size comes from its content insets, not from the background itself:
+# icon.padding_left and label.padding_right are its outer edges, and
+# icon.padding_right + label.padding_left is the gap between glyph and text.
+# padding_left/right sit outside the pill and space the widgets apart.
 default=(
   padding_left=5
   padding_right=5
   icon.font="CaskaydiaCove Nerd Font:Bold:17.0"
-  icon.color="$ACCENT_COLOR"
-  icon.padding_left=6
-  icon.padding_right=4
+  icon.color="$ROSE"
+  icon.padding_left=11
+  icon.padding_right=5
   label.font="CaskaydiaCove Nerd Font:Bold:17.0"
-  label.color="$ACCENT_COLOR"
-  label.padding_left=4
-  label.padding_right=6
-  background.color="$BACKGROUND_LIGHT"
-  background.corner_radius=5
-  background.height=24
+  label.color="$WHITE"
+  label.padding_left=5
+  label.padding_right=11
+  background.color="$OVERLAY"
+  background.corner_radius=6
+  background.height=28
   background.drawing=off
 )
 sketchybar --default "${default[@]}"
 
 # load items
-# source "$CONFIG_DIR/items/apple.sh"
 source "$CONFIG_DIR/items/workspaces.sh"
-source "$CONFIG_DIR/items/front_app.sh"
+# Right-hand items are laid out right-to-left in the order they are added, so
+# this reads as the reverse of what you see: datetime anchors the right edge and
+# media ends up leftmost. Each widget carries its own overlay pill.
 source "$CONFIG_DIR/items/datetime.sh"
 source "$CONFIG_DIR/items/volume.sh"
 source "$CONFIG_DIR/items/battery.sh"
+source "$CONFIG_DIR/items/network.sh"
 source "$CONFIG_DIR/items/slack.sh"
+source "$CONFIG_DIR/items/media.sh"
+
+# reload the bar by itself whenever a file under CONFIG_DIR changes
+sketchybar --hotload true
 
 sketchybar --update
