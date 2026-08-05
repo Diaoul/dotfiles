@@ -10,9 +10,7 @@ export HISTFILESIZE='20000'
 
 # PATH
 export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$HOME/.krew/bin:$PATH
-if [ "$(uname)" == "Darwin" ]; then
-  export PATH=/opt/homebrew/bin:$PATH
-fi
+export PATH=/opt/homebrew/bin:$PATH
 
 # man
 export MANROFFOPT="-c"
@@ -24,8 +22,6 @@ export RIPGREP_CONFIG_PATH=~/.config/ripgrep
 # swww
 export SWWW_TRANSITION=grow
 export SWWW_TRANSITION_POS=0.75,0.7
-# export PATH
-export PATH=$HOME/.local/bin:$HOME/.cargo/bin:$PATH
 
 # if not running interactively, don't do anything else
 [[ $- != *i* ]] && return
