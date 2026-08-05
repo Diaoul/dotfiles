@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>yubikey-touch-detector</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/antoine.bertin/.local/bin/yubikey-touch-detector.sh</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <!-- The daemon is a loop that should never end; restart it if it does. -->
+  <key>KeepAlive</key>
+  <true/>
+  <key>StandardErrorPath</key>
+  <string>/tmp/yubikey-touch-detector.log</string>
+</dict>
+</plist>

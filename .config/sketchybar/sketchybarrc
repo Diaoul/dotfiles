@@ -52,6 +52,9 @@ source "$CONFIG_DIR/items/battery.sh"
 source "$CONFIG_DIR/items/network.sh"
 source "$CONFIG_DIR/items/slack.sh"
 source "$CONFIG_DIR/items/media.sh"
+# Last, so it sits at the left edge of the right-hand cluster, and hidden until
+# yubikey-touch-detector.sh says the key is waiting for a touch.
+source "$CONFIG_DIR/items/yubikey.sh"
 
 # reload the bar by itself whenever a file under CONFIG_DIR changes
 sketchybar --hotload true
