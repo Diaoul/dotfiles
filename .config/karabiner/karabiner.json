@@ -5451,7 +5451,7 @@
                                     "key_code": "i",
                                     "modifiers": {
                                         "mandatory": ["control"],
-                                        "optional": ["any"]
+                                        "optional": ["caps_lock"]
                                     }
                                 },
                                 "to": [

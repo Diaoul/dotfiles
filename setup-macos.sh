@@ -75,6 +75,13 @@ defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
+# tap to click (built-in trackpad, Bluetooth trackpad, and the global flag the
+# login window and non-trackpad-aware apps read)
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
 # screenshots in their own folder
 mkdir -p ~/Screenshots
 defaults write com.apple.screencapture location ~/Screenshots

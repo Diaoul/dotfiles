@@ -5,7 +5,7 @@ persistent-workspaces = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
 # the sketchybar plugin scripts: they are spawned by the daemon started here and
 # inherit its environment, so they cannot be fixed from sketchybarrc.
 after-startup-command = [
-    'exec-and-forget /bin/bash -c "sketchybar --reload || sketchybar"',
+    'exec-and-forget /bin/bash -c "pgrep -x sketchybar >/dev/null && sketchybar --reload || sketchybar"',
     'exec-and-forget borders',
     'exec-and-forget ~/.config/aerospace/scripts/workspaces.sh'
 ]
@@ -179,12 +179,10 @@ run = 'layout floating'
     alt-0 = 'workspace 10'
 
     # Move
-    alt-shift-m = 'move left'
-    alt-shift-n = 'move down'
-    alt-shift-e = 'move up'
-    alt-shift-i = 'move right'
-    alt-shift-ctrl-m = 'move-node-to-monitor --focus-follows-window left'
-    alt-shift-ctrl-i = 'move-node-to-monitor --focus-follows-window right'
+    alt-shift-m = 'move --boundaries all-monitors-outer-frame --boundaries-action stop left'
+    alt-shift-n = 'move --boundaries all-monitors-outer-frame --boundaries-action stop down'
+    alt-shift-e = 'move --boundaries all-monitors-outer-frame --boundaries-action stop up'
+    alt-shift-i = 'move --boundaries all-monitors-outer-frame --boundaries-action stop right'
     alt-shift-u = [ 'move-node-to-workspace --wrap-around next', 'workspace --wrap-around next' ]
     alt-shift-l = [ 'move-node-to-workspace --wrap-around prev', 'workspace --wrap-around prev' ]
     alt-shift-1 = 'move-node-to-workspace --focus-follows-window 1'
