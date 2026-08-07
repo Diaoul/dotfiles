@@ -11,6 +11,12 @@ SB_ARGS=()
 
 DISPLAY_FINGERPRINT_FILE=${SKETCHYBAR_DISPLAY_FINGERPRINT:-/tmp/sketchybar-displays.fingerprint}
 
+# Left behind by display_change.sh when a redistribution did not land, so that
+# the --reload it triggers on the way out does not record the new arrangement as
+# handled — the stale fingerprint is what makes the next display_change retry
+# instead of dismissing itself as a no-op. Consumed by the rebuild it guards.
+DISPLAY_RETRY_FILE=${SKETCHYBAR_DISPLAY_RETRY:-/tmp/sketchybar-displays.retry}
+
 # Identity of the current monitor arrangement: the display frames, ordered
 # left-to-right. Used to tell a real arrangement change (dock, undock,
 # resolution change) apart from a mere change of *active* display, which
@@ -21,6 +27,16 @@ display_fingerprint() {
 
 save_display_fingerprint() {
   display_fingerprint > "$DISPLAY_FINGERPRINT_FILE"
+}
+
+# Record the arrangement the workspace items were just built against, unless a
+# failed redistribution asked for the previous one to be kept so it retries.
+save_display_fingerprint_unless_retry() {
+  if [[ -f $DISPLAY_RETRY_FILE ]]; then
+    rm -f "$DISPLAY_RETRY_FILE"
+    return 0
+  fi
+  save_display_fingerprint
 }
 
 # Scripts are spawned by the sketchybar daemon and inherit *its* environment, so

@@ -29,8 +29,10 @@ sketchybar --add item workspace_events left \
 # each workspace item is pinned to a display index when it is created, so those
 # indexes go stale on dock/undock and nothing else would recreate them.
 # Recording the arrangement the items were just built against keeps the first
-# display_change after startup from triggering a needless rebuild.
-save_display_fingerprint
+# display_change after startup from triggering a needless rebuild — except when
+# display_change.sh has just failed to redistribute and left the old arrangement
+# recorded on purpose, so that the next event retries.
+save_display_fingerprint_unless_retry
 
 sketchybar --add item display_events left \
            --set display_events \
