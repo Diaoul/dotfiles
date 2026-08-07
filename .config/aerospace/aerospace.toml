@@ -158,15 +158,16 @@ run = 'layout floating'
 [mode.main.binding]
     # Focus
     ## Nodes
-    # --wrap-around is rejected alongside --boundaries; the equivalent is
-    # spelling the wrap out as the boundaries-action
-    alt-m = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors left'
-    alt-n = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors down'
-    alt-e = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors up'
-    alt-i = 'focus --boundaries all-monitors-outer-frame --boundaries-action wrap-around-all-monitors right'
+    # Focus crosses monitor edges but stops at the outermost one: wrapping from
+    # the far right back to the far left makes the direction keys unreliable to
+    # hold down, since the same key eventually walks backwards.
+    alt-m = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop left'
+    alt-n = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop down'
+    alt-e = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop up'
+    alt-i = 'focus --boundaries all-monitors-outer-frame --boundaries-action stop right'
     ## Workspaces
-    alt-u = 'workspace --wrap-around next'
-    alt-l = 'workspace --wrap-around prev'
+    alt-u = 'workspace next'
+    alt-l = 'workspace prev'
     alt-1 = 'workspace 1'
     alt-2 = 'workspace 2'
     alt-3 = 'workspace 3'
@@ -183,8 +184,8 @@ run = 'layout floating'
     alt-shift-n = 'move --boundaries all-monitors-outer-frame --boundaries-action stop down'
     alt-shift-e = 'move --boundaries all-monitors-outer-frame --boundaries-action stop up'
     alt-shift-i = 'move --boundaries all-monitors-outer-frame --boundaries-action stop right'
-    alt-shift-u = [ 'move-node-to-workspace --wrap-around next', 'workspace --wrap-around next' ]
-    alt-shift-l = [ 'move-node-to-workspace --wrap-around prev', 'workspace --wrap-around prev' ]
+    alt-shift-u = [ 'move-node-to-workspace next', 'workspace next' ]
+    alt-shift-l = [ 'move-node-to-workspace prev', 'workspace prev' ]
     alt-shift-1 = 'move-node-to-workspace --focus-follows-window 1'
     alt-shift-2 = 'move-node-to-workspace --focus-follows-window 2'
     alt-shift-3 = 'move-node-to-workspace --focus-follows-window 3'
