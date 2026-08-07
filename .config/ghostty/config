@@ -13,3 +13,6 @@ macos-titlebar-style = hidden
 gtk-titlebar = false
 resize-overlay = never
 font-thicken = true
+
+# send Alt instead of composing characters, so alt+<key> bindings reach the shell
+macos-option-as-alt = true

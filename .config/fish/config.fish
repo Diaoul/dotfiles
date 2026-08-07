@@ -11,6 +11,12 @@ function fish_user_key_bindings
   # fuzzy-pick a worktree session
   bind --preset -M insert \cg 'ws pick; commandline -f repaint'
   bind --preset \cg 'ws pick; commandline -f repaint'
+
+  # ctrl+backspace kills a word, matching PC-style text editing everywhere else
+  # (fish default is backward-kill-token, which eats the whole argument)
+  bind -M insert ctrl-backspace backward-kill-word
+  # alt+backspace takes over the displaced whole-token kill
+  bind -M insert alt-backspace backward-kill-token
 end
 
 # cursor
