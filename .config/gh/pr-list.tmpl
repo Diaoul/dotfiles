@@ -1,0 +1,43 @@
+{{- autocolor "black+hu" (printf "%-5s" "PR") -}}{{- "  " -}}{{- autocolor "black+hu" (printf "%-@TW@s" "TITLE") -}}{{- "  " -}}{{- autocolor "black+hu" (printf "%-2s" "CI") -}}{{- "  " -}}{{- autocolor "black+hu" (printf "%-@LW@s" "LABELS") -}}{{- "\n" -}}
+{{- range . -}}
+  {{- $fail := false -}}{{- $pend := false -}}
+  {{- range .statusCheckRollup -}}
+    {{- $s := printf "%v %v %v" (index . "status") (index . "conclusion") (index . "state") -}}
+    {{- if or (contains "FAILURE" $s) (or (contains "ERROR" $s) (or (contains "TIMED_OUT" $s) (contains "ACTION_REQUIRED" $s))) -}}
+      {{- $fail = true -}}
+    {{- else if or (contains "PENDING" $s) (or (contains "IN_PROGRESS" $s) (or (contains "QUEUED" $s) (contains "WAITING" $s))) -}}
+      {{- $pend = true -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $g := "·" -}}{{- $gc := "black+h" -}}
+  {{- if $fail -}}{{- $g = "✗" -}}{{- $gc = "red" -}}
+  {{- else if $pend -}}{{- $g = "●" -}}{{- $gc = "yellow" -}}
+  {{- else if gt (len .statusCheckRollup) 0 -}}{{- $g = "✓" -}}{{- $gc = "green" -}}
+  {{- end -}}
+  {{- $labels := "" -}}
+  {{- range .labels -}}
+    {{- $n := .name -}}
+    {{- if hasPrefix "renovate/" $n -}}
+    {{- else if eq $n "hold" -}}
+      {{- $labels = printf "%s %s" $labels (autocolor "white+b:red" "hold") -}}
+    {{- else if hasPrefix "type/" $n -}}
+      {{- $t := slice $n 5 -}}
+      {{- $c := "white" -}}
+      {{- if eq $t "digest" -}}{{- $c = "black+h" -}}
+      {{- else if eq $t "patch" -}}{{- $c = "green" -}}
+      {{- else if eq $t "minor" -}}{{- $c = "yellow" -}}
+      {{- else if eq $t "major" -}}{{- $c = "red+b" -}}
+      {{- end -}}
+      {{- $labels = printf "%s %s" $labels (autocolor $c $t) -}}
+    {{- else -}}
+      {{- $labels = printf "%s %s" $labels (autocolor "cyan" $n) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if gt (len $labels) 0 -}}{{- $labels = slice $labels 1 -}}{{- end -}}
+  {{- $num := printf "#%v" .number -}}
+  {{- $pad := slice (printf "%-7s" $num) (len $num) -}}
+  {{- hyperlink .url (autocolor "green+u" $num) -}}{{- $pad -}}
+  {{- printf "%-@TP@s" (.title | truncate @TW@) -}}
+  {{- autocolor $gc (printf "%-4s" $g) -}}
+  {{- $labels -}}{{- "\n" -}}
+{{- end -}}

@@ -2,4 +2,5 @@ version: "1"
 git_protocol: ssh
 pager: delta
 aliases:
-  co: pr checkout
+    co: pr checkout
+    prl: '!bash ~/.config/gh/prl.sh "$@"'
