@@ -235,6 +235,8 @@ return {
         prompt_for_file_name = false,
         drag_and_drop = {
           insert_mode = true,
+          -- every text paste goes through img-clip, which otherwise warns "Content is not an image."
+          verbose = false,
         },
       },
     },
