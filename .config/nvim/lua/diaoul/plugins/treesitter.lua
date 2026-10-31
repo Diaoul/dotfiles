@@ -151,7 +151,8 @@ return {
           for key, query in pairs(keymaps) do
             local name = query:gsub("@", ""):gsub("%..*", "")
             local desc = (key:sub(1, 1) == "[" and "Prev " or "Next ")
-              .. name:sub(1, 1):upper() .. name:sub(2)
+              .. name:sub(1, 1):upper()
+              .. name:sub(2)
               .. (key:sub(2, 2) == key:sub(2, 2):upper() and " End" or " Start")
             vim.keymap.set({ "n", "x", "o" }, key, function()
               if vim.wo.diff and key:find("[cC]") then
