@@ -36,7 +36,7 @@
   {{- if gt (len $labels) 0 -}}{{- $labels = slice $labels 1 -}}{{- end -}}
   {{- $num := printf "#%v" .number -}}
   {{- $pad := slice (printf "%-7s" $num) (len $num) -}}
-  {{- hyperlink .url (autocolor "green+u" $num) -}}{{- $pad -}}
+  {{- if eq "@LINK@" "1" -}}{{- hyperlink .url (autocolor "green+u" $num) -}}{{- else -}}{{- autocolor "green+u" $num -}}{{- end -}}{{- $pad -}}
   {{- printf "%-@TP@s" (.title | truncate @TW@) -}}
   {{- autocolor $gc (printf "%-4s" $g) -}}
   {{- $labels -}}{{- "\n" -}}
