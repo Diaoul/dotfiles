@@ -32,6 +32,8 @@ direnv hook fish | source
 
 # mise-en-place
 mise activate fish | source
+# shims as a fallback so subshells (lefthook, IDE git clients, cron) resolve tools
+fish_add_path -g -a ~/.local/share/mise/shims
 
 # zoxide
 zoxide init fish | source
