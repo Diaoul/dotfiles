@@ -1,3 +1,17 @@
+---@param bufnr integer
+---@return boolean
+local function is_k8s_manifest(bufnr)
+  local has_api_version, has_kind = false, false
+  for _, line in ipairs(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)) do
+    has_api_version = has_api_version or line:find("^apiVersion:") ~= nil
+    has_kind = has_kind or line:find("^kind:") ~= nil
+    if has_api_version and has_kind then
+      return true
+    end
+  end
+  return false
+end
+
 return {
   -- lspconfig
   {
@@ -59,10 +73,33 @@ return {
         rust_analyzer = {},
         taplo = {},
         ts_ls = {},
-        home_assistant = {
+        -- Kubernetes manifests go to yayamlls instead
+        yamlls = {
+          root_dir = function(bufnr, on_dir)
+            if not is_k8s_manifest(bufnr) then
+              on_dir(vim.fs.root(bufnr, { ".git" }))
+            end
+          end,
           settings = {
-            homeassistant = {
-              host = os.getenv("HASS_URL"),
+            yaml = {
+              customTags = {
+                "!env_var scalar",
+                "!include scalar",
+                "!include_dir_list scalar",
+                "!include_dir_merge_list scalar",
+                "!include_dir_merge_named scalar",
+                "!include_dir_named scalar",
+                "!input scalar",
+                "!secret scalar",
+              },
+            },
+          },
+        },
+        home_assistant = {
+          workspace_required = true,
+          settings = {
+            ["vscode-home-assistant"] = {
+              hostUrl = os.getenv("HASS_URL"),
               longLivedAccessToken = os.getenv("HASS_TOKEN"),
             },
           },
@@ -110,8 +147,11 @@ return {
             client.server_capabilities.hoverProvider = false
           end
 
-          -- attach navic
-          if client:supports_method(vim.lsp.protocol.Methods.textDocument_documentSymbol) then
+          -- attach navic (first symbol provider wins, it supports only one per buffer)
+          if
+            client:supports_method(vim.lsp.protocol.Methods.textDocument_documentSymbol)
+            and vim.b[event.buf].navic_client_id == nil
+          then
             require("nvim-navic").attach(client, event.buf)
           end
 
@@ -171,10 +211,15 @@ return {
       end
 
       -- yayamlls: Flux-aware YAML LS (not Mason-managed, installed via AUR)
+      -- only beats yamlls on Kubernetes manifests (apiVersion/kind schemas, Flux rendering)
       vim.lsp.config("yayamlls", {
         cmd = { "yayamlls" },
         filetypes = { "yaml" },
-        root_markers = { ".yayamlls.yaml", ".git" },
+        root_dir = function(bufnr, on_dir)
+          if is_k8s_manifest(bufnr) then
+            on_dir(vim.fs.root(bufnr, { ".yayamlls.yaml", ".git" }))
+          end
+        end,
         capabilities = capabilities,
       })
       vim.lsp.enable("yayamlls")
