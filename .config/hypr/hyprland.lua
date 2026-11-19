@@ -1,5 +1,4 @@
 -- Hyprland config, Lua format (>= 0.55).
--- Converted from hyprland.conf (hyprlang), which is kept as a reference.
 -- Docs: https://wiki.hypr.land/Configuring/Start/
 
 --
