@@ -95,15 +95,6 @@ return {
             },
           },
         },
-        home_assistant = {
-          workspace_required = true,
-          settings = {
-            ["vscode-home-assistant"] = {
-              hostUrl = os.getenv("HASS_URL"),
-              longLivedAccessToken = os.getenv("HASS_TOKEN"),
-            },
-          },
-        },
       },
     },
     config = function(_, opts)
@@ -185,11 +176,6 @@ return {
           end
         end,
       })
-
-      -- disable home assistant if missing config
-      if (os.getenv("HASS_URL") or "") == "" or (os.getenv("HASS_TOKEN") or "") == "" then
-        opts.servers.home_assistant = nil
-      end
 
       -- configuration
       require("mason").setup()

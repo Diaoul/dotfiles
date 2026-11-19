@@ -1,4 +1,2 @@
-export HASS_URL=$(pass show hass/url)
-export HASS_TOKEN=$(pass show hass/token)
 export TERMINAL=kitty
 export WLR_RENDERER=vulkan
