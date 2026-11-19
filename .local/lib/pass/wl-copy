@@ -1,0 +1,3 @@
+#!/bin/sh
+# pass has no copy-command setting; this marks its copies so clipboard history skips them
+exec /usr/bin/wl-copy --sensitive "$@"
