@@ -1,2 +1,1 @@
-export TERMINAL=kitty
-export WLR_RENDERER=vulkan
+export TERMINAL=ghostty
