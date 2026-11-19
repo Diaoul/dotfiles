@@ -1,0 +1,124 @@
+# Noctalia config — migrated from Wayle (2026-10-31)
+# Reference: https://docs.noctalia.dev/noctalia/ | GUI overrides: ~/.local/state/noctalia/settings.toml
+
+[shell]
+font_family = "Geist"
+# history skips `pass -c` copies: fish/functions/pass.fish makes them use `wl-copy --sensitive`
+clipboard_enabled = true
+# replaces hyprpolkitagent.service, which must stay disabled: only one agent can register
+polkit_agent = true
+
+[shell.panel]
+open_near_click_control_center = true
+
+[theme]
+mode = "dark"
+source = "builtin"
+builtin = "Rosé Pine"
+
+# awww-daemon.service draws the wallpaper
+[wallpaper]
+enabled = false
+
+# also answers `loginctl lock-session`, so hypridle must not run its own locker
+[lockscreen]
+enabled = true
+# awww draws the desktop wallpaper, so Noctalia has none to reuse
+wallpaper = "/home/antoine/wallpapers/current"
+
+# replaces hyprsunset.service, which must stay disabled: both drive gamma
+[nightlight]
+enabled = true
+temperature_day = 6000
+temperature_night = 5000
+
+[location]
+address = "Verneuil-sur-Seine"
+
+[weather]
+enabled = true
+unit = "celsius"
+
+# Dark chips with one pine accent; love is kept for alerts (YubiKey touch, low battery)
+[bar.main]
+position = "top"
+# attached panels share this opacity
+background_opacity = 0.85
+margin_ends = 0
+margin_edge = 0
+radius = 0
+shadow = false
+thickness = 42
+padding = 8
+widget_spacing = 8
+font_weight = 500
+font_scale = 1.1
+capsule = true
+capsule_thickness = 0.64
+capsule_radius = 6.0
+capsule_padding = 8.0
+capsule_fill = "surface_container"
+color = "on_surface"
+icon_color = "tertiary"
+start = ["control-center", "taskbar"]
+center = ["group:clock"]
+end = ["yubikey", "volume", "network", "bluetooth", "updates", "battery", "tray", "caffeine", "notifications"]
+
+[widget.control-center]
+custom_image = "/usr/share/pixmaps/archlinux-logo.svg"
+custom_image_colorize = true
+capsule_fill = "tertiary"
+color = "on_tertiary"
+icon_color = "on_tertiary"
+
+[widget.workspaces]
+show_labels = false
+focused_color = "tertiary"
+capsule = false
+# pill_scale caps at 1; pill height follows the widget scale
+scale = 1.35
+inactive_pill_size = 1.1
+active_pill_size = 1.65
+
+[[bar.main.capsule_group]]
+id = "clock"
+members = ["clock-icon", "clock"]
+fill = "surface_container"
+
+[widget.clock-icon]
+type = "custom_button"
+glyph = "calendar-time"
+
+[widget.clock]
+format = "{:%d/%m %H:%M:%S}"
+
+[widget.yubikey]
+type = "diaoul/yubikey-touch:yubikey"
+capsule_fill = "error"
+color = "on_primary"
+icon_color = "on_primary"
+
+[widget.volume]
+# Rosé Pine "subtle", as in notifications; one color covers icon and label, and the default love reads as an alert
+mute_color = "#908caa"
+
+[widget.network]
+show_label = false
+
+[widget.updates]
+type = "diaoul/updates:updates"
+
+[plugins]
+enabled = ["diaoul/updates", "diaoul/yubikey-touch"]
+
+# the volume keys used to allow up to 150%
+[audio]
+enable_overdrive = true
+
+# one capsule per workspace with its app icons; replaces `workspaces` since labels are off
+[widget.taskbar]
+group_by_workspace = true
+workspace_group_content = "icons"
+show_workspace_label = false
+group_single_icon_per_app = true
+prefer_symbolic_icons = true

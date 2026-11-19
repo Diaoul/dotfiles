@@ -20,14 +20,10 @@ hl.config({
 -- Exec --
 --
 hl.on("hyprland.start", function()
-    -- cursor
-    hl.exec_cmd('hyprctl setcursor "BreezeX-RoséPine" 26')
-    -- bar and wallpaper
-    hl.exec_cmd("uwsm app -- hyprpanel")
+    -- shell: bar, notifications, OSD (wallpaper stays with awww-daemon.service)
+    hl.exec_cmd("uwsm app -- noctalia")
     -- automount
     hl.exec_cmd("uwsm app -- udiskie")
-    -- app launcher
-    hl.exec_cmd("uwsm app -- hyprlauncher -d")
 end)
 
 --
@@ -232,6 +228,26 @@ hl.window_rule({
     idle_inhibit = "fullscreen",
 })
 
+hl.window_rule({
+    name  = "noctalia-settings",
+    match = { class = "dev.noctalia.Noctalia" },
+    float = true,
+    size  = { 1080, 920 },
+})
+
+--
+-- Layer Rules --
+--
+-- Noctalia animates its own surfaces; Hyprland's layer animations fight them
+hl.layer_rule({
+    name         = "noctalia",
+    match        = { namespace = "^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd|window-switcher)$" },
+    no_anim      = true,
+    ignore_alpha = 0.5,
+    blur         = true,
+    blur_popups  = true,
+})
+
 --
 -- Keybindings --
 --
@@ -243,11 +259,13 @@ hl.bind("SUPER + ALT + Q", hl.dsp.exit())
 
 -- apps
 -- launcher
-hl.bind("SUPER + Space", hl.dsp.exec_cmd("hyprlauncher"))
+hl.bind("SUPER + Space", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher"))
 -- emoji selector
-hl.bind("SUPER + Period", hl.dsp.exec_cmd("rofimoji --max-recent 8"))
+hl.bind("SUPER + Period", hl.dsp.exec_cmd("noctalia msg panel-toggle launcher /emo"))
+-- clipboard history
+hl.bind("SUPER + V", hl.dsp.exec_cmd("noctalia msg panel-toggle clipboard"))
 -- power menu
-hl.bind("SUPER + X", hl.dsp.exec_cmd("nwg-bar"))
+hl.bind("SUPER + X", hl.dsp.exec_cmd("noctalia msg panel-toggle session"))
 -- terminal
 -- foot (waiting for ligature support)
 -- hl.bind("SUPER + Return",         hl.dsp.exec_cmd("foot"))
@@ -343,22 +361,22 @@ hl.bind("SUPER + ALT + up",    hl.dsp.window.resize({ x = 0,   y = -10, relative
 hl.bind("SUPER + ALT + right", hl.dsp.window.resize({ x = 10,  y = 0,   relative = true }), { repeating = true })
 
 -- brightness
-hl.bind("CTRL + XF86MonBrightnessUp",    hl.dsp.exec_cmd("brightnessctl -d intel_backlight -c backlight set +1%"),  { repeating = true })
-hl.bind("CTRL + XF86MonBrightnessDown",  hl.dsp.exec_cmd("brightnessctl -d intel_backlight -c backlight set 1%-"),  { repeating = true })
-hl.bind("XF86MonBrightnessUp",           hl.dsp.exec_cmd("brightnessctl -d intel_backlight -c backlight set +5%"),  { repeating = true })
-hl.bind("XF86MonBrightnessDown",         hl.dsp.exec_cmd("brightnessctl -d intel_backlight -c backlight set 5%-"),  { repeating = true })
-hl.bind("SHIFT + XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl -d intel_backlight -c backlight set +10%"), { repeating = true })
-hl.bind("SHIFT + XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -d intel_backlight -c backlight set 10%-"), { repeating = true })
+hl.bind("CTRL + XF86MonBrightnessUp",    hl.dsp.exec_cmd("noctalia msg brightness-up eDP-1 1"),    { repeating = true })
+hl.bind("CTRL + XF86MonBrightnessDown",  hl.dsp.exec_cmd("noctalia msg brightness-down eDP-1 1"),  { repeating = true })
+hl.bind("XF86MonBrightnessUp",           hl.dsp.exec_cmd("noctalia msg brightness-up eDP-1 5"),    { repeating = true })
+hl.bind("XF86MonBrightnessDown",         hl.dsp.exec_cmd("noctalia msg brightness-down eDP-1 5"),  { repeating = true })
+hl.bind("SHIFT + XF86MonBrightnessUp",   hl.dsp.exec_cmd("noctalia msg brightness-up eDP-1 10"),   { repeating = true })
+hl.bind("SHIFT + XF86MonBrightnessDown", hl.dsp.exec_cmd("noctalia msg brightness-down eDP-1 10"), { repeating = true })
 
 -- media
-hl.bind("CTRL + XF86AudioRaiseVolume",  hl.dsp.exec_cmd("wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 1%+"),  { repeating = true })
-hl.bind("CTRL + XF86AudioLowerVolume",  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"),         { repeating = true })
-hl.bind("XF86AudioRaiseVolume",         hl.dsp.exec_cmd("wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+"),  { repeating = true })
-hl.bind("XF86AudioLowerVolume",         hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),         { repeating = true })
-hl.bind("SHIFT + XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 10%+"), { repeating = true })
-hl.bind("SHIFT + XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 10%-"),        { repeating = true })
-hl.bind("XF86AudioMute",                hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),        { repeating = true })
-hl.bind("CTRL + XF86AudioMute",         hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),      { repeating = true })
+hl.bind("CTRL + XF86AudioRaiseVolume",  hl.dsp.exec_cmd("noctalia msg volume-up 1"),               { repeating = true })
+hl.bind("CTRL + XF86AudioLowerVolume",  hl.dsp.exec_cmd("noctalia msg volume-down 1"),             { repeating = true })
+hl.bind("XF86AudioRaiseVolume",         hl.dsp.exec_cmd("noctalia msg volume-up 5"),               { repeating = true })
+hl.bind("XF86AudioLowerVolume",         hl.dsp.exec_cmd("noctalia msg volume-down 5"),             { repeating = true })
+hl.bind("SHIFT + XF86AudioRaiseVolume", hl.dsp.exec_cmd("noctalia msg volume-up 10"),              { repeating = true })
+hl.bind("SHIFT + XF86AudioLowerVolume", hl.dsp.exec_cmd("noctalia msg volume-down 10"),            { repeating = true })
+hl.bind("XF86AudioMute",                hl.dsp.exec_cmd("noctalia msg volume-mute"),               { repeating = true })
+hl.bind("CTRL + XF86AudioMute",         hl.dsp.exec_cmd("noctalia msg mic-mute"),                  { repeating = true })
 hl.bind("XF86AudioPlay",                hl.dsp.exec_cmd("playerctl play"),                                    { repeating = true })
 hl.bind("XF86AudioPause",               hl.dsp.exec_cmd("playerctl pause"),                                   { repeating = true })
 hl.bind("XF86AudioStop",                hl.dsp.exec_cmd("playerctl stop"),                                    { repeating = true })

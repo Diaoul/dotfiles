@@ -1,0 +1,17 @@
+id           = "diaoul/yubikey-touch"
+name         = "YubiKey Touch"
+version      = "1.0.0"
+plugin_api   = 3
+author       = "diaoul"
+icon         = "key"
+description  = "Shows a key while the YubiKey waits for a touch."
+dependencies = ["yubikey-touch-detector"]
+
+# one detector connection for every bar
+[[service]]
+id    = "detector"
+entry = "service.luau"
+
+[[widget]]
+id    = "yubikey"
+entry = "widget.luau"
