@@ -46,23 +46,7 @@ hl.monitor({
 --
 -- Workspaces --
 --
--- Workspaces are pinned to monitors by description, so the same physical
--- display always owns the same workspaces. Hotplug is handled natively:
--- on disconnect Hyprland records the owning monitor per workspace and moves
--- them to a surviving one, on reconnect it moves them back.
--- (replaces scripts/workspaces.sh)
-local wsMonitors = {
-    ["eDP-1"]                               = { 1, 2, 3 },
-    ["desc:Dell Inc. DELL S2722QC 7901MD3"] = { 4, 5, 6, 7 },
-    ["desc:Dell Inc. DELL S2722QC DBX9MD3"] = { 8, 9, 10 },
-}
-for mon, ids in pairs(wsMonitors) do
-    for _, i in ipairs(ids) do
-        hl.workspace_rule({ workspace = tostring(i), monitor = mon, persistent = true })
-    end
-end
-
-hl.workspace_rule({ workspace = "special:scratchpad", gaps_in = 50, gaps_out = 50 })
+hl.workspace_rule({ workspace = "special:scratchpad", gaps_in = 50, gaps_out = 150 })
 
 --
 -- Gestures --
@@ -190,7 +174,6 @@ hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 5, bezier = "e
 hl.config({
     dwindle = {
         force_split          = 2,
-        special_scale_factor = 0.8,
     },
 })
 
@@ -314,10 +297,69 @@ hl.bind("SUPER + down",  hl.dsp.focus({ direction = "down" }))
 hl.bind("SUPER + up",    hl.dsp.focus({ direction = "up" }))
 hl.bind("SUPER + right", hl.dsp.focus({ direction = "right" }))
 
+-- Nearest workspace on this monitor in `dir`, plus every id in use: ids held
+-- by other monitors must be skipped, or the dispatch pulls focus there.
+local function adjacent_workspace(cur, dir)
+    local mon = cur.monitor and cur.monitor.name
+    local used = {}
+    local target
+    for _, ws in ipairs(hl.get_workspaces()) do
+        if not ws.special and ws.id then
+            used[ws.id] = true
+            if ws.monitor and ws.monitor.name == mon
+                and (ws.id - cur.id) * dir > 0
+                and (not target or math.abs(ws.id - cur.id) < math.abs(target - cur.id)) then
+                target = ws.id
+            end
+        end
+    end
+    return target, used
+end
+
+-- First free id past `id` in `dir`, or nil below 1.
+local function free_id(used, id, dir)
+    id = id + dir
+    while used[id] do id = id + dir end
+    if id >= 1 then return id end
+end
+
+-- Next/previous workspace on this monitor; past the last one, open a single
+-- empty workspace, never a second one (r+1 alone keeps creating them). A
+-- moved window may leave an empty workspace behind, so repeated moves walk it
+-- further out.
+local function step_workspace(dir, moving, dispatcher)
+    return function()
+        local cur = hl.get_active_workspace()
+        if not cur or not cur.id then return end
+        local target, used = adjacent_workspace(cur, dir)
+        if not target and (moving or cur.windows > 0) then
+            target = free_id(used, cur.id, dir)
+        end
+        if target then hl.dispatch(dispatcher(tostring(target))) end
+    end
+end
+
+-- Into the scratchpad, or out of it onto the workspace shown under it.
+local function toggle_scratchpad()
+    local win = hl.get_active_window()
+    if not win then return end
+    if win.workspace and win.workspace.special then
+        local ws = win.monitor and win.monitor.active_workspace
+        if ws and ws.id then
+            hl.dispatch(hl.dsp.window.move({ workspace = tostring(ws.id), follow = true }))
+        end
+    else
+        hl.dispatch(hl.dsp.window.move({ workspace = "special:scratchpad", follow = true }))
+    end
+end
+
+local function focus_ws(id) return hl.dsp.focus({ workspace = id }) end
+local function move_ws(id) return hl.dsp.window.move({ workspace = id, follow = true }) end
+
 -- focus workspace
 -- direction
-hl.bind("SUPER + U", hl.dsp.focus({ workspace = "m+1" }))
-hl.bind("SUPER + L", hl.dsp.focus({ workspace = "m-1" }))
+hl.bind("SUPER + U", step_workspace(1, false, focus_ws))
+hl.bind("SUPER + L", step_workspace(-1, false, focus_ws))
 hl.bind("SUPER + minus", hl.dsp.workspace.toggle_special("scratchpad"))
 
 -- focus monitor
@@ -339,9 +381,9 @@ hl.bind("SUPER + SHIFT + right", hl.dsp.window.move({ direction = "right" }))
 
 -- move window to workspace
 -- direction
-hl.bind("SUPER + SHIFT + U", hl.dsp.window.move({ workspace = "m+1", follow = true }))
-hl.bind("SUPER + SHIFT + L", hl.dsp.window.move({ workspace = "m-1", follow = true }))
-hl.bind("SUPER + SHIFT + minus", hl.dsp.window.move({ workspace = "special:scratchpad", follow = true }))
+hl.bind("SUPER + SHIFT + U", step_workspace(1, true, move_ws))
+hl.bind("SUPER + SHIFT + L", step_workspace(-1, true, move_ws))
+hl.bind("SUPER + SHIFT + minus", toggle_scratchpad)
 
 -- move window to monitor
 -- direction
