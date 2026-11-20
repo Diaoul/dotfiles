@@ -1,12 +1,10 @@
-#!/usr/bin/fish
-
 # key bindings
 function fish_user_key_bindings
-  fish_default_key_bindings -M insert
+    fish_default_key_bindings -M insert
 
-  if ! set -q NVIM_LISTEN_ADDRESS
-    fish_vi_key_bindings --no-erase insert
-  end
+    if ! set -q NVIM_LISTEN_ADDRESS
+        fish_vi_key_bindings --no-erase insert
+    end
 end
 
 # cursor
@@ -24,7 +22,7 @@ set -gx SSH_AUTH_SOCK (gpgconf --list-dirs agent-ssh-socket)
 
 # pyenv
 if type -q pyenv
-  pyenv init --path fish | source
+    pyenv init --path fish | source
 end
 
 # direnv

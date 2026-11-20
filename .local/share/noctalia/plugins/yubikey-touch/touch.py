@@ -12,7 +12,7 @@ import socket
 import sys
 import time
 
-RUNTIME_DIR = os.environ.get("XDG_RUNTIME_DIR", "/run/user/%d" % os.getuid())
+RUNTIME_DIR = os.environ.get("XDG_RUNTIME_DIR", f"/run/user/{os.getuid()}")
 SOCKET_PATH = os.path.join(RUNTIME_DIR, "yubikey-touch-detector.socket")
 FRAME_LEN = 5
 LABELS = {"GPG": "GPG", "U2F": "U2F", "MAC": "HMAC"}
@@ -66,7 +66,7 @@ def main():
         try:
             watch()
         except (OSError, ConnectionError) as exc:
-            print("yubikey-touch: %s" % exc, file=sys.stderr)
+            print(f"yubikey-touch: {exc}", file=sys.stderr)
         emit(set())
         time.sleep(2)
 

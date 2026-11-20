@@ -9,12 +9,12 @@ set -U fish_greeting ""
 
 # PATH
 set -U fish_user_paths \
-  $HOME/.local/bin \
-  $HOME/.cargo/bin \
-  $HOME/.krew/bin
+    $HOME/.local/bin \
+    $HOME/.cargo/bin \
+    $HOME/.krew/bin
 
 # man
-set -Ux MANROFFOPT "-c"
+set -Ux MANROFFOPT -c
 set -Ux MANPAGER "sh -c 'col -bx | bat -l man -p'"
 
 # ripgrep
@@ -60,7 +60,7 @@ alias -s lazyvim "NVIM_APPNAME=lazyvim nvim"
 # gnome/gtk desktop settings (persisted in dconf, reapplied here)
 # middle-click primary-selection paste for GTK apps (ghostty, etc.)
 if type -q gsettings
-  gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true
+    gsettings set org.gnome.desktop.interface gtk-enable-primary-paste true
 end
 
 # fisher
@@ -68,5 +68,5 @@ curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fi
 
 # local configuration
 if test -f ~/.config/fish/local.fish
-  source ~/.config/fish/local.fish
+    source ~/.config/fish/local.fish
 end

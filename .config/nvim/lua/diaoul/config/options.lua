@@ -82,7 +82,7 @@ opt.foldminlines = 1
 -- Status column
 opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 
--- Formating
+-- Formatting
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 -- Fix markdown indentation settings

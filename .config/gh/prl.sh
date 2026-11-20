@@ -9,10 +9,10 @@ cols=${PRL_COLS:-$(stty size 2>/dev/null </dev/tty | cut -d' ' -f2 || true)}
 link=0
 [[ -t 1 ]] && link=1
 
-lw=20                     # LABELS column
+lw=20                  # LABELS column
 tw=$((cols - 13 - lw)) # PR col 7 + CI col 4 + 2 trailing gap
 ((tw < 40)) && tw=40
-((tw > 114)) && tw=114    # longest title seen in this repo
+((tw > 114)) && tw=114 # longest title seen in this repo
 
 tmpl=$(sed "s/@TW@/$tw/g; s/@TP@/$((tw + 2))/g; s/@LW@/$lw/g; s/@LINK@/$link/g" ~/.config/gh/pr-list.tmpl)
 gh pr list --json number,title,url,labels,statusCheckRollup --template "$tmpl" "$@"

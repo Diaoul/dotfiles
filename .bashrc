@@ -36,12 +36,15 @@ export FZF_DEFAULT_OPTS="
   --cycle --border --height=90% --preview-window=wrap --marker=\">\""
 
 # ls colors
-export LS_COLORS="$(vivid generate rose-pine)"
+LS_COLORS="$(vivid generate rose-pine)"
+export LS_COLORS
 
 # gpg
-export GPG_TTY="$(tty)"
+GPG_TTY="$(tty)"
+export GPG_TTY
 gpg-connect-agent updatestartuptty /bye >/dev/null
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+export SSH_AUTH_SOCK
 
 # vi mode
 set -o vi
@@ -84,7 +87,7 @@ alias grep='rg'
 alias myip="dog --short myip.opendns.com @resolver1.opendns.com"
 
 # dotfiles git bare
-alias dotfiles="git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+alias dotfiles='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # pyenv
 if command -v pyenv &>/dev/null; then

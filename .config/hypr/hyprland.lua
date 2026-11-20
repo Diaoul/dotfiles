@@ -235,7 +235,7 @@ hl.layer_rule({
 -- Keybindings --
 --
 -- see https://wiki.hypr.land/Configuring/Basics/Binds/
--- maintainance
+-- maintenance
 -- quit hyprland
 -- NOTE: uwsm users are advised to use `uwsm stop` instead of the exit dispatcher
 hl.bind("SUPER + ALT + Q", hl.dsp.exit())
