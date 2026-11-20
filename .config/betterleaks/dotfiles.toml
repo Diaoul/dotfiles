@@ -1,0 +1,9 @@
+# Passed with --config: betterleaks never auto-loads a config from the scanned repo.
+
+# GPG key fingerprints are public
+filter = '''
+filter.matchesAny(finding["line"], [`^\s*signingkey\s*=\s*[0-9A-Fa-f]{40}\s*$`])
+'''
+
+[extend]
+useDefault = true

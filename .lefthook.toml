@@ -1,0 +1,100 @@
+glob_matcher = "doublestar"
+
+# Sequential: several fixers rewrite the same files.
+[pre-commit]
+parallel = false
+
+[pre-commit.commands.trailing-whitespace]
+run = "trailing-whitespace-fixer {staged_files}"
+file_types = ["text"]
+stage_fixed = true
+
+[pre-commit.commands.end-of-file]
+run = "end-of-file-fixer {staged_files}"
+file_types = ["text"]
+stage_fixed = true
+
+[pre-commit.commands.line-endings]
+run = "mixed-line-ending --fix=lf {staged_files}"
+file_types = ["text"]
+stage_fixed = true
+
+[pre-commit.commands.merge-conflict]
+run = "check-merge-conflict {staged_files}"
+file_types = ["text"]
+
+[pre-commit.commands.symlinks]
+run = "check-symlinks {staged_files}"
+file_types = ["symlink"]
+
+[pre-commit.commands.executables-have-shebangs]
+run = "check-executables-have-shebangs {staged_files}"
+file_types = ["executable", "text"]
+
+[pre-commit.commands.shebang-scripts-are-executable]
+run = "check-shebang-scripts-are-executable {staged_files}"
+file_types = ["text"]
+# sourced, the shebang only tells shellcheck the dialect
+exclude = [".bashrc"]
+
+[pre-commit.commands.json]
+run = "check-json {staged_files}"
+glob = ["**/*.json"]
+
+[pre-commit.commands.toml]
+run = "check-toml {staged_files}"
+glob = ["**/*.toml"]
+
+[pre-commit.commands.yaml]
+run = "check-yaml {staged_files}"
+glob = ["**/*.{yaml,yml}"]
+
+[pre-commit.commands.secrets]
+run = "betterleaks git --pre-commit --staged --redact --verbose --no-banner --config .config/betterleaks/dotfiles.toml ."
+
+[pre-commit.commands.typos]
+run = "typos --config .config/typos/dotfiles.toml --force-exclude {staged_files}"
+file_types = ["text"]
+
+[pre-commit.commands.shellcheck]
+run = "shellcheck {staged_files}"
+file_types = ["text/x-shellscript", "text/x-sh"]
+
+[pre-commit.commands.shfmt]
+run = "shfmt --write --indent 2 {staged_files}"
+file_types = ["text/x-shellscript", "text/x-sh"]
+stage_fixed = true
+
+[pre-commit.commands.stylua]
+run = "stylua {staged_files}"
+glob = [".config/nvim/**/*.lua"]
+stage_fixed = true
+
+[pre-commit.commands.ruff-check]
+run = "ruff check --fix {staged_files}"
+glob = ["**/*.py"]
+stage_fixed = true
+
+[pre-commit.commands.ruff-format]
+run = "ruff format {staged_files}"
+glob = ["**/*.py"]
+stage_fixed = true
+
+[pre-commit.commands.fish_indent]
+run = "fish_indent --write {staged_files}"
+glob = ["**/*.fish", ".local/bin/walle"]
+stage_fixed = true
+# CI runners ship an older fish whose formatting differs
+skip = [{ run = 'test -n "${CI:-}"' }]
+
+[pre-commit.commands.renovate]
+run = "check-jsonschema --builtin-schema vendor.renovate {staged_files}"
+glob = ["renovate.json"]
+
+[pre-commit.commands.actionlint]
+run = "actionlint {staged_files}"
+glob = [".github/workflows/*.{yaml,yml}"]
+
+[pre-commit.commands.zizmor]
+run = "zizmor {staged_files}"
+glob = [".github/workflows/*.{yaml,yml}"]

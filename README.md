@@ -2,7 +2,7 @@
 
 _I use Arch, btw._
 
-![pre-commit](https://img.shields.io/github/actions/workflow/status/Diaoul/dotfiles/pre-commit.yml?label=pre-commit&style=for-the-badge)
+![lint](https://img.shields.io/github/actions/workflow/status/Diaoul/dotfiles/lint.yaml?label=lint&style=for-the-badge)
 
 ## :camera_flash: Screenshots
 
@@ -24,7 +24,8 @@ dotfiles config --local remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*
 dotfiles sparse-checkout set --no-cone "/*" "!/.github/"
 dotfiles checkout
 
-GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME pre-commit install
+mise install
+GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME lefthook install
 ```
 
 If `dotfiles checkout` refuses to overwrite pre-existing files (e.g. a stock
