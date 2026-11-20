@@ -1,4 +1,4 @@
-local POLL_MS = 24 * 60 * 1000
+local POLL_MS = 24 * 60 * 60 * 1000
 
 local checking = false
 

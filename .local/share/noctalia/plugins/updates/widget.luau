@@ -15,7 +15,9 @@ function update()
 end
 
 function onClick()
-  noctalia.runAsync("ghostty -e paru -Syu")
+  noctalia.runAsync("ghostty -e paru -Syu", function()
+    noctalia.state.set("refresh", os.time())
+  end)
 end
 
 function onRightClick()
