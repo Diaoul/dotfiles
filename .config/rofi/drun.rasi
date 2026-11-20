@@ -1,7 +1,0 @@
-configuration{
-    modi: "drun";
-    show-icons: true;
-    hover-select: true;
-}
-
-@theme "~/.config/rofi/gruvbox.rasi"

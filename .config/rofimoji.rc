@@ -1,5 +1,0 @@
-action = type
-skin-tone = neutral
-max-recent = 10
-prompt =  Emoji
-selector-args = "-theme ~/.config/rofi/emoji.rasi"

@@ -17,8 +17,3 @@ file = '~/.config/kitty/theme.conf'
 template = 'kitty'
 subtemplate = 'default-256'
 rewrite = true
-
-[[item]]
-file = '~/.config/alacritty/alacritty.yml'
-template = 'alacritty'
-subtemplate = 'default-256'
