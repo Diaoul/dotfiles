@@ -21,13 +21,10 @@ LABELS = {"GPG": "GPG", "U2F": "U2F", "MAC": "HMAC"}
 def emit(active):
     if active:
         names = [LABELS[k] for k in ("GPG", "U2F", "MAC") if k in active]
-        payload = {
-            "text": "touch",
-            "alt": "waiting",
-            "class": "yubikey-waiting",
-            "tooltip": "YubiKey waiting for touch: " + ", ".join(names),
-        }
-        print(json.dumps(payload), flush=True)
+        print(
+            json.dumps({"tooltip": "YubiKey waiting for touch: " + ", ".join(names)}),
+            flush=True,
+        )
     else:
         # Plain "false" (not a JSON object) so the widget hides itself.
         print("false", flush=True)
