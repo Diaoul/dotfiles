@@ -1,4 +1,3 @@
-# Noctalia config — migrated from Wayle (2026-10-31)
 # Reference: https://docs.noctalia.dev/noctalia/ | GUI overrides: ~/.local/state/noctalia/settings.toml
 
 [shell]
