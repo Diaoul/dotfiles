@@ -1,16 +1,22 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended",
-    "helpers:pinGitHubActionDigests",
-    ":timezone(Europe/Paris)"
-  ],
+  "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
   "packageRules": [
     {
       "description": "Auto-merge mise tools",
       "matchManagers": ["mise"],
       "matchUpdateTypes": ["minor", "patch"],
       "matchCurrentVersion": "!/^v?0/",
+      "minimumReleaseAge": "3 days",
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "Auto-merge patches of 0.x mise tools",
+      "matchManagers": ["mise"],
+      "matchUpdateTypes": ["patch"],
+      "matchCurrentVersion": "/^v?0/",
+      "minimumReleaseAge": "3 days",
       "automerge": true,
       "automergeType": "pr"
     },
@@ -20,7 +26,7 @@
       "matchUpdateTypes": ["minor", "patch", "digest"],
       "minimumReleaseAge": "3 days",
       "automerge": true,
-      "automergeType": "branch"
+      "automergeType": "pr"
     }
   ]
 }
