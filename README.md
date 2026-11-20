@@ -54,11 +54,6 @@ There are other nice looking fonts [out](https://terminal.sexy/)
 
 To preview and apply those, I run `nwg-look`.
 
-### Firefox
-
-I published my own theme made with [Firefox Color](https://color.firefox.com/)
-which is available [here](https://addons.mozilla.org/addon/yagdmit/).
-
 ### Spotify
 
 I use [`spotify-player`](https://github.com/aome510/spotify-player) in the
