@@ -30,82 +30,65 @@ GIT_DIR=$HOME/.dotfiles GIT_WORK_TREE=$HOME pre-commit install
 If `dotfiles checkout` refuses to overwrite pre-existing files (e.g. a stock
 `.bashrc`), move them out of the way and retry, or use `dotfiles checkout -f`.
 
-On macOS, then run:
-
-```fish
-~/setup-macos.sh
-```
-
 ## :art: Style
 
-I love [gruvbox](https://github.com/gruvbox-community/gruvbox) :heart:
+I love [Rosé Pine](https://rosepinetheme.com/) :heart: and use it everywhere:
+GTK, icons, cursors, Hyprland, Noctalia, Neovim, fish, tmux and k9s.
 
 ### Font
 
-Currently, I use [Monaspace](https://github.com/githubnext/monaspace) or [Cascadia Code](https://github.com/microsoft/cascadia-code)
-Nerd Font variants but I switch regularly when I get too bored!
+Currently, I use [Maple Mono](https://github.com/subframe7536/maple-font) Nerd
+Font but I switch regularly when I get too bored!
 
-See my [fontconfig](.config/fontconfig/fonts.conf) for more details
+See my [fontconfig](.config/fontconfig/fonts.conf) for more details and
+alternatives.
 
 There are other nice looking fonts [out](https://terminal.sexy/)
 [there](https://www.programmingfonts.org/).
 
-### Cursors
+### GTK, icons and cursors
 
-I use [Simp1e](https://gitlab.com/cursors/simp1e/) (Gruvbox variant) but there are
-some great alternatives:
+- GTK theme and icons from [rose-pine-gtk](https://github.com/rose-pine/gtk)
+- [rose-pine-hyprcursor](https://github.com/ndom91/rose-pine-hyprcursor) for
+  Hyprland and BreezeX-RosePine for XWayland and other XCursor clients
 
-- [Capitaine](https://github.com/keeferrourke/capitaine-cursors) or its fork with Gruvbox support
-- [Bibata](https://github.com/ful1e5/Bibata_Cursor)
-
-### Icon theme
-
-I use [Gruvbox-Plus](https://github.com/SylEleuth/gruvbox-plus-icon-pack) using
-[my own package on the AUR](https://aur.archlinux.org/packages/gruvbox-plus-icon-theme-git).
-
-### Theme
-
-I use [Themix](https://github.com/themix-project/themix-gui) to create my own
-theme (and icons) variants.
-
-To preview and apply all those, I run `nwg-look`.
+To preview and apply those, I run `nwg-look`.
 
 ### Firefox
 
 I published my own theme made with [Firefox Color](https://color.firefox.com/)
 which is available [here](https://addons.mozilla.org/addon/yagdmit/).
 
-### Brave
-
-I rely on the GTK+ theme as the few available theme options don't allow to
-create anything better.
-
 ### Spotify
 
-Customized thanks to [Spicetify](https://github.com/khanhas/spicetify-cli).
-
-But I mostly use [`spotify-player`](https://github.com/aome510/spotify-player).
-
-### Discord
-
-I use [BetterDiscord](https://betterdiscord.app/) with custom css.
+I use [`spotify-player`](https://github.com/aome510/spotify-player) in the
+terminal.
 
 ## :hammer_and_wrench: System
 
 ### Display Manager
 
-Running [SDDM](https://github.com/sddm/sddm) and very happy with its
-multimonitor support.
+Running [ly](https://codeberg.org/fairyglade/ly), a TUI display manager.
 
 ### Window Manager
 
-Previously on [bspwm](https://github.com/baskerville/bspwm), I now trust [Hyprland](https://github.com/hyprwm/Hyprland)
-on Wayland for my tiling window management needs. I use 10 persistent workspaces
-accross multiple monitors.
+Previously on [bspwm](https://github.com/baskerville/bspwm), I now trust
+[Hyprland](https://github.com/hyprwm/Hyprland) on Wayland for my tiling window
+management needs, configured in Lua and started through
+[uwsm](https://github.com/Vladimir-csp/uwsm).
 
-To handle monitor changes (plugging and unplugging on the dock), I've setup
-[kanshi](https://sr.ht/~emersion/kanshi/) and listen to monitor changes on Hyprland's
-socket.
+Workspaces are dynamic and per monitor: directional binds step through the
+workspaces of the focused monitor and open a single empty one past the last.
+
+### Shell
+
+[Noctalia](https://noctalia.dev/) provides the bar, launcher (including emoji
+and clipboard history), notifications, OSD, session menu, lock screen and night
+light, with a couple of [custom plugins](.local/share/noctalia/plugins).
+
+[awww](https://github.com/LGFae/swww) draws the wallpaper and
+[hypridle](https://github.com/hyprwm/hypridle) handles dimming, locking and
+suspend.
 
 ### File Manager
 
@@ -118,16 +101,12 @@ Running [Thunar](https://docs.xfce.org/xfce/thunar/start) with a few plugins:
 - raw-thumbnailer
 - tumbler-stl-thumbnailer
 
-### Launcher
-
-[rofi](https://github.com/lbonn/rofi) (forked for Wayland support) and [rofimoji](https://github.com/fdw/rofimoji) for emoji selector.
-
 ### Terminal emulators
 
-I run [Kitty](https://sw.kovidgoyal.net/kitty/) because I'm a sucker for ligatures.
+I run [Ghostty](https://ghostty.org/) because I'm a sucker for ligatures.
 
-[foot](https://codeberg.org/dnkl/foot) would be my go-to choice on Wayland otherwise.
-I also have config for [Alacritty](https://github.com/alacritty/alacritty), just in case.
+I also keep a config for [Kitty](https://sw.kovidgoyal.net/kitty/), just in
+case.
 
 ### Tools
 
@@ -135,13 +114,15 @@ _Amazing tools I use all the time!_
 
 - [eza](https://github.com/eza-community/eza) as a replacement for `ls`
 - [bat](https://github.com/sharkdp/bat) instead of `cat` (with wings)
-- [doggo](https://doggo.mrkaran.dev/) for coloured (and usable) `dig`
 - [delta](https://github.com/dandavison/delta): `diff` with style
 - [fd](https://github.com/sharkdp/fd) as a `find` alternative
 - [ripgrep](https://github.com/BurntSushi/ripgrep) to kill old `grep`
 - [fzf](https://github.com/junegunn/fzf) the fuzzy finder
 - [starship](https://starship.rs/) ok this is not a tool but a cool prompt!
 - [direnv](https://direnv.net/) for per-project environment
+- [zoxide](https://github.com/ajeetdsouza/zoxide) to jump around directories
+- [mise](https://mise.jdx.dev/) to manage tool versions
+- [tmux](https://github.com/tmux/tmux) for sessions that survive
 
 ## :gear: System configuration
 
@@ -154,7 +135,7 @@ ln -s /usr/share/fontconfig/conf.avail/09-autohint-if-no-hinting.conf /etc/fonts
 ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
 ln -s /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
 # if you don't plan to use bitmap fonts
-ln -s /usr/share/fontconfig/conf.avail/70-no-bitmaps.com /etc/fonts/conf.d/
+ln -s /usr/share/fontconfig/conf.avail/70-no-bitmaps.conf /etc/fonts/conf.d/
 ```
 
 ## :handshake: Thanks
