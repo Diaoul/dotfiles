@@ -297,8 +297,7 @@ hl.bind("SUPER + down",  hl.dsp.focus({ direction = "down" }))
 hl.bind("SUPER + up",    hl.dsp.focus({ direction = "up" }))
 hl.bind("SUPER + right", hl.dsp.focus({ direction = "right" }))
 
--- Nearest workspace on this monitor in `dir`, plus every id in use: ids held
--- by other monitors must be skipped, or the dispatch pulls focus there.
+-- Also returns every id in use: dispatching to one held by another monitor pulls focus there.
 local function adjacent_workspace(cur, dir)
     local mon = cur.monitor and cur.monitor.name
     local used = {}
@@ -323,10 +322,7 @@ local function free_id(used, id, dir)
     if id >= 1 then return id end
 end
 
--- Next/previous workspace on this monitor; past the last one, open a single
--- empty workspace, never a second one (r+1 alone keeps creating them). A
--- moved window may leave an empty workspace behind, so repeated moves walk it
--- further out.
+-- Past the last workspace, opens one empty workspace but never a second (r+1 keeps creating them).
 local function step_workspace(dir, moving, dispatcher)
     return function()
         local cur = hl.get_active_workspace()
