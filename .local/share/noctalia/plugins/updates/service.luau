@@ -7,7 +7,7 @@ local function check()
     return
   end
   checking = true
-  noctalia.runAsync("checkupdates 2>/dev/null | wc -l", function(result)
+  noctalia.runAsync("{ checkupdates; paru -Qua; } 2>/dev/null | grep -vc '\\[ignored\\]'", function(result)
     checking = false
     noctalia.state.set("count", tonumber(result.stdout:match("%d+")) or 0)
   end)

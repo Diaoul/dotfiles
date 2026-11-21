@@ -4,7 +4,7 @@ version      = "1.0.0"
 plugin_api   = 3
 author       = "diaoul"
 icon         = "package"
-description  = "Pending repository updates from checkupdates; click to upgrade with paru, right-click to recheck."
+description  = "Pending repository and AUR updates; click to upgrade with paru, right-click to recheck."
 dependencies = ["pacman-contrib", "paru", "ghostty"]
 
 # one checker for every bar: concurrent checkupdates runs share a temp db and fight over its lock
